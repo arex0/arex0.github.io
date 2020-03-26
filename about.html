@@ -8,143 +8,390 @@
     <title>About - Arex0</title>
     <link href='/link/github/ui/dist/web/ui.css' rel='stylesheet'>
     <style>
-    a {
-        color: inherit;
-        font-weight: 100;
-        text-decoration: none;
-    }
-
-    #resume {
-        min-width: 794px;
-        height: 1240px;
-        font: 15px monaco, consolas, monospace;
-        line-height: 20px;
-        padding-top: calc(64px + 1vh);
-    }
-
-    #page {
-        /*A4*/
-        position: absolute;
-        margin: 0 0 0 50vw;
-        padding: 0;
-        background-color: hsl(var(--background));
-        color: hsl(var(--color));
-        border: 1px solid hsla(var(--color), .12);
-        box-shadow: 0 0 8px 0 hsla(var(--color), .08), 0 0 15px 0 hsla(var(--color), .02), 0 0 20px 4px hsla(var(--color), .06);
-        width: 794px;
-        height: 1123px;
-        transform: translateX(-50%);
-        filter: brightness(1.05);
-    }
-
-    @media only screen and (max-width: 795px) {
-        #page {
-            margin: 0;
-            transform: none;
+        .light {
+            --background: 0, 0%, 93%;
+            --color: 0, 0%, 21%;
         }
-    }
 
-    header {
-        display: flex;
-        padding: 16px;
-        background-color: hsl(var(--color));
-        color: hsl(var(--background));
-        box-sizing: border-box;
-        width: 794px;
-        font-weight: bolder;
-        border-bottom: solid 1px;
-        justify-content: space-between;
-    }
+        .dark {
+            --background: 0, 0%, 8%;
+            --color: 0, 0%, 93%;
+        }
 
-    #main {
-        display: flex;
-        padding: 0 8px;
-        width: 794px;
-    }
+        * {
+            min-width: 32px;
+            min-height: 32px;
+        }
 
-    #main>div {
-        width: 50%;
-    }
+        body {
+            display: flex;
+            position: relative;
+            margin: 0;
+            z-index: 0;
+            background-color: hsl(var(--background));
+            color: hsl(var(--color));
+            font: calc(16px + 1vh) monaco, consolas, monospace;
+            flex-direction: column;
+        }
 
-    #main>div>section>h3 {
-        display: block;
-        padding: 2px 16px 4px 8px;
-        background-color: hsl(var(--color));
-        color: hsl(var(--background));
-        width: max-content;
-        min-width: 103px;
-        text-align: center;
-        line-height: 32px;
-    }
+        div {
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
 
-    section>div {
-        margin: -8px 16px 0 8px;
-        word-break: break-word;
-    }
+        .nav {
+            display: flex;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            background: hsl(var(--background));
+            outline: none;
+            box-shadow: 0 0 6px hsla(var(--color), .25);
+            min-width: 100vw;
+            min-height: 1.7em;
+            align-items: center;
+            border-bottom: solid 1px hsla(var(--color), .1);
+        }
 
-    ul {
-        padding: .3em 1em;
-        list-style: disc;
-    }
-
-    #skill {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    #skill>div {
-        position: relative;
-        padding: 4px 0 8px 32px;
-        width: 50%;
-    }
-
-    #skill>div>label {
-        vertical-align: text-top;
-        line-height: .9em;
-        font-weight: bold;
-        font-size: 1.2em;
-    }
-
-    #skill>div>label::before {
-        display: block;
-        position: absolute;
-        left: 8px;
-        background-color: hsl(var(--color));
-        width: .8em;
-        height: .8em;
-        content: '';
-    }
-
-    #skill>div>ul {
-        margin: 0;
-    }
-
-    li>div li {
-        min-height: unset;
-    }
-
-    @media print {
-        html {
+        .nav ul {
+            display: flex;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
             padding: 0;
-            height: 1123px;
+            min-height: 1.7em;
+        }
+
+        .nav li {
+            display: flex;
+            margin: 0 2vw;
+            list-style-type: none;
+            align-items: center;
+        }
+
+        .nav a {
+            color: hsl(var(--color));
+            text-decoration: none;
+            flex: 1;
+        }
+
+        @media only screen and (max-width: 500px) {
+            .nav {
+                height: calc(1em + 8vmin);
+                overflow: hidden;
+            }
+
+            .nav[open] {
+                border: none;
+                height: calc(7.5em + 6vmin);
+                min-height: calc(128px + 1.5em + 6vmin);
+            }
+
+            .nav ul {
+                right: unset;
+                left: 0;
+                padding: 0;
+                flex-direction: column;
+            }
+
+            .nav li {
+                margin: 0;
+                line-height: 1.5em;
+            }
+
+            .nav a {
+                display: block;
+                background-color: hsl(var(--color));
+                color: hsl(var(--background));
+                outline: solid 1px hsla(var(--background), .05);
+                text-align: center;
+            }
+
+            .nav ul::before {
+                display: block;
+                padding: 4vmin;
+                background-color: hsl(var(--color));
+                color: hsl(var(--background));
+                text-align: center;
+                line-height: 1em;
+                cursor: pointer;
+                content: '☰';
+                font-size: 1em;
+                align-self: flex-start;
+            }
+
+            .nav[open] ul::before {
+                padding: 3vmin 0;
+                width: 100vw;
+                content: '⨯';
+                font-size: 1.5em;
+            }
+
+            .nav .logo {
+                max-width: unset !important;
+                line-height: calc(1em + 5vmin);
+                padding-left: calc(8vmin + 1em) !important;
+                font-size: 1.5em;
+            }
+
+            .nav .logo:focus~* {
+                display: none;
+            }
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            padding: calc(32px + 1vh) 0;
+            background: hsl(var(--background));
+            min-height: calc(99vh - 1.7em);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        .footer {
+            position: relative;
+            bottom: 0;
+            z-index: -2;
+            height: calc(7em + 4vh);
+            order: 1;
+        }
+
+        .footer>div {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            z-index: -1;
+            padding: 2vh;
+            background: hsla(var(--color), .95);
+            color: hsl(var(--background));
+            width: 100vw;
+            justify-content: center;
+        }
+
+        .footer a {
+            color: hsl(var(--background));
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 1300px) {
+            main {
+                min-height: calc(99vh - 1.7em) !important;
+                padding-top: calc(1em + 8vmin);
+            }
+
+            .footer {
+                height: calc(4vh + 19.5em);
+            }
+
+            .footer>div,
+            .footer>div>div {
+                flex-direction: column;
+            }
+
+            .footer>div>*>* {
+                padding: 0 !important;
+                text-align: center;
+            }
+
+            .footer * {
+                border: none !important;
+            }
+        }
+
+        .fabs {
+            display: flex;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            z-index: 6;
+            max-height: 100%;
+            overflow: hidden;
+            order: 1;
+            flex-direction: column-reverse;
+            flex-wrap: wrap-reverse;
+            align-content: baseline;
+            will-change: clip-path, opacity;
+            transition: clip-path .3s ease-out, opacity .3s ease;
+            clip-path: inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
+            contain: layout style;
+        }
+
+        .fabs>a {
+            display: block;
+            margin: calc(8px + 1.25vmin) calc(16px + 2.5vmin);
+            visibility: visible;
+            background-color: hsl(var(--background));
+            border: .5px solid hsla(var(--color), .2);
+            box-shadow: 0 0 6px hsla(var(--color), .25);
+            max-width: calc(48px + 2.5vmin);
+            min-height: calc(48px + 2.5vmin);
+            max-height: calc(48px + 2.5vmin);
+            overflow: hidden;
+            text-decoration: none;
+            border-radius: calc(24px + 1.25vmin);
+            transition: max-width .5s ease;
+        }
+
+        .fabs:hover {
+            clip-path: inset(0);
+        }
+
+        .fabs>a~a:hover {
+            max-width: calc(48px + 2.5vmin + 12em);
+        }
+
+        .fabs svg {
+            width: calc(48px + 2.5vmin);
+            stroke: hsla(var(--color), .7);
+        }
+
+        .fabs>a~a::after {
+            color: hsl(var(--color));
+            vertical-align: top;
+            line-height: calc(48px + 2.5vmin);
+            content: attr(title);
+            margin-right: calc(24px + 1.25vmin);
+        }
+
+        a {
+            color: inherit;
+            font-weight: 100;
+            text-decoration: none;
         }
 
         #resume {
-            padding: 0;
-            height: 1123px;
+            min-width: 794px;
+            height: 1240px;
+            font: 15px monaco, consolas, monospace;
+            line-height: 20px;
+            padding-top: calc(64px + 1vh);
         }
 
         #page {
-            border: none;
-            box-shadow: none;
+            /*A4*/
+            position: absolute;
+            margin: 0 0 0 50vw;
+            padding: 0;
+            background-color: hsl(var(--background));
+            color: hsl(var(--color));
+            border: 1px solid hsla(var(--color), .12);
+            box-shadow: 0 0 8px 0 hsla(var(--color), .08), 0 0 15px 0 hsla(var(--color), .02), 0 0 20px 4px hsla(var(--color), .06);
+            width: 794px;
+            height: 1123px;
+            transform: translateX(-50%);
+            filter: brightness(1.05);
         }
 
-        .nav,
-        .footer,
-        .fabs {
-            display: none;
+        @media only screen and (max-width: 795px) {
+            #page {
+                margin: 0;
+                transform: none;
+            }
         }
-    }
+
+        header {
+            display: flex;
+            padding: 16px;
+            background-color: hsl(var(--color));
+            color: hsl(var(--background));
+            box-sizing: border-box;
+            width: 794px;
+            font-weight: bolder;
+            border-bottom: solid 1px;
+            justify-content: space-between;
+        }
+
+        #main {
+            display: flex;
+            padding: 0 8px;
+            width: 794px;
+        }
+
+        #main>div {
+            width: 50%;
+        }
+
+        #main>div>section>h3 {
+            display: block;
+            padding: 2px 16px 4px 8px;
+            background-color: hsl(var(--color));
+            color: hsl(var(--background));
+            width: max-content;
+            min-width: 103px;
+            text-align: center;
+            line-height: 32px;
+        }
+
+        section>div {
+            margin: -8px 16px 0 8px;
+            word-break: break-word;
+        }
+
+        ul {
+            padding: .3em 1em;
+            list-style: disc;
+        }
+
+        #skill {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #skill>div {
+            position: relative;
+            padding: 4px 0 8px 32px;
+            width: 50%;
+        }
+
+        #skill>div>label {
+            vertical-align: text-top;
+            line-height: .9em;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        #skill>div>label::before {
+            display: block;
+            position: absolute;
+            left: 8px;
+            background-color: hsl(var(--color));
+            width: .8em;
+            height: .8em;
+            content: '';
+        }
+
+        #skill>div>ul {
+            margin: 0;
+        }
+
+        li>div li {
+            min-height: unset;
+        }
+
+        @media print {
+            html {
+                padding: 0;
+                height: 1123px;
+            }
+
+            #resume {
+                padding: 0;
+                height: 1123px;
+            }
+
+            #page {
+                border: none;
+                box-shadow: none;
+            }
+
+            .nav,
+            .footer,
+            .fabs {
+                display: none;
+            }
+        }
 
     </style>
 </head>
