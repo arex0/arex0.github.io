@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport'
+        content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>Apps - Arex0</title>
+    <link href='demo/elements/elements.css' rel='stylesheet'>
+    <style>
+            @media only screen and (max-width: 795px) {
+                main {
+                    margin: 0 !important;
+                    transform: none;
+                }
+            }
+
+            .app {
+                display: flex;
+                margin: .5em;
+                padding: .5em;
+                color: hsl(var(--color));
+                width: 5em;
+                height: 5em;
+                text-align: center;
+                text-decoration: none;
+                cursor: pointer;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .app:hover {
+                backdrop-filter: invert(.1);
+            }
+
+            .app::before {
+                line-height: 1em;
+                content: attr(short-name);
+                font-size: 3.3em;
+            }
+
+            .app::after {
+                content: attr(long-name);
+                font-size: .8em;
+            }
+
+    </style>
+</head>
+
+<body>
+    <nav class='nav' onclick='this.getAttribute("open")?this.removeAttribute("open"):this.setAttribute("open",true)'>
+        <a href='javascript:jump("/")' class='logo'
+            style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;'>
+            <b>Arex</b><span
+                style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
+                <span
+                    style='display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);'></span>
+            </span>
+        </a>
+        <ul>
+            <li><a href='javascript:jump("/blog.html")'>Blog</a></li>
+            <li><a href='javascript:jump("/archive.html")'>Archive</a></li>
+            <li><a href='javascript:jump("/about.html")'>About</a></li>
+            <li><a href='javascript:jump("/apps.html")'>Apps</a></li>
+            <li><a>&nbsp;</a></li>
+        </ul>
+    </nav>
+    <main onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
+        <a class='app' short-name='🗒' long-name='GuestBook' href='/guestbook.html'></a>
+        <a class='app' short-name='�' long-name='a-Icons' href='/a-icons.html'></a>
+        <a class='app' short-name='✉' long-name='Mail' href='/mail.html'></a>
+    </main>
+    <div class='fabs' id='fabs'>
+        <a href='javascript:void(0)'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
+                <line x1='6' y1='12' x2='18' y2='12'></line>
+                <line x1='12' y1='6' x2='12' y2='18'></line>
+            </svg>
+        </a>
+        <a href='javascript:jump("/")' title='Home'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
+                <polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline>
+                <polyline points='5 11,12 5,19 11' fill='#fff0'></polyline>
+            </svg>
+        </a>
+        <a href='javascript:scrollTo({top:0,behavior:"smooth"})' title='Top'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
+                <line x1='8' y1='7' x2='16' y2='7'></line>
+                <polyline points='8 13,12 9,16 13' fill='#fff0'></polyline>
+                <line x1='12' y1='10' x2='12' y2='18'></line>
+            </svg>
+        </a>
+        <a href='javascript:theme(+1)' title='Turn Theme'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'>
+                <path fill='#fff0' d='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'>
+                </path>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        const themes = ['light', 'dark']
+        function theme(i) {
+            let theme = localStorage.getItem('theme')
+            document.body.classList.remove(theme)
+            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
+            localStorage.setItem('theme', theme)
+            document.body.classList.add(theme)
+        }
+        theme(0)
+        function jump(url) {
+            document.getElementsByTagName('main')[0].style.opacity = 0
+            setTimeout(() => location.href = url, 300)
+        }
+        setTimeout(() => document.getElementsByTagName('main')[0].style.opacity = 1, 100)
+    </script>
+</body>
+
+</html>
