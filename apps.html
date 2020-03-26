@@ -65,11 +65,6 @@
             <li><a>&nbsp;</a></li>
         </ul>
     </nav>
-    <main onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
-        <a class='app' short-name='🗒' long-name='GuestBook' href='/guestbook.html'></a>
-        <a class='app' short-name='�' long-name='a-Icons' href='/a-icons.html'></a>
-        <a class='app' short-name='✉' long-name='Mail' href='/mail.html'></a>
-    </main>
     <div class='fabs' id='fabs'>
         <a href='javascript:void(0)'>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
@@ -97,6 +92,11 @@
             </svg>
         </a>
     </div>
+    <main onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
+        <a class='app' short-name='🗒' long-name='GuestBook' href='/guestbook.html'></a>
+        <a class='app' short-name='�' long-name='a-Icons' href='/a-icons.html'></a>
+        <a class='app' short-name='✉' long-name='Mail' href='/mail.html'></a>
+    </main>
 
     <script>
         const themes = ['light', 'dark']

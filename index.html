@@ -118,32 +118,6 @@
             <li><a>&nbsp;</a></li>
         </ul>
     </nav>
-    <main style='min-height: unset;' onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")'>
-        <span id='type' style='position: absolute; right: 75vw; top: 30vh;'>Click Zero</span>
-        <span id='zero'
-            style='display: block;left: 50vw;top: 40vh;position: fixed;border: solid 0.3em;width: 40vh;height: 40vh;text-align: center;transform: translateX(-50%) translateY(-50%);border-radius: 50%;'>
-            <span
-                style='display: inline-block;position: absolute;top: 50%;left: 50%;width: 2em;min-width: unset;height: 2em;min-height: unset;background: hsl(var(--color));transform: translateX(-50%) translateY(-50%);'></span>
-        </span>
-        <span id='value' style='position: absolute; left: 75vw; top: 30vh;'>Tap Space</span>
-        <div id='sounds'
-            onclick='this.getAttribute("close")?(this.removeAttribute("close"),audioCtx.resume()):(this.setAttribute("close",true),audioCtx.suspend())'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='transform: scale(.8);'>
-                <path
-                    d='M126,192H56a8,8,0,0,0-8,8V312a8,8,0,0,0,8,8h69.65a15.93,15.93,0,0,1,10.14,3.54l91.47,74.89A8,8,0,0,0,240,392V120a8,8,0,0,0-12.74-6.43l-91.47,74.89A15,15,0,0,1,126,192Z'
-                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
-                </path>
-                <path d='M320,320c9.74-19.38,16-40.84,16-64,0-23.48-6-44.42-16-64'
-                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
-                </path>
-                <path d='M368,368c19.48-33.92,32-64.06,32-112s-12-77.74-32-112'
-                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
-                </path>
-                <path d='M416,416c30-46,48-91.43,48-160S446,143,416,96'
-                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
-                </path>
-            </svg></div>
-    </main>
     <footer class='footer'>
         <div>
             <div style='display: flex;justify-content: center;'>
@@ -253,6 +227,32 @@
             </svg>
         </a>
     </div>
+    <main style='min-height: unset;' onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")'>
+        <span id='type' style='position: absolute; right: 75vw; top: 30vh;'>Click Zero</span>
+        <span id='zero'
+            style='display: block;left: 50vw;top: 40vh;position: fixed;border: solid 0.3em;width: 40vh;height: 40vh;text-align: center;transform: translateX(-50%) translateY(-50%);border-radius: 50%;'>
+            <span
+                style='display: inline-block;position: absolute;top: 50%;left: 50%;width: 2em;min-width: unset;height: 2em;min-height: unset;background: hsl(var(--color));transform: translateX(-50%) translateY(-50%);'></span>
+        </span>
+        <span id='value' style='position: absolute; left: 75vw; top: 30vh;'>Tap Space</span>
+        <div id='sounds'
+            onclick='this.getAttribute("close")?(this.removeAttribute("close"),audioCtx.resume()):(this.setAttribute("close",true),audioCtx.suspend())'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='transform: scale(.8);'>
+                <path
+                    d='M126,192H56a8,8,0,0,0-8,8V312a8,8,0,0,0,8,8h69.65a15.93,15.93,0,0,1,10.14,3.54l91.47,74.89A8,8,0,0,0,240,392V120a8,8,0,0,0-12.74-6.43l-91.47,74.89A15,15,0,0,1,126,192Z'
+                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
+                </path>
+                <path d='M320,320c9.74-19.38,16-40.84,16-64,0-23.48-6-44.42-16-64'
+                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
+                </path>
+                <path d='M368,368c19.48-33.92,32-64.06,32-112s-12-77.74-32-112'
+                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
+                </path>
+                <path d='M416,416c30-46,48-91.43,48-160S446,143,416,96'
+                    style='fill:none;stroke:hsl(var(--color));stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'>
+                </path>
+            </svg></div>
+    </main>
 
     <script>
         const themes = ['light', 'dark']
