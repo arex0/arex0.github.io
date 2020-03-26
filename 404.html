@@ -345,6 +345,14 @@
             }
         }
 
+        .s404 #sounds {
+            opacity: 0;
+        }
+
+        .s404 #value {
+            opacity: 1;
+        }
+
     </style>
 </head>
 
@@ -475,14 +483,12 @@
             </svg>
         </a>
     </div>
-    <main style='min-height: unset;' onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")'>
-        <span id='type' style='position: absolute; right: 75vw; top: 30vh;'>Click Zero</span>
-        <span id='zero'
-            style='display: block;left: 50vw;top: 40vh;position: fixed;border: solid 0.3em;width: 40vh;height: 40vh;text-align: center;transform: translateX(-50%) translateY(-50%);border-radius: 50%;'>
-            <span
-                style='display: inline-block;position: absolute;top: 50%;left: 50%;width: 2em;min-width: unset;height: 2em;min-height: unset;background: hsl(var(--color));transform: translateX(-50%) translateY(-50%);'></span>
+    <main class='s404' style='min-height: unset;' onclick='document.getElementsByTagName("nav")[0].removeAttribute("open")'>
+        <span id='type' style='position: absolute; right: 75vw; top: 30vh;'>Error</span>
+        <span id="zero" style="display: flex;left: 50vw;top: 40vh;position: fixed;border: solid 0.3em;width: 40vh;height: 40vh;text-align: center;transform: translateX(-50%) translateY(-50%);border-radius: 50%;justify-content: center;flex-direction: column;line-height: 1em;">
+            <span style="display: inline-block;font-size: 20vh;transform: translateY(-30%);">404</span>
         </span>
-        <span id='value' style='position: absolute; left: 75vw; top: 30vh;'>Tap Space</span>
+        <span id='value' style='position: absolute; left: 75vw; top: 30vh;'>Page No Found</span>
         <div id='sounds'
             onclick='this.getAttribute("close")?(this.removeAttribute("close"),audioCtx.resume()):(this.setAttribute("close",true),audioCtx.suspend())'>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='transform: scale(.8);'>
@@ -603,6 +609,8 @@
 
         function zero() {
             window.zero = () => { }
+            document.getElementsByClassName('s404')[0].classList.remove('s404')
+            document.getElementById('zero').innerHTML = `<span style='display: inline-block;position: absolute;top: 50%;left: 50%;width: 2em;min-width: unset;height: 2em;min-height: unset;background: hsl(var(--color));transform: translateX(-50%) translateY(-50%);'></span>`
             document.getElementById('zero').setAttribute('listening', true)
             document.getElementById('zero').addEventListener('click', () => {
                 hello.stop()
