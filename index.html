@@ -520,14 +520,12 @@
         theme(0)
         function jump(url) {
             document.activeElement.blur()
-            document.querySelector('main').style.opacity = 0
             document.querySelector('footer').style.opacity = 0
-            setTimeout(() => location.href = url, 300)
+            setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
+            setTimeout(() => location.href = url, 600)
         }
-        setTimeout(() => {
-            document.querySelector('main').style.opacity = 1
-            document.querySelector('footer').style.opacity = 1
-        }, 100)
+        setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+        setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
 
         var AudioContext = window.AudioContext || window.webkitAudioContext
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
