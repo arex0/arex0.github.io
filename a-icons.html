@@ -176,7 +176,6 @@
         z-index: -2;
         height: calc(7em + 4vh);
         opacity: 0;
-        contain: layout style;
         order: 1;
         transition: opacity .3s;
     }
@@ -413,14 +412,12 @@
         theme(0)
         function jump(url) {
             document.activeElement.blur()
-            document.querySelector('main').style.opacity = 0
             document.querySelector('footer').style.opacity = 0
-            setTimeout(() => location.href = url, 300)
+            setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
+            setTimeout(() => location.href = url, 600)
         }
-        setTimeout(() => {
-            document.querySelector('main').style.opacity = 1
-            document.querySelector('footer').style.opacity = 1
-        }, 100)
+        setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+        setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
         function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => window.autoscrolling = (window.autoscrolling === false) ? (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) : (window.autoscrolling === true) ? false : ((i > 0.01) && (i < .99)), { threshold: [0.01, 0.99] }).observe(e) } snap(document.querySelector('footer'))
     </script>
 </body>
