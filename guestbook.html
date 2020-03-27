@@ -3,9 +3,10 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' id="viewportMeta" content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <title>GuestBook - Arex0</title>
-    <link href='/link/github/ui/dist/web/ui.css' rel='stylesheet'>
+    <meta name='viewport' id='viewportMeta' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>Arex0</title>
+    <link rel='manifest' href='/manifest.webmanifest'>
+    <link rel='shortcut icon' href='/icon.svg'>
     <style>
     .light {
         --background: 0, 0%, 93%;
@@ -48,6 +49,7 @@
         box-shadow: 0 0 6px hsla(var(--color), .25);
         min-width: 100vw;
         min-height: 1.7em;
+        contain: layout style;
         align-items: center;
         border-bottom: solid 1px hsla(var(--color), .1);
     }
@@ -75,6 +77,15 @@
         flex: 1;
     }
 
+    .logo>*:not(:first-child),
+    .logo:focus-within>*:first-child {
+        display: none !important;
+    }
+
+    .logo:focus-within>*:not(:first-child) {
+        display: unset !important;
+    }
+
     @media only screen and (max-width: 500px) {
         .nav {
             height: calc(1em + 8vmin);
@@ -83,8 +94,8 @@
 
         .nav[open] {
             border: none;
-            height: calc(7.5em + 6vmin);
-            min-height: calc(128px + 1.5em + 6vmin);
+            height: calc(7.5em + 6vmin + 8vh);
+            min-height: calc(128px + 1.5em + 6vmin + 10vh);
         }
 
         .nav ul {
@@ -101,6 +112,7 @@
 
         .nav a {
             display: block;
+            padding: 1vh 0;
             background-color: hsl(var(--color));
             color: hsl(var(--background));
             outline: solid 1px hsla(var(--background), .05);
@@ -141,15 +153,10 @@
         .nav input {
             max-width: 100% !important;
         }
-    }
 
-    .logo>*:last-child,
-    .logo:focus-within>* {
-        display: none !important;
-    }
-
-    .logo:focus-within>*:last-child {
-        display: unset !important;
+        .logo>span {
+            left: calc(8vw + 1.1em) !important;
+        }
     }
 
     main {
@@ -159,6 +166,7 @@
         background: hsl(var(--background));
         min-height: calc(99vh - 1.7em);
         opacity: 0;
+        contain: layout style;
         transition: opacity .3s;
     }
 
@@ -167,7 +175,10 @@
         bottom: 0;
         z-index: -2;
         height: calc(7em + 4vh);
+        opacity: 0;
+        contain: layout style;
         order: 1;
+        transition: opacity .3s;
     }
 
     .footer>div {
@@ -188,6 +199,10 @@
     }
 
     @media only screen and (max-width: 1300px) {
+        * {
+            cursor: default !important;
+        }
+
         main {
             min-height: calc(99vh - 1.7em) !important;
             padding-top: calc(1em + 8vmin);
@@ -272,11 +287,14 @@
 
 <body>
     <nav class='nav' onclick='this.getAttribute("open")?this.removeAttribute("open"):this.setAttribute("open",true)'>
-        <a class='logo' href='#' onclick='event.stopPropagation(),this.lastElementChild.focus()' style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;'>
-            <b>Arex</b><span style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
+        <a class='logo' tabindex='-1' onclick='event.stopPropagation(),this.lastElementChild.focus()' style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;cursor:pointer;'>
+            <b>Arex<span style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
                 <span style='display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);'></span>
+            </span></b>
+            <span style="display: inline-block;position: absolute;border: solid .125em;top: .4em;left: 1.4em;width: .8em;min-width: unset;height: .8em;min-height: unset;text-align: center;vertical-align: middle;transform: translateY(-.05em);border-radius: 50%;">
+                <span style="display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);"></span>
             </span>
-            <input style="max-width: calc(80vw - 17em);background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB2ZXJzaW9uPSIxLjEiPjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUwIiBmaWxsPSJ0cmFuc3BhcmVudCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEwIi8+PHJlY3QgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSI0NSIgeT0iNDUiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIvPjwvc3ZnPg==') no-repeat;border: solid .1em;box-shadow: 0 0 8px hsla(var(--color), .5), inset 0 0 8px hsla(var(--color), .5);font: calc(16px + 1vh) monaco, consolas, monospace;padding-left: 1.8em;">
+            <input style='max-width: calc(80vw - 17em);background: transparent;border: solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow: 0 0 8px hsla(var(--color), .5), inset 0 0 8px hsla(var(--color), .5);font: calc(16px + 1vh) monaco, consolas, monospace;padding-left: 1.8em;'>
         </a>
         <ul>
             <li><a href='javascript:jump("/blog.html")'>Blog</a></li>
@@ -378,8 +396,8 @@
 
     <script>
         ((height) => {
-            let metaEl = document.querySelector("#viewportMeta")
-            let content = "height=" + height + ",width=device-width,initial-scale=1.0,user-scalable=no"
+            let metaEl = document.querySelector('#viewportMeta')
+            let content = 'height=' + height + ',width=device-width,initial-scale=1\.0,user-scalable=no'
             metaEl.setAttribute('name', 'viewport')
             metaEl.setAttribute('content', content)
         })(window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight)
@@ -396,9 +414,13 @@
         function jump(url) {
             document.activeElement.blur()
             document.querySelector('main').style.opacity = 0
+            document.querySelector('footer').style.opacity = 0
             setTimeout(() => location.href = url, 300)
         }
-        setTimeout(() => document.querySelector('main').style.opacity = 1, 100)
+        setTimeout(() => {
+            document.querySelector('main').style.opacity = 1
+            document.querySelector('footer').style.opacity = 1
+        }, 100)
         function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => window.autoscrolling = (window.autoscrolling === false) ? (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) : (window.autoscrolling === true) ? false : ((i > 0.01) && (i < .99)), { threshold: [0.01, 0.99] }).observe(e) } snap(document.querySelector('footer'))
     </script>
 </body>
