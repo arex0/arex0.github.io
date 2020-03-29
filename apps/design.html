@@ -293,7 +293,7 @@
     </script>
 </head>
 
-<body style='overflow-y: scroll;'>
+<body style='overflow-y: scroll;overflow-x: hidden;'>
     <nav class='nav' onclick='this.getAttribute("open")?this.removeAttribute("open"):this.setAttribute("open",true)'>
         <a class='logo' tabindex='-1' onclick='event.stopPropagation(),this.lastElementChild.focus()' style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;cursor:pointer;'>
             <b>Arex<span style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
@@ -339,7 +339,7 @@
             </svg>
         </a>
     </div>
-    <main onclick="document.querySelector('nav').removeAttribute('open')" style='background: hsl(0, 0%, 21%);touch-action: none;padding: 0;height: 100vh;perspective: 100vh;'>
+    <main onclick="document.querySelector('nav').removeAttribute('open')" style='background: hsl(0, 0%, 21%);touch-action: none;padding: 0;height: 100vh;overflow: hidden;perspective: 100vh;'>
         <div id='zero-3d' style='position: absolute; left: 50%; top: 50%; background: hsl(var(--background)); height: 50%; width: 50%; touch-action: none;user-select: none;'>
             <div>123456789</div>
         </div>
