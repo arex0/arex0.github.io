@@ -1,0 +1,57 @@
+#! /bin/bash
+function sitemap(){
+    echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+    echo '  <url>' >> sitemap.xml
+    echo '      <loc>http://arex0.com/</loc>' >> sitemap.xml
+    echo '      <lastmod>'$(ls --full-time index.html | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+    echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+    echo '      <priority>1</priority>' >> sitemap.xml
+    echo '  </url>' >> sitemap.xml
+
+    for dir in $(ls -l  | grep "^d" | grep -v '^_' | awk '{print $9}')
+    do
+        for file in $(ls $dir | grep -v '^_')
+        do
+            if [[ -d "$dir/$file" ]]
+            then
+                echo '  <url>' >> sitemap.xml
+                echo '      <loc>http://arex0.com/'$dir/$file/'</loc>' >> sitemap.xml
+                echo '      <lastmod>'$(ls --full-time "$dir/$file/index.html" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+                echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+                echo '      <priority>1</priority>' >> sitemap.xml
+                echo '  </url>' >> sitemap.xml
+            else
+                echo '  <url>' >> sitemap.xml
+                echo '      <loc>http://arex0.com/'$dir/$file'</loc>' >> sitemap.xml
+                echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+                echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+                echo '      <priority>1</priority>' >> sitemap.xml
+                echo '  </url>' >> sitemap.xml
+            fi
+        done
+    done
+
+    for file in $(ls -l link/github | grep "^d" | awk '{print $9}')
+    do
+        echo '  <url>' >> sitemap.xml
+        echo '      <loc>http://arex0.com/link/github/'$file'</loc>' >> sitemap.xml
+        echo '      <lastmod>'$(ls --full-time "link/github/$file/README.md" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+        echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+        echo '      <priority>.5</priority>' >> sitemap.xml
+        echo '  </url>' >> sitemap.xml
+    done
+    echo '</urlset>' >> sitemap.xml
+}
+
+function blog(){
+    for file in $(ls blog | grep -v '^_')
+    do
+        if [[ $file == *.html ]]
+        then
+            echo 'ok'
+        fi
+    done
+}
+
+sitemap

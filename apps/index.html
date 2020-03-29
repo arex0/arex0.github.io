@@ -157,6 +157,10 @@
         .logo>span {
             left: calc(8vw + 1.1em) !important;
         }
+
+        .logo:focus-within>span {
+            transform: scale(.8) !important;
+        }
     }
 
     main {
@@ -287,10 +291,10 @@
             <input style='max-width: calc(80vw - 17em);background: transparent;border: solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow: 0 0 8px hsla(var(--color), .5), inset 0 0 8px hsla(var(--color), .5);font: calc(16px + 1vh) monaco, consolas, monospace;padding-left: 1.8em;'>
         </a>
         <ul>
-            <li><a href='javascript:jump("/blog.html")'>Blog</a></li>
-            <li><a href='javascript:jump("/archive.html")'>Archive</a></li>
-            <li><a href='javascript:jump("/about.html")'>About</a></li>
-            <li><a href='javascript:jump("/apps.html")'>Apps</a></li>
+            <li><a href='javascript:jump("/blog/")'>Blog</a></li>
+            <li><a href='javascript:jump("/archive/")'>Archive</a></li>
+            <li><a href='javascript:jump("/about/")'>About</a></li>
+            <li><a href='javascript:jump("/apps/")'>Apps</a></li>
             <li><a>&nbsp;</a></li>
         </ul>
     </nav>
@@ -322,10 +326,11 @@
         </a>
     </div>
     <main onclick='document.querySelector("nav").removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
+        <a class='app' short-name='🔗' long-name='link' href='/link/'></a>
         <a class='app' short-name='🗒' long-name='GuestBook' href='/apps/guestbook.html'></a>
-        <a class='app' short-name='�' long-name='a-Icons' href='/apps/a-icons.html'></a>
-        <a class='app' short-name='✉' long-name='Mail' href='/apps/mail.html'></a>
+        <a class='app' short-name='IC' long-name='a-Icons' href='/apps/a-icons.html'></a>
         <a class='app' short-name='DN' long-name='design 3d' href='/apps/design.html'></a>
+        <a class='app' short-name='✉' long-name='Mail' href='/apps/mail.html'></a>
     </main>
 
     <script>

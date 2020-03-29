@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang='en-US' translate='no'>
+<html lang='zh-CN'>
 
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' id='viewportMeta' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <meta name='google' content='notranslate'>
-    <title>Design 3D | Arex0</title>
+    <title>Links | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
     <style>
@@ -161,7 +160,6 @@
 
         .logo:focus-within>span {
             transform: scale(.8) !important;
-            transform: scale(.8) !important;
         }
     }
 
@@ -247,50 +245,38 @@
             margin: 0 !important;
             transform: none;
         }
-
-        #zero-3d {
-            margin-top: 2em;
-        }
-
-        #controller {
-            font-size: .5em !important;
-        }
     }
 
-    #zero-3d,
-    #zero-3d * {
-        position: relative;
-        background-color: hsla(var(--background), 5);
-        border: .5px solid hsl(var(--color));
-        box-shadow: 0 0 6px hsla(var(--color), .25);
-        transform: translateZ(var(--zero3d-separation));
-        transform-style: preserve-3d;
-        perspective: 1000px;
+    .app {
+        display: flex;
+        margin: .5em;
+        padding: .5em;
+        color: hsl(var(--color));
+        width: 5em;
+        height: 5em;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    #controller {
-        --background: 0, 0%, 93%;
-        --color: 0, 0%, 21%;
+    .app:hover {
+        backdrop-filter: invert(.1);
     }
 
-    #content button {
-        --background: 0, 0%, 93%;
-        background-color: transparent;
-        --color: 0, 0%, 21%;
-        color: hsl(var(--background));
-        border: .5px solid hsl(var(--background));
-        box-shadow: 0 0 6px hsla(var(--background), .25);
-        width: 10em;
-        margin-bottom: .5em;
+    .app::before {
+        line-height: 1em;
+        content: attr(short-name);
+        font-size: 3.3em;
+    }
+
+    .app::after {
+        content: attr(long-name);
+        font-size: .8em;
     }
 
     </style>
-    <script>
-        let windowInnerHeight = window.innerHeight
-        let metaEl = document.querySelector('#viewportMeta')
-        metaEl.setAttribute('name', 'viewport')
-        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-    </script>
 </head>
 
 <body style='overflow-y: scroll;'>
@@ -339,30 +325,19 @@
             </svg>
         </a>
     </div>
-    <main onclick="document.querySelector('nav').removeAttribute('open')" style='background: hsl(0, 0%, 21%);touch-action: none;padding: 0;height: 100vh;perspective: 100vh;'>
-        <div id='zero-3d' style='position: absolute; left: 50%; top: 50%; background: hsl(var(--background)); height: 50%; width: 50%; touch-action: none;user-select: none;'>
-            <div>123456789</div>
-        </div>
-        <div id='content' style='font-size: .8em; position: fixed; left: 1em; top: 5em;' onpointerdown='event.stopPropagation()'>
-            <button>set style</button><br>
-            <button>set component</button><br>
-            <button>set content</button><br>
-            <button>update</button><br>
-        </div>
-        <div id='controller' style='font-size: .8em;position: fixed; top: 10vh; right: 5vw; color: hsl(var(--background));' onpointerdown='event.stopPropagation()'>
-            <div id='rotate-controller' style='font-size: 2em;width: 5em; height: 5em; border: solid .2em; border-radius: 50%; line-height: 5em; transform: rotateZ(-60deg);user-select: none;'>⬤</div>
-            <br>separation separation<br>
-            <input type='range' oninput='setSeparation(this.value)' value='500' min='1' max='1000'>
-        </div>
+    <main onclick='document.querySelector("nav").removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
+        <a class='app' short-name='🖇' long-name='Share Links' href='/link/add.html'></a>
+        <a class='app' short-name='ꇚ' long-name='Github' href='/link/github/'></a>
     </main>
 
     <script>
-        document.body.addEventListener('resize',()=>{
-            if(window.innerHeight>windowInnerHeight){
-                windowInnerHeight = window.innerHeight
-                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-            }
-        })
+        ((height) => {
+            let metaEl = document.querySelector('#viewportMeta')
+            let content = 'height=' + height + ',width=device-width,initial-scale=1.0,user-scalable=no'
+            metaEl.setAttribute('name', 'viewport')
+            metaEl.setAttribute('content', content)
+        })(window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight)
+
         const themes = ['light', 'dark']
         function theme(i) {
             let theme = localStorage.getItem('theme')
@@ -378,29 +353,8 @@
             setTimeout(() => location.href = url, 300)
         }
         setTimeout(() => {
-            scrollTo({top:0})
             document.querySelector('main').style.opacity = 1
         }, 100)
-        setTimeout(() => scrollTo({top:0}),300)
-    </script>
-    <script src='/link/github/zero-3d.js/zero-3d.js'></script>
-    <script>
-        let ctl_3d = zero3d(document.getElementById('zero-3d'),{
-            rotatable: true,
-            scalable: true,
-            root: document,
-            x: '-50%',
-            y: '-50%',
-            rx: 30,
-            ry: 45,
-            rz: 60,
-            rzc: document.getElementById('rotate-controller'),
-            size: .8,
-            p: 13.71,
-        })
-        function setSeparation(d){
-            ctl_3d.p = 1/(1.001-(d/1000)**.1) - 1/1.001
-        }
     </script>
 </body>
 

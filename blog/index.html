@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' id='viewportMeta' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <title>Arex0's Repositories | Arex0</title>
+    <title>Blog | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
     <style>
@@ -155,9 +155,7 @@
         }
 
         .logo>span {
-            left: calc(8vw + 1.1em) !important;
-        }
-
+            left: calc(8vw + 1.1em) !important;}
         .logo:focus-within>span {
             transform: scale(.8) !important;
         }
@@ -285,43 +283,17 @@
         margin-right: calc(24px + 1.25vmin);
     }
 
-    main>ul {
-        padding: 0;
-        list-style: none;
-    }
-
-    .card {
-        margin: .8em;
-        padding: .8em .8em .5em;
-        border: .5px solid hsla(var(--color), .2);
-        box-shadow: 0 0 6px hsla(var(--color), .25);
-        width: 80vmin;
-        cursor: pointer;
-    }
-
-    .card>div:nth-child(2) {
-        font-size: .6em;
-    }
-
-    .card>div:nth-child(3) {
-        font-size: .5em;
-    }
-
-    .card>div:nth-child(3)>span {
-        margin-right: calc(.5em + 1vw);
-    }
-
     </style>
 </head>
 
 <body>
-    <nav class='nav' onclick="this.getAttribute('open')?this.removeAttribute('open'):this.setAttribute('open',true)">
+    <nav class='nav' onclick='this.getAttribute("open")?this.removeAttribute("open"):this.setAttribute("open",true)'>
         <a class='logo' tabindex='-1' onclick='event.stopPropagation(),this.lastElementChild.focus()' style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;cursor:pointer;'>
             <b>Arex<span style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
                 <span style='display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);'></span>
             </span></b>
-            <span onclick="jump('/')" style='display: inline-block;position: absolute;border: solid .125em;top: .4em;left: 1.4em;width: .8em;min-width: unset;height: .8em;min-height: unset;text-align: center;vertical-align: middle;transform: translateY(-.05em);border-radius: 50%;'>
-                <span style='display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);'></span>
+            <span onclick='jump("/")' style="display: inline-block;position: absolute;border: solid .125em;top: .4em;left: 1.4em;width: .8em;min-width: unset;height: .8em;min-height: unset;text-align: center;vertical-align: middle;transform: translateY(-.05em);border-radius: 50%;">
+                <span style="display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);"></span>
             </span>
             <input style='max-width: calc(80vw - 17em);background: transparent;border: solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow: 0 0 8px hsla(var(--color), .5), inset 0 0 8px hsla(var(--color), .5);font: calc(16px + 1vh) monaco, consolas, monospace;padding-left: 1.8em;'>
         </a>
@@ -400,7 +372,7 @@
                 <line x1='12' y1='6' x2='12' y2='18'></line>
             </svg>
         </a>
-        <a href='javascript:jump("/"")' title='Home'>
+        <a href='javascript:jump("/")' title='Home'>
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
                 <polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline>
                 <polyline points='5 11,12 5,19 11' fill='#fff0'></polyline>
@@ -420,7 +392,8 @@
             </svg>
         </a>
     </div>
-    <main onclick="document.querySelector('nav').removeAttribute('open')" style='display: flex;justify-content: center;'></main>
+    <main onclick='document.querySelector("nav").removeAttribute("open")'> under construction
+    </main>
     <script>
         ((height) => { let metaEl = document.querySelector('#viewportMeta')
             let content = 'height=' + height + ',width=device-width,initial-scale=1\.0,user-scalable=no'
@@ -437,51 +410,15 @@
             document.body.classList.add(theme)
         }
         theme(0)
-        history.scrollRestoration = 'manual'
         function jump(url) {
-            history.replaceState({top:document.documentElement.scrollTop},document.title)
             document.activeElement.blur()
             document.querySelector('footer').style.opacity = 0
             setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
             setTimeout(() => location.href = url, 600)
         }
-        function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => { window.autoscrolling = (window.autoscrolling === true) ? false : (window.autoscrolling === false) && ((i > .01) && (i < .99)) && (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) }, { threshold: [0.01, 0.99] }).observe(e) }
-        snap(document.querySelector('footer'))
-        
-        const Encode = (e => e.encode.bind(e))(new TextEncoder)
-        const Color = async text => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-1', Encode(text)))).map(b => b.toString(16).padStart(2, '0')).join('').slice(4,10)
-        fetch('https://api.github.com/users/arex0/repos').then(res=>res.json()).then(repos=>{
-            let ul = document.createElement('ul')
-            repos.sort((r1,r2)=>r2.stargazers_count-r1.stargazers_count).forEach(async repo=>{
-                let li = document.createElement('li')
-                li.classList.add('card')
-                let color = (!repo.language)||await Color(repo.language)
-                li.innerHTML = `
-                <div>${repo.name}</div>
-                <div>${repo.description||'No description'}</div>
-                <div style='max-width: 500px;display: flex;justify-content: space-between;'>
-                    ${repo.language?
-                        `<span><span style='display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#${color}'></span>${repo.language}</span>`
-                        :''
-                    }
-                    ${repo.license?.spdx_id?
-                        `<span>
-                            <svg style='width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;'><path fill-rule='evenodd' d='M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z'></path></svg>
-                            ${repo.license.spdx_id}
-                        </span>
-                        `:''
-                    }
-                    <span>${repo.stargazers_count} stars</span>
-                    <span>${repo.forks} forks</span>
-                </div>`
-                li.addEventListener('click',()=>jump(repo.name))
-                ul.appendChild(li)
-            })
-            document.querySelector('main').appendChild(ul)
-            setTimeout(()=>scrollTo({top:history.state?.top||0}),99)
-            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
-            setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
-        })
+        setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+        setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+        function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => window.autoscrolling = (window.autoscrolling === false) ? (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) : (window.autoscrolling === true) ? false : ((i > 0.01) && (i < .99)), { threshold: [0.01, 0.99] }).observe(e) } snap(document.querySelector('footer'))
     </script>
 </body>
 
