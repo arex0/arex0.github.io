@@ -377,11 +377,6 @@
             document.querySelector('main').style.opacity = 0
             setTimeout(() => location.href = url, 300)
         }
-        setTimeout(() => {
-            scrollTo({top:0})
-            document.querySelector('main').style.opacity = 1
-        }, 100)
-        setTimeout(() => scrollTo({top:0}),300)
     </script>
     <script src='/link/github/zero-3d.js/zero-3d.js'></script>
     <script>
@@ -401,6 +396,11 @@
         function setSeparation(d){
             ctl_3d.p = 1/(1.001-(d/1000)**.1) - 1/1.001
         }
+        setTimeout(() => {
+            scrollTo({top:0})
+            document.querySelector('main').style.opacity = 1
+        }, 100)
+        setTimeout(() => scrollTo({top:0}),300)
     </script>
 </body>
 
