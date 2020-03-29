@@ -7,3 +7,18 @@
 [submodule "link/github/zero-3d.js"]
 	path = link/github/zero-3d.js
 	url = https://github.com/arex0/zero-3d.js.git
+[submodule "link/github/clash-script"]
+	path = link/github/clash-script
+	url = https://github.com/arex0/clash-script.git
+[submodule "link/github/baidu_not_in_home"]
+	path = link/github/baidu_not_in_home
+	url = https://github.com/arex0/baidu_not_in_home.git
+[submodule "link/github/diff"]
+	path = link/github/diff
+	url = https://github.com/arex0/diff.git
+[submodule "link/github/go-ext"]
+	path = link/github/go-ext
+	url = https://github.com/arex0/go-ext.git
+[submodule "link/github/mail"]
+	path = link/github/mail
+	url = https://github.com/arex0/mail.git

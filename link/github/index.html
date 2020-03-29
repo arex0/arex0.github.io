@@ -292,6 +292,7 @@
         border: .5px solid hsla(var(--color), .2);
         box-shadow: 0 0 6px hsla(var(--color), .25);
         width: 80vmin;
+        cursor: pointer;
     }
 
     .card>div:nth-child(2) {
@@ -467,7 +468,7 @@
                     <span>${repo.stargazers_count} stars</span>
                     <span>${repo.forks} forks</span>
                 </div>`
-                li.addEventListener('click',()=>console.log('jump(${repo.name})'))
+                li.addEventListener('click',()=>jump(repo.name))
                 ul.appendChild(li)
             })
             document.querySelector('main').appendChild(ul)
