@@ -363,6 +363,7 @@
                 metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
             }
         })
+        
         const themes = ['light', 'dark']
         function theme(i) {
             let theme = localStorage.getItem('theme')
@@ -400,6 +401,7 @@
             scrollTo({top:0})
             document.querySelector('main').style.opacity = 1
         }, 100)
+        window.onpageshow = () => {setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)}
         setTimeout(() => scrollTo({top:0}),300)
     </script>
 </body>

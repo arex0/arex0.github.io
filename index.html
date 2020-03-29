@@ -379,6 +379,12 @@
     }
 
     </style>
+    <script>
+        let windowInnerHeight = window.innerHeight
+        let metaEl = document.querySelector('#viewportMeta')
+        metaEl.setAttribute('name', 'viewport')
+        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+    </script>
 </head>
 
 <body style='overflow-y: scroll;'>
@@ -507,11 +513,12 @@
     </main>
 
     <script>
-        ((height) => { let metaEl = document.querySelector('#viewportMeta')
-            let content = 'height=' + height + ',width=device-width,initial-scale=1.0,user-scalable=no'
-            metaEl.setAttribute('name', 'viewport')
-            metaEl.setAttribute('content', content)
-        })(window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight)
+       document.body.addEventListener('resize',()=>{
+            if(window.innerHeight>windowInnerHeight){
+                windowInnerHeight = window.innerHeight
+                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+            }
+        })
 
         const themes = ['light', 'dark']
         function theme(i) {
@@ -530,6 +537,10 @@
         }
         setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
         setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+        window.onpageshow = () => {
+            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+            setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+        }
 
         var AudioContext = window.AudioContext || window.webkitAudioContext
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition

@@ -312,6 +312,12 @@
     }
 
     </style>
+    <script>
+        let windowInnerHeight = window.innerHeight
+        let metaEl = document.querySelector('#viewportMeta')
+        metaEl.setAttribute('name', 'viewport')
+        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+    </script>
 </head>
 
 <body>
@@ -422,11 +428,12 @@
     </div>
     <main onclick="document.querySelector('nav').removeAttribute('open')" style='display: flex;justify-content: center;'></main>
     <script>
-        ((height) => { let metaEl = document.querySelector('#viewportMeta')
-            let content = 'height=' + height + ',width=device-width,initial-scale=1\.0,user-scalable=no'
-            metaEl.setAttribute('name', 'viewport')
-            metaEl.setAttribute('content', content)
-        })(window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight)
+        document.body.addEventListener('resize',()=>{
+            if(window.innerHeight>windowInnerHeight){
+                windowInnerHeight = window.innerHeight
+                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+            }
+        })
 
         const themes = ['light', 'dark']
         function theme(i) {
@@ -481,6 +488,10 @@
             setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),99)
             setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
             setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+            window.onpageshow = () => {
+                setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+                setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+            }
         })
     </script>
 </body>
