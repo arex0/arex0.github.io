@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+Disallow: /link/github/pic/
+Disallow: /*?*
+Sitemap: https://arex0.com/sitemap.xml
