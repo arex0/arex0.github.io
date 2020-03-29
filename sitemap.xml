@@ -61,6 +61,12 @@
       <priority>1</priority>
   </url>
   <url>
+      <loc>http://arex0.com/link/github/index.html</loc>
+      <lastmod>2020-03-29</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
       <loc>http://arex0.com/link/github/pic</loc>
       <lastmod>2020-03-29</lastmod>
       <changefreq>weekly</changefreq>
@@ -80,7 +86,7 @@
   </url>
   <url>
       <loc>http://arex0.com/link/github/zero-3d.js</loc>
-      <lastmod>2020-03-28</lastmod>
+      <lastmod>2020-03-29</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
