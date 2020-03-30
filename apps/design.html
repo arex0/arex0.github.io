@@ -8,6 +8,35 @@
     <title>Design 3D | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
+    <script>
+        let windowInnerHeight = window.innerHeight
+        let metaEl = document.querySelector('#viewportMeta')
+        metaEl.setAttribute('name', 'viewport')
+        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+        window.addEventListener('resize',()=>{
+            if(window.innerHeight>windowInnerHeight){
+                windowInnerHeight = window.innerHeight
+                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+            }
+        })
+        const themes = ['light', 'dark']
+        function theme(i) {
+            let theme = localStorage.getItem('theme')
+            document.body.classList.remove(theme)
+            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
+            localStorage.setItem('theme', theme)
+            document.body.classList.add(theme)
+        }
+        function jump(url) {
+            document.activeElement.blur()
+            setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
+            setTimeout(() => location.href = url, 600)
+        }
+        function pageshow(){
+            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+        }
+        window.addEventListener('pageshow',pageshow)
+    </script>
     <style>
     .light {
         --background: 0, 0%, 93%;
@@ -285,12 +314,6 @@
     }
 
     </style>
-    <script>
-        let windowInnerHeight = window.innerHeight
-        let metaEl = document.querySelector('#viewportMeta')
-        metaEl.setAttribute('name', 'viewport')
-        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-    </script>
 </head>
 
 <body style='overflow-y: scroll;overflow-x: hidden;'>
@@ -356,29 +379,7 @@
         </div>
     </main>
 
-    <script>
-        document.body.addEventListener('resize',()=>{
-            if(window.innerHeight>windowInnerHeight){
-                windowInnerHeight = window.innerHeight
-                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-            }
-        })
-        
-        const themes = ['light', 'dark']
-        function theme(i) {
-            let theme = localStorage.getItem('theme')
-            document.body.classList.remove(theme)
-            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
-            localStorage.setItem('theme', theme)
-            document.body.classList.add(theme)
-        }
-        theme(0)
-        function jump(url) {
-            document.activeElement.blur()
-            document.querySelector('main').style.opacity = 0
-            setTimeout(() => location.href = url, 300)
-        }
-    </script>
+    <script>theme(0)</script>
     <script src='/link/github/zero-3d.js/zero-3d.js'></script>
     <script>
         let ctl_3d = zero3d(document.getElementById('zero-3d'),{
@@ -399,9 +400,8 @@
         }
         setTimeout(() => {
             scrollTo({top:0})
-            document.querySelector('main').style.opacity = 1
+            pageshow()
         }, 100)
-        window.onpageshow = () => {setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)}
         setTimeout(() => scrollTo({top:0}),300)
     </script>
 </body>

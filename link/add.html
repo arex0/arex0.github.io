@@ -7,6 +7,37 @@
     <title>Share Links | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
+    <script>
+        let windowInnerHeight = window.innerHeight
+        let metaEl = document.querySelector('#viewportMeta')
+        metaEl.setAttribute('name', 'viewport')
+        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+        window.addEventListener('resize',()=>{
+            if(window.innerHeight>windowInnerHeight){
+                windowInnerHeight = window.innerHeight
+                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+            }
+        })
+        const themes = ['light', 'dark']
+        function theme(i) {
+            let theme = localStorage.getItem('theme')
+            document.body.classList.remove(theme)
+            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
+            localStorage.setItem('theme', theme)
+            document.body.classList.add(theme)
+        }
+        function jump(url) {
+            document.activeElement.blur()
+            document.querySelector('footer').style.opacity = 0
+            setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
+            setTimeout(() => location.href = url, 600)
+        }
+        function pageshow(){
+            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+            setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
+        }
+        window.addEventListener('pageshow',pageshow)
+    </script>
     <style>
     .light {
         --background: 0, 0%, 93%;
@@ -286,12 +317,6 @@
     }
 
     </style>
-    <script>
-        let windowInnerHeight = window.innerHeight
-        let metaEl = document.querySelector('#viewportMeta')
-        metaEl.setAttribute('name', 'viewport')
-        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-    </script>
 </head>
 
 <body>
@@ -404,35 +429,10 @@
     </main>
 
     <script>
-        document.body.addEventListener('resize',()=>{
-            if(window.innerHeight>windowInnerHeight){
-                windowInnerHeight = window.innerHeight
-                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
-            }
-        })
-
-        const themes = ['light', 'dark']
-        function theme(i) {
-            let theme = localStorage.getItem('theme')
-            document.body.classList.remove(theme)
-            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
-            localStorage.setItem('theme', theme)
-            document.body.classList.add(theme)
-        }
         theme(0)
-        function jump(url) {
-            document.activeElement.blur()
-            document.querySelector('footer').style.opacity = 0
-            setTimeout(() => document.querySelector('main').style.opacity = 0, 300)
-            setTimeout(() => location.href = url, 600)
-        }
-        setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
-        setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
-        window.onpageshow = () => {
-            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
-            setTimeout(()=>{document.querySelector('footer').style.opacity = 1},400)
-        }
-        function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => window.autoscrolling = (window.autoscrolling === false) ? (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) : (window.autoscrolling === true) ? false : ((i > 0.01) && (i < .99)), { threshold: [0.01, 0.99] }).observe(e) } snap(document.querySelector('footer'))
+        pageshow()
+        function snap(e) { new IntersectionObserver(([{ intersectionRatio: i }]) => window.autoscrolling = (window.autoscrolling === false) ? (scrollBy({ top: Math.sign(i - .5) * -e.scrollHeight, behavior: 'smooth' }), true) : (window.autoscrolling === true) ? false : ((i > 0.01) && (i < .99)), { threshold: [0.01, 0.99] }).observe(e) }
+        snap(document.querySelector('footer'))
     </script>
 </body>
 
