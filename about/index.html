@@ -3,7 +3,8 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' id='viewportMeta' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta name='viewport' id='viewportMeta' content='width=device-widthwidth=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0,user-scalable=no'>
+    <meta name='description' content='About arex0, personal resume page.'>
     <title>About | Arex0</title>
     <link href='/link/github/ui/dist/web/ui.css' rel='stylesheet'>
     <link rel='manifest' href='/manifest.webmanifest'>
@@ -280,27 +281,31 @@
         contain: layout style;
     }
 
-    .fabs>a {
+    .fabs>button {
         display: block;
         margin: calc(8px + 1.25vmin) calc(16px + 2.5vmin);
         visibility: visible;
+        padding: 0;
         background-color: hsl(var(--background));
         border: .5px solid hsla(var(--color), .2);
+        outline: none;
         box-shadow: 0 0 6px hsla(var(--color), .25);
         max-width: calc(48px + 2.5vmin);
         min-height: calc(48px + 2.5vmin);
         max-height: calc(48px + 2.5vmin);
         overflow: hidden;
-        text-decoration: none;
+        font: inherit;
         border-radius: calc(24px + 1.25vmin);
         transition: max-width .5s ease;
     }
 
+    .fabs:focus-within,
     .fabs:hover {
         clip-path: inset(0);
     }
 
-    .fabs>a~a:hover {
+    .fabs>button~button:focus,
+    .fabs>button~button:hover {
         max-width: calc(48px + 2.5vmin + 12em);
     }
 
@@ -309,7 +314,7 @@
         stroke: hsla(var(--color), .7);
     }
 
-    .fabs>a~a::after {
+    .fabs>button~button::after {
         color: hsl(var(--color));
         vertical-align: top;
         line-height: calc(48px + 2.5vmin);
