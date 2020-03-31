@@ -2,7 +2,7 @@
 <html lang='zh-CN'>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline';form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
+    <meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com ;form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
     <meta name='author' content='Arex0'>
     <meta name='description' content='$1'>
     <meta name='generator' content='https://arex0.com/apps/design.html'>
@@ -80,18 +80,8 @@
                 font-size: 1em;
                 align-self: flex-start;
             }
-
-            nav:focus-within li:nth-child(2)>a::before {
-                display: inline-block !important;
-                padding: calc(4vmin - 1.5vh) 0;
-                background-color: hsl(var(--color));
-                color: hsl(var(--background));
-                width: 100vw;
-                text-align: center;
-                line-height: 1em;
-                content: '⨯';
-                font-size: 1em;
-                align-self: flex-start;
+            nav:focus-within li:nth-child(2)>a{
+                display: block !important;
             }
         }
 
@@ -183,17 +173,8 @@
             align-self: flex-start;
         }
 
-        nav[open] li:first-child>a::before {
-            display: inline-block;
-            padding: calc(4vmin - 1.5vh) 0;
-            background-color: hsl(var(--color));
-            color: hsl(var(--background));
-            width: 100vw;
-            text-align: center;
-            line-height: 1em;
-            content: '⨯';
-            font-size: 1em;
-            align-self: flex-start;
+        nav[open] li:first-child>a{
+            display: block !important;
         }
 
         nav ul a {
@@ -337,8 +318,8 @@
         <input id='zerotext' class='js' onkeydown='(event.keyCode==13)&&(zero(this.value),this.value="")' onblur='this.parentElement.removeAttribute("open")' style='max-width:calc(80vw - 17em);background:transparent;border:solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow:0 0 8px hsla(var(--color),.5),inset 0 0 8px hsla(var(--color),.5);font:calc(16px + 1vh) monaco,consolas,monospace;padding-left:1.8em'>
     </div>
     <ul tabindex='-1' style='display:flex;position:absolute;top:0;right:0;margin:0;padding:0;list-style-type:none;outline:none' onclick='this.parentElement.getAttribute("open")?this.parentElement.removeAttribute("open"):this.parentElement.setAttribute("open",true)'>
-        <li class='js'><a href='#nav' onclick='this.blur(),event.preventDefault()'><!--toggle item--></a></li>
-        <li class='nojs' style='display:none'><a href='#nav'></a></li>
+        <li class='js'><a href='#nav' style='display:none' onclick='this.blur(),event.preventDefault()'>⨯<!--toggle item--></a></li>
+        <li class='nojs' style='display:none'><a href='#nav' style='display:none'>⨯</a></li>
         <li class='nojs' style='display:none'><a href='/'>Home</a></li>
         <li><a href='/blog/' onclick='event.preventDefault(),jump("/blog/")'>Blog</a></li>
         <li><a href='/archive/' onclick='event.preventDefault(),jump("/archive/")'>Archive</a></li>
@@ -348,12 +329,12 @@
     </ul>
 </nav>
 <div class='js fabs' style='display:flex;position:fixed;right:0;bottom:0;z-index:2;max-height:100%;overflow:hidden;order:1;flex-direction:column-reverse;flex-wrap:wrap-reverse;align-content:baseline;will-change:clip-path,opacity;transition:clip-path .3s ease-out,opacity .3s ease;contain:layout style'>
-    <button onclick='void(0)'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='6' y1='12' x2='18' y2='12'></line><line x1='12' y1='6' x2='12' y2='18'></line></svg></button>
+    <button onclick='void(0)' title='Expand'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='6' y1='12' x2='18' y2='12'></line><line x1='12' y1='6' x2='12' y2='18'></line></svg></button>
     <button onclick='jump("/")' title='Home'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline><polyline points='5 11,12 5,19 11' fill='#fff0'></polyline></svg></button>
     <button onclick='smsrcoll(0)' title='Top'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='8' y1='7' x2='16' y2='7'></line><polyline points='8 13,12 9,16 13' fill='#fff0'></polyline><line x1='12' y1='10' x2='12' y2='18'></line></svg></button>
     <button onclick='theme(+1)' title='Turn Theme'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'><path fill='#fff0'd='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'></path></svg></button>
 </div>
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;'>
     <a class='app' short-name='🔗' href='/link/' onclick='event.preventDefault(),jump("/link/")'>link</a>
     <a class='app' short-name='🗒' href='/apps/guestbook.html' onclick='event.preventDefault(),jump("/apps/guestbook.html")'>GuestBook</a>
     <a class='app' short-name='IC' href='/apps/icons.html' onclick='event.preventDefault(),jump("/apps/icons.html")'>Icons Font</a>
@@ -362,6 +343,7 @@
 </main>
 </body>
 <script>
+    document.querySelector('main').addEventListener('click',()=>document.body.firstElementChild.removeAttribute("open"),{passive:true})
     theme(0)
     pageshow()
     let actions={
