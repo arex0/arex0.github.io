@@ -1,51 +1,111 @@
 <!DOCTYPE html>
 <html lang='zh-CN'>
-
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' id='viewportMeta' content='width=device-widthwidth=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0,user-scalable=no'>
-    <meta name='description' content='Share links of Arex0'>
+    <meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline';form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
+    <meta name='author' content='Arex0'>
+    <meta name='description' content='Arex0 Links'>
+    <meta name='generator' content='https://arex0.com/apps/design.html'>
+    <meta name='keywords' content='Arex0,Links'>
+    <meta name='referrer' content='no-referrer'>
+    <meta name='theme-color' content='hsl(var(0,0%,8%))'>
+    <meta name='color-scheme' content='dark light'>
+    <meta name='publisher' content='arex0.com'>
+    <meta name='viewport' id='viewportMeta' content='width=device-width,height=device-height,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no'>
     <title>Links | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
+    <link license='https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC'>
     <script>
-        let windowInnerHeight = window.innerHeight
-        let metaEl = document.querySelector('#viewportMeta')
-        metaEl.setAttribute('name', 'viewport')
-        metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+        let windowInnerHeight=window.innerHeight
+        let metaEl=document.querySelector('#viewportMeta')
+        metaEl.setAttribute('name','viewport')
+        metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
         window.addEventListener('resize',()=>{
             if(window.innerHeight>windowInnerHeight){
-                windowInnerHeight = window.innerHeight
-                metaEl.setAttribute('content', `height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+                windowInnerHeight=window.innerHeight
+                metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
             }
         })
-        const themes = ['light', 'dark']
+        const themes=['light','dark']
         function theme(i) {
-            let theme = localStorage.getItem('theme')
+            let theme=localStorage.getItem('theme')
             document.body.classList.remove(theme)
-            theme = themes[(themes.indexOf(theme || 'light') + i) % themes.length]
-            localStorage.setItem('theme', theme)
+            theme=themes[(themes.indexOf(theme||'light')+i) % themes.length]
+            localStorage.setItem('theme',theme)
             document.body.classList.add(theme)
         }
         function jump(url) {
             document.activeElement.blur()
-            document.querySelector('main').style.opacity = 0
-            setTimeout(() => location.href = url, 300)
+            setTimeout(()=>document.querySelector('main').style.opacity=0,300)
+            setTimeout(()=>location.href=url,600)
         }
         function pageshow(){
-            setTimeout(() => {document.querySelector('main').style.opacity = 1}, 100)
+            setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+        }
+        function smsrcoll(h){
+            scrollTo({top:h,behavior:"smooth"})
         }
         window.addEventListener('pageshow',pageshow)
     </script>
+    <noscript><style id='nojs'>
+        .js {
+            display: none !important;
+        }
+
+        .nojs {
+            display: unset !important;
+            opacity: 1 !important;
+        }
+
+        @media only screen and (max-width:500px) {
+            nav:focus-within {
+                border: none;
+                height: calc(6em + 8vmin + 15vh);
+                min-height: calc(160px + 1em + 8vmin + 15vh) !important;
+            }
+
+            nav:focus-within ul {
+                width: 100vw;
+            }
+
+            nav:not(:focus-within) li:nth-child(2)::before {
+                display: inline-block;
+                padding: 4vmin;
+                background-color: hsl(var(--color));
+                color: hsl(var(--background));
+                text-align: center;
+                line-height: 1em;
+                content: '☰';
+                font-size: 1em;
+                align-self: flex-start;
+            }
+
+            nav:focus-within li:nth-child(2)>a::before {
+                display: inline-block !important;
+                padding: calc(4vmin - 1.5vh) 0;
+                background-color: hsl(var(--color));
+                color: hsl(var(--background));
+                width: 100vw;
+                text-align: center;
+                line-height: 1em;
+                content: '⨯';
+                font-size: 1em;
+                align-self: flex-start;
+            }
+        }
+
+    </style></noscript>
     <style>
+    :root,
     .light {
-        --background: 0, 0%, 93%;
-        --color: 0, 0%, 21%;
+        --background: 0,0%,93%;
+        --color: 0,0%,21%;
     }
 
     .dark {
-        --background: 0, 0%, 8%;
-        --color: 0, 0%, 93%;
+        --background: 0,0%,8%;
+        --color: 0,0%,93%;
     }
 
     * {
@@ -53,184 +113,134 @@
         min-height: 32px;
     }
 
-    body {
-        display: flex;
-        position: relative;
-        margin: 0;
-        z-index: 0;
-        background-color: hsl(var(--background));
-        color: hsl(var(--color));
-        font: calc(16px + 1vh) monaco, consolas, monospace;
-        flex-direction: column;
-    }
-
     div {
         box-sizing: border-box;
         border-radius: 4px;
     }
 
-    .nav {
-        display: flex;
-        position: fixed;
-        top: 0;
-        z-index: 2;
-        background: hsl(var(--background));
-        outline: none;
-        box-shadow: 0 0 6px hsla(var(--color), .25);
-        min-width: 100vw;
-        min-height: 1.7em;
-        contain: layout style;
-        align-items: center;
-        border-bottom: solid 1px hsla(var(--color), .1);
-    }
-
-    .nav ul {
-        display: flex;
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        min-height: 1.7em;
-    }
-
-    .nav li {
-        display: flex;
+    nav ul a {
         margin: 0 2vw;
-        list-style-type: none;
-        align-items: center;
-    }
-
-    .nav a {
         color: hsl(var(--color));
+        line-height: 1.7em;
         text-decoration: none;
         flex: 1;
+        user-select: none;
     }
 
     .logo>*:not(:first-child),
-    .logo:focus-within>*:first-child {
-        display: none !important;
+    .logo[open]>b {
+        display: none;
     }
 
     .logo:focus-within>*:not(:first-child) {
-        display: unset !important;
+        display: inline-block;
+        max-width: unset !important;
     }
 
-    @media only screen and (max-width: 500px) {
-        .nav {
+    /*firefox so diffcult*/
+    .logo:not(:focus-within)::after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+    }
+
+    @media only screen and (max-width:500px) {
+        nav {
             height: calc(1em + 8vmin);
             overflow: hidden;
         }
 
-        .nav[open] {
+        nav[open] {
             border: none;
-            height: calc(7.5em + 6vmin + 8vh);
-            min-height: calc(128px + 1.5em + 6vmin + 10vh);
+            height: calc(5em + 8vmin + 12vh);
+            min-height: calc(128px + 1em + 8vmin + 12vh) !important;
         }
 
-        .nav ul {
-            right: unset;
+        nav ul {
+            right: unset !important;
             left: 0;
-            padding: 0;
+            width: calc(1em + 8vmin);
             flex-direction: column;
         }
 
-        .nav li {
-            margin: 0;
-            line-height: 1.5em;
+        nav[open] ul {
+            width: 100vw;
         }
 
-        .nav a {
-            display: block;
-            padding: 1vh 0;
-            background-color: hsl(var(--color));
-            color: hsl(var(--background));
-            outline: solid 1px hsla(var(--background), .05);
-            text-align: center;
-        }
-
-        .nav ul::before {
-            display: block;
+        nav:not([open]) li:first-child::before {
+            display: inline-block;
             padding: 4vmin;
             background-color: hsl(var(--color));
             color: hsl(var(--background));
             text-align: center;
             line-height: 1em;
-            cursor: pointer;
             content: '☰';
             font-size: 1em;
             align-self: flex-start;
         }
 
-        .nav[open] ul::before {
-            padding: 3vmin 0;
+        nav[open] li:first-child>a::before {
+            display: inline-block;
+            padding: calc(4vmin - 1.5vh) 0;
+            background-color: hsl(var(--color));
+            color: hsl(var(--background));
             width: 100vw;
+            text-align: center;
+            line-height: 1em;
             content: '⨯';
-            font-size: 1.5em;
+            font-size: 1em;
+            align-self: flex-start;
         }
 
-        .nav .logo {
-            max-width: unset !important;
-            line-height: calc(1em + 5vmin);
+        nav ul a {
+            display: block;
+            margin: 0;
+            padding: 1.5vh 0;
+            background-color: hsl(var(--color));
+            color: hsl(var(--background));
+            outline: solid 1px hsla(var(--background),.05);
+            text-align: center;
+            line-height: 1em;
+        }
+
+        nav .logo {
+            width: 100vw;
+            text-align: center;
             padding-left: calc(8vmin + 1em) !important;
-            font-size: 1.5em;
-        }
-
-        .nav .logo:focus~* {
-            display: none;
-        }
-
-        .nav input {
-            max-width: 100% !important;
+            font-size: calc(1em + 4vmin);
         }
 
         .logo>span {
-            left: calc(8vw + 1.1em) !important;
+            left: calc(8vw + 1em) !important;
         }
 
         .logo:focus-within>span {
-            transform: scale(.8) !important;
+            transform: scale(.6) !important;
+        }
+
+        .logo input {
+            margin: 4vmin 0;
         }
     }
 
-    main {
-        position: relative;
-        z-index: 1;
-        padding: calc(32px + 1vh) 0;
-        background: hsl(var(--background));
-        min-height: calc(99vh - 1.7em);
-        opacity: 0;
-        contain: layout style;
-        transition: opacity .3s;
-    }
-
-    @media only screen and (max-width: 1300px) {
-        * {
-            cursor: default !important;
-        }
-
+    @media only screen and (max-width:1300px) {
         main {
-            min-height: calc(99vh - 1.7em) !important;
-            padding-top: calc(1em + 8vmin);
+            min-height: calc(100vh - 1em - 8vmin) !important;
+            margin-top: calc(1em + 8vmin) !important;
         }
     }
 
     .fabs {
-        display: flex;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        z-index: 6;
-        max-height: 100%;
-        overflow: hidden;
-        order: 1;
-        flex-direction: column-reverse;
-        flex-wrap: wrap-reverse;
-        align-content: baseline;
-        will-change: clip-path, opacity;
-        transition: clip-path .3s ease-out, opacity .3s ease;
         clip-path: inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
-        contain: layout style;
+    }
+
+    .fabs:focus-within,
+    .fabs:hover {
+        clip-path: inset(0);
     }
 
     .fabs>button {
@@ -239,9 +249,9 @@
         visibility: visible;
         padding: 0;
         background-color: hsl(var(--background));
-        border: .5px solid hsla(var(--color), .2);
+        border: .5px solid hsla(var(--color),.2);
         outline: none;
-        box-shadow: 0 0 6px hsla(var(--color), .25);
+        box-shadow: 0 0 6px hsla(var(--color),.25);
         max-width: calc(48px + 2.5vmin);
         min-height: calc(48px + 2.5vmin);
         max-height: calc(48px + 2.5vmin);
@@ -252,19 +262,9 @@
         transition: max-width .5s ease;
     }
 
-    .fabs:focus-within,
-    .fabs:hover {
-        clip-path: inset(0);
-    }
-
     .fabs>button~button:focus,
     .fabs>button~button:hover {
         max-width: calc(48px + 2.5vmin + 12em);
-    }
-
-    .fabs svg {
-        width: calc(48px + 2.5vmin);
-        stroke: hsla(var(--color), .7);
     }
 
     .fabs>button~button::after {
@@ -275,23 +275,44 @@
         margin-right: calc(24px + 1.25vmin);
     }
 
-    @media only screen and (max-width: 795px) {
-        main {
-            margin: 0 !important;
-            transform: none;
-        }
+    .fabs svg {
+        width: calc(48px + 2.5vmin);
+        stroke: hsla(var(--color),.7);
+    }
+
+    .zero {
+        display: inline-block;
+        position: relative;
+        min-width: unset;
+        min-height: unset;
+        overflow: hidden;
+        text-align: center;
+        vertical-align: middle;
+        transform: translateY(-.05em);
+        border-radius: 50%;
+        user-select: none;
+    }
+
+    .exist {
+        display: inline-block;
+        position: absolute;
+        background-color: hsl(var(--color));
+        min-width: unset;
+        min-height: unset;
+        transform: translateX(-50%) translateY(-50%);
     }
 
     .app {
         display: flex;
-        margin: .5em;
-        padding: .5em;
+        margin: 1em;
+        padding: .8em;
         color: hsl(var(--color));
         width: 5em;
         height: 5em;
         text-align: center;
         text-decoration: none;
         cursor: pointer;
+        font-size: .8em;
         flex-direction: column;
         justify-content: space-between;
     }
@@ -303,72 +324,52 @@
     .app::before {
         line-height: 1em;
         content: attr(short-name);
-        font-size: 3.3em;
-    }
-
-    .app::after {
-        content: attr(long-name);
-        font-size: .8em;
+        font-size: 4em;
     }
 
     </style>
 </head>
-
-<body style='overflow-y: scroll;'>
-    <nav class='nav' onclick='this.getAttribute("open")?this.removeAttribute("open"):this.setAttribute("open",true)'>
-        <a class='logo' tabindex='-1' onclick='event.stopPropagation(),this.lastElementChild.focus()' style='padding: 0 1em;color: inherit;background: inherit;max-width: fit-content;cursor:pointer;'>
-            <b>Arex<span style='display: inline-block; position: relative; border: solid .125em; width: .8em; min-width: unset; height: .8em; min-height: unset; text-align: center; vertical-align: middle; transform: translateY(-.05em); border-radius: 50%;'>
-                <span style='display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);'></span>
-            </span></b>
-            <span onclick='jump("/")' style="display: inline-block;position: absolute;border: solid .125em;top: .4em;left: 1.4em;width: .8em;min-width: unset;height: .8em;min-height: unset;text-align: center;vertical-align: middle;transform: translateY(-.05em);border-radius: 50%;">
-                <span style="display: inline-block; position: absolute; top: .4em; left: .4em; border: solid .12em; width: 0; min-width: unset; height: 0; min-height: unset; transform: translateX(-50%) translateY(-50%);"></span>
-            </span>
-            <input style='max-width: calc(80vw - 17em);background: transparent;border: solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow: 0 0 8px hsla(var(--color), .5), inset 0 0 8px hsla(var(--color), .5);font: calc(16px + 1vh) monaco, consolas, monospace;padding-left: 1.8em;'>
-        </a>
-        <ul>
-            <li><a href='javascript:jump("/blog/")'>Blog</a></li>
-            <li><a href='javascript:jump("/archive/")'>Archive</a></li>
-            <li><a href='javascript:jump("/about/")'>About</a></li>
-            <li><a href='javascript:jump("/apps/")'>Apps</a></li>
-            <li><a>&nbsp;</a></li>
-        </ul>
-    </nav>
-    <div class='fabs' id='fabs'>
-        <button onclick='void(0)'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
-                <line x1='6' y1='12' x2='18' y2='12'></line>
-                <line x1='12' y1='6' x2='12' y2='18'></line>
-            </svg>
-        </button>
-        <button onclick='jump("/")' title='Home'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
-                <polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline>
-                <polyline points='5 11,12 5,19 11' fill='#fff0'></polyline>
-            </svg>
-        </button>
-        <button onclick='scrollTo({top:0,behavior:"smooth"})' title='Top'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'>
-                <line x1='8' y1='7' x2='16' y2='7'></line>
-                <polyline points='8 13,12 9,16 13' fill='#fff0'></polyline>
-                <line x1='12' y1='10' x2='12' y2='18'></line>
-            </svg>
-       </button>
-        <button onclick='theme(+1)' title='Turn Theme'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'>
-                <path fill='#fff0' d='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'>
-                </path>
-            </svg>
-        </button>
+<body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
+<nav id='nav' style='display:flex;position:fixed;top:0;z-index:2;background:hsl(var(--background));outline:none;box-shadow:0 0 6px hsla(var(--color),.25);width:100vw;min-height:1.7em;contain:layout style;align-items:center;border-bottom:solid 1px hsla(var(--color),.1);overflow:hidden'>
+    <div tabindex='-1' onclick='document.getElementById("zerotext").focus(),setTimeout(()=>document.getElementById("zerotext").focus(),1000)' class='logo' style='position:relative;padding:0 1em;outline:none' onpointerdown='this.setAttribute("open",true)' ontouchstart='this.setAttribute("open",true)'>
+        <b style='cursor:pointer'>Arex<span class='zero' style='border:solid .125em;width:.8em;height:.8em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span></b>
+        <span onclick='jump("/")' class='js zero' style='border:solid .125em;width:.8em;height:.8em;position:absolute;top:.4em;left:1.4em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span>
+        <input id='zerotext' class='js' onkeydown='(event.keyCode==13)&&(zero(this.value),this.value="")' onblur='this.parentElement.removeAttribute("open")' style='max-width:calc(80vw - 17em);background:transparent;border:solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow:0 0 8px hsla(var(--color),.5),inset 0 0 8px hsla(var(--color),.5);font:calc(16px + 1vh) monaco,consolas,monospace;padding-left:1.8em'>
     </div>
-    <main onclick='document.querySelector("nav").removeAttribute("open")' style='display: flex; flex-flow: row wrap;margin: 4em 8em; border: .5px solid hsla(var(--color), .2); box-shadow: 0 0 6px hsla(var(--color), .25); border-radius: 1em; padding: 3em 4vmin; min-height: 60vh;'>
-        <a class='app' short-name='🖇' long-name='Share Links' href='/link/add.html'></a>
-        <a class='app' short-name='ꇚ' long-name='Github' href='/link/github/'></a>
-    </main>
-
-    <script>
-        theme(0)
-        pageshow()
-    </script>
+    <ul tabindex='-1' style='display:flex;position:absolute;top:0;right:0;margin:0;padding:0;list-style-type:none;outline:none' onclick='this.parentElement.getAttribute("open")?this.parentElement.removeAttribute("open"):this.parentElement.setAttribute("open",true)'>
+        <li class='js'><a href='#nav' onclick='this.blur(),event.preventDefault()'><!--toggle item--></a></li>
+        <li class='nojs' style='display:none'><a href='#nav'></a></li>
+        <li class='nojs' style='display:none'><a href='/'>Home</a></li>
+        <li><a href='/blog/' onclick='event.preventDefault(),jump("/blog/")'>Blog</a></li>
+        <li><a href='/archive/' onclick='event.preventDefault(),jump("/archive/")'>Archive</a></li>
+        <li><a href='/about/' onclick='event.preventDefault(),jump("/about/")'>About</a></li>
+        <li><a href='/apps/' onclick='event.preventDefault(),jump("/apps/")'>Apps</a></li>
+        <li><a href='#nav' onclick='this.blur(),event.preventDefault()' style='color:hsl(var(--background));cursor:default'>⨯<!--safe item--></a></li>
+    </ul>
+</nav>
+<div class='js fabs' style='display:flex;position:fixed;right:0;bottom:0;z-index:2;max-height:100%;overflow:hidden;order:1;flex-direction:column-reverse;flex-wrap:wrap-reverse;align-content:baseline;will-change:clip-path,opacity;transition:clip-path .3s ease-out,opacity .3s ease;contain:layout style'>
+    <button onclick='void(0)'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='6' y1='12' x2='18' y2='12'></line><line x1='12' y1='6' x2='12' y2='18'></line></svg></button>
+    <button onclick='jump("/")' title='Home'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline><polyline points='5 11,12 5,19 11' fill='#fff0'></polyline></svg></button>
+    <button onclick='smsrcoll(0)' title='Top'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='8' y1='7' x2='16' y2='7'></line><polyline points='8 13,12 9,16 13' fill='#fff0'></polyline><line x1='12' y1='10' x2='12' y2='18'></line></svg></button>
+    <button onclick='theme(+1)' title='Turn Theme'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'><path fill='#fff0'd='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'></path></svg></button>
+</div>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex !important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <a class='app' short-name='🖇' href='add.html' onclick='event.preventDefault(),jump("add.html")'>Share Links</a>
+    <a class='app' short-name='ꇚ' href='github/' onclick='event.preventDefault(),jump("github/")'>Github</a>
+</main>
 </body>
-
+<script>
+    theme(0)
+    pageshow()
+    let actions={
+        '主题':event=>theme(1),
+        '主页':()=>jump('/'),
+        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
+        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
+    }
+    function zero(command){
+        let match=false
+        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+    }
+</script>
 </html>

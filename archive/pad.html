@@ -302,48 +302,31 @@
         transform: translateX(-50%) translateY(-50%);
     }
 
-
-    @media only screen and (max-width: 795px) {
-        main {
-            margin: 0 !important;
-            transform: none;
-        }
-
-        #zero-3d {
-            margin-top: 2em;
-        }
-
-        #controller {
-            font-size: .5em !important;
-        }
+    .app {
+        display: flex;
+        margin: 1em;
+        padding: .8em;
+        color: hsl(var(--color));
+        width: 5em;
+        height: 5em;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: .8em;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    #zero-3d,
-    #zero-3d * {
-        position: relative;
-        background-color: hsla(var(--background), 5);
-        border: .5px solid hsl(var(--color));
-        box-shadow: 0 0 6px hsla(var(--color), .25);
-        transform: translateZ(var(--zero3d-separation));
-        transform-style: preserve-3d;
-        perspective: 1000px;
+    .app:hover {
+        backdrop-filter: invert(.1);
     }
 
-    #controller {
-        --background: 0, 0%, 93%;
-        --color: 0, 0%, 21%;
+    .app::before {
+        line-height: 1em;
+        content: attr(short-name);
+        font-size: 4em;
     }
 
-    #content button {
-        --background: 0, 0%, 93%;
-        background-color: transparent;
-        --color: 0, 0%, 21%;
-        color: hsl(var(--background));
-        border: .5px solid hsl(var(--background));
-        box-shadow: 0 0 6px hsla(var(--background), .25);
-        width: 10em;
-        margin-bottom: .5em;
-    }
     </style>
 </head>
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
@@ -370,47 +353,26 @@
     <button onclick='smsrcoll(0)' title='Top'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='8' y1='7' x2='16' y2='7'></line><polyline points='8 13,12 9,16 13' fill='#fff0'></polyline><line x1='12' y1='10' x2='12' y2='18'></line></svg></button>
     <button onclick='theme(+1)' title='Turn Theme'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'><path fill='#fff0'd='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'></path></svg></button>
 </div>
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;background: hsl(0, 0%, 21%);touch-action: none;padding: 0;overflow: hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <div id='zero-3d' style='position: absolute; left: 50%; top: 50%; background: hsl(var(--background)); height: 50%; width: 50%; touch-action: none;user-select: none;'>
-        <div>123456789</div>
-    </div>
-    <div id='content' style='font-size: .8em; position: fixed; left: 1em; top: 5em;' onpointerdown='event.stopPropagation()'>
-        <button>set style</button><br>
-        <button>set component</button><br>
-        <button>set content</button><br>
-        <button>update</button><br>
-    </div>
-    <div id='controller' style='font-size: .8em;position: fixed; top: 10vh; right: 5vw; color: hsl(var(--background));' onpointerdown='event.stopPropagation()'>
-        <div id='rotate-controller' style='font-size: 2em;width: 5em; height: 5em; border: solid .2em; border-radius: 50%; line-height: 5em; transform: rotateZ(-60deg);user-select: none;'>⬤</div>
-        <br>separation separation<br>
-        <input type='range' oninput='setSeparation(this.value)' value='500' min='1' max='1000'>
-    </div>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <a class='app' short-name='🔗' href='/link/' onclick='event.preventDefault(),jump("/link/")'>link</a>
+    <a class='app' short-name='🗒' href='/apps/guestbook.html' onclick='event.preventDefault(),jump("/apps/guestbook.html")'>GuestBook</a>
+    <a class='app' short-name='IC' href='/apps/icons.html' onclick='event.preventDefault(),jump("/apps/icons.html")'>Icons Font</a>
+    <a class='app' short-name='DN' href='/apps/design.html' onclick='event.preventDefault(),jump("/apps/design.html")'>Design 3d</a>
+    <a class='app' short-name='✉' href='/apps/mail.html' onclick='event.preventDefault(),jump("/apps/mail.html")'>Mail</a>
 </main>
 </body>
-
-<script>theme(0)</script>
-<script src='/link/github/zero-3d.js/zero-3d.js'></script>
 <script>
-    let ctl_3d = zero3d(document.getElementById('zero-3d'),{
-        rotatable: true,
-        scalable: true,
-        root: document,
-        x: '-50%',
-        y: '-50%',
-        rx: 30,
-        ry: 45,
-        rz: 60,
-        rzc: document.getElementById('rotate-controller'),
-        size: .8,
-        p: 13.71,
-    })
-    function setSeparation(d){
-        ctl_3d.p = 1/(1.001-(d/1000)**.1) - 1/1.001
+    theme(0)
+    pageshow()
+    let actions={
+        '主题':event=>theme(1),
+        '主页':()=>jump('/'),
+        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
+        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
     }
-    setTimeout(() => {
-        scrollTo({top:0})
-        pageshow()
-    }, 100)
-    setTimeout(() => scrollTo({top:0}),300)
+    function zero(command){
+        let match=false
+        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+    }
 </script>
 </html>
