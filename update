@@ -16,14 +16,19 @@ function sitemap(){
             if [[ -d "$dir/$file" ]]
             then
                 echo '  <url>' >> sitemap.xml
-                echo '      <loc>http://arex0.com/'$dir/$file/'</loc>' >> sitemap.xml
+                echo '      <loc>http://arex0.com/'$dir/$file'</loc>' >> sitemap.xml
                 echo '      <lastmod>'$(ls --full-time "$dir/$file/index.html" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
                 echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
                 echo '      <priority>1</priority>' >> sitemap.xml
                 echo '  </url>' >> sitemap.xml
             else
                 echo '  <url>' >> sitemap.xml
-                echo '      <loc>http://arex0.com/'$dir/$file'</loc>' >> sitemap.xml
+                if [[  $file == "index.html" ]]
+                then
+                    echo '      <loc>http://arex0.com/'$dir'</loc>' >> sitemap.xml
+                else
+                    echo '      <loc>http://arex0.com/'$dir/${file%.html}'</loc>' >> sitemap.xml
+                fi
                 echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
                 echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
                 echo '      <priority>1</priority>' >> sitemap.xml
