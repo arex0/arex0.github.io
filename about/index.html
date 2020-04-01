@@ -106,12 +106,12 @@
         border-radius:4px;
     }
     nav ul a {
-        margin: 0 2vw;
-        color: hsl(var(--color));
-        line-height: 1.7em;
-        text-decoration: none;
-        flex: 1;
-        user-select: none;
+        margin:0 2vw;
+        color:hsl(var(--color));
+        line-height:1.7em;
+        text-decoration:none;
+        flex:1;
+        user-select:none;
     }
     .logo>*:not(:first-child),
     .logo[open]>b {
@@ -130,6 +130,7 @@
         width:100%;
         height:100%;
         content:'';
+        cursor:'pointer';
     }
     @media only screen and (max-width:500px) {
         nav {
@@ -162,7 +163,7 @@
             align-self:flex-start;
         }
         nav[open] li:first-child>a{
-            display: block !important;
+            display:block !important;
         }
         nav ul a {
             display:block;
@@ -456,7 +457,7 @@
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 <nav id='nav' style='display:flex;position:fixed;top:0;z-index:2;background:hsl(var(--background));outline:none;box-shadow:0 0 6px hsla(var(--color),.25);width:100vw;min-height:1.7em;contain:layout style;align-items:center;border-bottom:solid 1px hsla(var(--color),.1);overflow:hidden'>
     <div tabindex='-1' class='logo' style='position:relative;padding:0 1em;outline:none' onclick='document.getElementById("zerotext").focus(),setTimeout(()=>document.getElementById("zerotext").focus(),1000)'>
-        <b style='cursor:pointer'>Arex<span class='zero' style='border:solid .125em;width:.8em;height:.8em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span></b>
+        <b>Arex<span class='zero' style='border:solid .125em;width:.8em;height:.8em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span></b>
         <span onclick='jump("/")' class='js zero' style='border:solid .125em;width:.8em;height:.8em;position:absolute;top:.4em;left:1.4em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span>
         <input id='zerotext' class='js' onkeydown='(event.keyCode==13)&&(zero(this.value),this.value="")' onblur='this.parentElement.removeAttribute("open")' style='max-width:calc(80vw - 17em);background:transparent;border:solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow:0 0 8px hsla(var(--color),.5),inset 0 0 8px hsla(var(--color),.5);font:calc(16px + 1vh) monaco,consolas,monospace;padding-left:1.8em'>
     </div>
