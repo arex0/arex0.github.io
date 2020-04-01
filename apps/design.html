@@ -52,23 +52,19 @@
         .js {
             display:none !important;
         }
-
         .nojs {
             display:unset !important;
             opacity:1 !important;
         }
-
         @media only screen and (max-width:500px) {
             nav:focus-within {
                 border:none;
                 height:calc(6em + 8vmin + 15vh);
                 min-height:calc(160px + 1em + 8vmin + 15vh) !important;
             }
-
             nav:focus-within ul {
                 width:100vw;
             }
-
             nav:not(:focus-within) li:nth-child(2)::before {
                 display:inline-block;
                 padding:4vmin;
@@ -84,7 +80,6 @@
                 display:block !important;
             }
         }
-
     </style></noscript>
     <style>
     :root,
@@ -92,22 +87,18 @@
         --background:0,0%,93%;
         --color:0,0%,21%;
     }
-
     .dark {
         --background:0,0%,8%;
         --color:0,0%,93%;
     }
-
     * {
         min-width:32px;
         min-height:32px;
     }
-
     div {
         box-sizing:border-box;
         border-radius:4px;
     }
-
     nav ul a {
         margin:0 2vw;
         color:hsl(var(--color));
@@ -116,17 +107,14 @@
         flex:1;
         user-select:none;
     }
-
     .logo>*:not(:first-child),
     .logo[open]>b {
         display:none;
     }
-
     .logo:focus-within>*:not(:first-child) {
         display:inline-block;
         max-width:unset !important;
     }
-
     /*firefox so diffcult*/
     .logo:not(:focus-within)::after {
         display:block;
@@ -138,30 +126,29 @@
         content:'';
         cursor:'pointer';
     }
-
     @media only screen and (max-width:500px) {
+        main {
+            min-height:calc(100vh - 1em - 8vmin) !important;
+            margin-top:calc(1em + 8vmin) !important;
+        }
         nav {
             height:calc(1em + 8vmin);
             overflow:hidden;
         }
-
         nav[open] {
             border:none;
             height:calc(5em + 8vmin + 12vh);
             min-height:calc(128px + 1em + 8vmin + 12vh) !important;
         }
-
         nav ul {
             right:unset !important;
             left:0;
             width:calc(1em + 8vmin);
             flex-direction:column;
         }
-
         nav[open] ul {
             width:100vw;
         }
-
         nav:not([open]) li:first-child::before {
             display:inline-block;
             padding:4vmin;
@@ -173,11 +160,9 @@
             font-size:1em;
             align-self:flex-start;
         }
-
         nav[open] li:first-child>a{
             display:block !important;
         }
-
         nav ul a {
             display:block;
             margin:0;
@@ -188,43 +173,29 @@
             text-align:center;
             line-height:1em;
         }
-
         nav .logo {
             width:100vw;
             text-align:center;
             padding-left:calc(8vmin + 1em) !important;
             font-size:calc(1em + 4vmin);
         }
-
         .logo>span {
             left:calc(8vw + 1em) !important;
         }
-
         .logo:focus-within>span {
             transform:scale(.6) !important;
         }
-
         .logo input {
             margin:4vmin 0;
         }
     }
-
-    @media only screen and (max-width:1300px) {
-        main {
-            min-height:calc(100vh - 1em - 8vmin) !important;
-            margin-top:calc(1em + 8vmin) !important;
-        }
-    }
-
     .fabs {
         clip-path:inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
     }
-
     .fabs:focus-within,
     .fabs:hover {
         clip-path:inset(0);
     }
-
     .fabs>button {
         display:block;
         margin:calc(8px + 1.25vmin) calc(16px + 2.5vmin);
@@ -243,12 +214,10 @@
         border-radius:calc(24px + 1.25vmin);
         transition:max-width .5s ease;
     }
-
     .fabs>button~button:focus,
     .fabs>button~button:hover {
         max-width:calc(48px + 2.5vmin + 12em);
     }
-
     .fabs>button~button::after {
         color:hsl(var(--color));
         vertical-align:top;
@@ -256,12 +225,10 @@
         content:attr(title);
         margin-right:calc(24px + 1.25vmin);
     }
-
     .fabs svg {
         width:calc(48px + 2.5vmin);
         stroke:hsla(var(--color),.7);
     }
-
     .zero {
         display:inline-block;
         position:relative;
@@ -274,7 +241,6 @@
         border-radius:50%;
         user-select:none;
     }
-
     .exist {
         display:inline-block;
         position:absolute;
@@ -284,21 +250,17 @@
         transform:translateX(-50%) translateY(-50%);
     }
 
-
     @media only screen and (max-width:795px) {
         main {
             transform:none;
         }
-
         #zero-3d {
             margin-top:2em;
         }
-
         #controller {
             font-size:.5em !important;
         }
     }
-
     #zero-3d,
     #zero-3d * {
         position:relative;
@@ -309,12 +271,10 @@
         transform-style:preserve-3d;
         perspective:1000px;
     }
-
     #controller {
         --background:0, 0%, 93%;
         --color:0, 0%, 21%;
     }
-
     #content button {
         --background:0, 0%, 93%;
         background-color:transparent;

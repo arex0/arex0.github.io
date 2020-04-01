@@ -126,6 +126,11 @@
         content:'';
     }
     @media only screen and (max-width:500px) {
+        main {
+            margin:0 !important;
+            min-height:calc(100vh - 1em - 8vmin) !important;
+            margin-top:calc(1em + 8vmin) !important;
+        }
         nav {
             height:calc(1em + 8vmin);
             overflow:hidden;
@@ -184,11 +189,9 @@
             margin:4vmin 0;
         }
     }
-    @media only screen and (max-width:1300px) {
+    @media only screen and (min-width:500px) and (max-width:1300px) {
         main {
-            margin:0 !important;
-            min-height:calc(100vh - 1em - 8vmin) !important;
-            margin-top:calc(1em + 8vmin) !important;
+            margin: calc(1em + 8vmin) 4em 0 !important;
         }
     }
     .fabs {
