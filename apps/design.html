@@ -50,38 +50,38 @@
     </script>
     <noscript><style id='nojs'>
         .js {
-            display: none !important;
+            display:none !important;
         }
 
         .nojs {
-            display: unset !important;
-            opacity: 1 !important;
+            display:unset !important;
+            opacity:1 !important;
         }
 
         @media only screen and (max-width:500px) {
             nav:focus-within {
-                border: none;
-                height: calc(6em + 8vmin + 15vh);
-                min-height: calc(160px + 1em + 8vmin + 15vh) !important;
+                border:none;
+                height:calc(6em + 8vmin + 15vh);
+                min-height:calc(160px + 1em + 8vmin + 15vh) !important;
             }
 
             nav:focus-within ul {
-                width: 100vw;
+                width:100vw;
             }
 
             nav:not(:focus-within) li:nth-child(2)::before {
-                display: inline-block;
-                padding: 4vmin;
-                background-color: hsl(var(--color));
-                color: hsl(var(--background));
-                text-align: center;
-                line-height: 1em;
-                content: '☰';
-                font-size: 1em;
-                align-self: flex-start;
+                display:inline-block;
+                padding:4vmin;
+                background-color:hsl(var(--color));
+                color:hsl(var(--background));
+                text-align:center;
+                line-height:1em;
+                content:'☰';
+                font-size:1em;
+                align-self:flex-start;
             }
             nav:focus-within li:nth-child(2)>a{
-                display: block !important;
+                display:block !important;
             }
         }
 
@@ -89,241 +89,240 @@
     <style>
     :root,
     .light {
-        --background: 0,0%,93%;
-        --color: 0,0%,21%;
+        --background:0,0%,93%;
+        --color:0,0%,21%;
     }
 
     .dark {
-        --background: 0,0%,8%;
-        --color: 0,0%,93%;
+        --background:0,0%,8%;
+        --color:0,0%,93%;
     }
 
     * {
-        min-width: 32px;
-        min-height: 32px;
+        min-width:32px;
+        min-height:32px;
     }
 
     div {
-        box-sizing: border-box;
-        border-radius: 4px;
+        box-sizing:border-box;
+        border-radius:4px;
     }
 
     nav ul a {
-        margin: 0 2vw;
-        color: hsl(var(--color));
-        line-height: 1.7em;
-        text-decoration: none;
-        flex: 1;
-        user-select: none;
+        margin:0 2vw;
+        color:hsl(var(--color));
+        line-height:1.7em;
+        text-decoration:none;
+        flex:1;
+        user-select:none;
     }
 
     .logo>*:not(:first-child),
     .logo[open]>b {
-        display: none;
+        display:none;
     }
 
     .logo:focus-within>*:not(:first-child) {
-        display: inline-block;
-        max-width: unset !important;
+        display:inline-block;
+        max-width:unset !important;
     }
 
     /*firefox so diffcult*/
     .logo:not(:focus-within)::after {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        content: '';
+        display:block;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        content:'';
     }
 
     @media only screen and (max-width:500px) {
         nav {
-            height: calc(1em + 8vmin);
-            overflow: hidden;
+            height:calc(1em + 8vmin);
+            overflow:hidden;
         }
 
         nav[open] {
-            border: none;
-            height: calc(5em + 8vmin + 12vh);
-            min-height: calc(128px + 1em + 8vmin + 12vh) !important;
+            border:none;
+            height:calc(5em + 8vmin + 12vh);
+            min-height:calc(128px + 1em + 8vmin + 12vh) !important;
         }
 
         nav ul {
-            right: unset !important;
-            left: 0;
-            width: calc(1em + 8vmin);
-            flex-direction: column;
+            right:unset !important;
+            left:0;
+            width:calc(1em + 8vmin);
+            flex-direction:column;
         }
 
         nav[open] ul {
-            width: 100vw;
+            width:100vw;
         }
 
         nav:not([open]) li:first-child::before {
-            display: inline-block;
-            padding: 4vmin;
-            background-color: hsl(var(--color));
-            color: hsl(var(--background));
-            text-align: center;
-            line-height: 1em;
-            content: '☰';
-            font-size: 1em;
-            align-self: flex-start;
+            display:inline-block;
+            padding:4vmin;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            text-align:center;
+            line-height:1em;
+            content:'☰';
+            font-size:1em;
+            align-self:flex-start;
         }
 
         nav[open] li:first-child>a{
-            display: block !important;
+            display:block !important;
         }
 
         nav ul a {
-            display: block;
-            margin: 0;
-            padding: 1.5vh 0;
-            background-color: hsl(var(--color));
-            color: hsl(var(--background));
-            outline: solid 1px hsla(var(--background),.05);
-            text-align: center;
-            line-height: 1em;
+            display:block;
+            margin:0;
+            padding:1.5vh 0;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            outline:solid 1px hsla(var(--background),.05);
+            text-align:center;
+            line-height:1em;
         }
 
         nav .logo {
-            width: 100vw;
-            text-align: center;
-            padding-left: calc(8vmin + 1em) !important;
-            font-size: calc(1em + 4vmin);
+            width:100vw;
+            text-align:center;
+            padding-left:calc(8vmin + 1em) !important;
+            font-size:calc(1em + 4vmin);
         }
 
         .logo>span {
-            left: calc(8vw + 1em) !important;
+            left:calc(8vw + 1em) !important;
         }
 
         .logo:focus-within>span {
-            transform: scale(.6) !important;
+            transform:scale(.6) !important;
         }
 
         .logo input {
-            margin: 4vmin 0;
+            margin:4vmin 0;
         }
     }
 
     @media only screen and (max-width:1300px) {
         main {
-            min-height: calc(100vh - 1em - 8vmin) !important;
-            margin-top: calc(1em + 8vmin) !important;
+            min-height:calc(100vh - 1em - 8vmin) !important;
+            margin-top:calc(1em + 8vmin) !important;
         }
     }
 
     .fabs {
-        clip-path: inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
+        clip-path:inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
     }
 
     .fabs:focus-within,
     .fabs:hover {
-        clip-path: inset(0);
+        clip-path:inset(0);
     }
 
     .fabs>button {
-        display: block;
-        margin: calc(8px + 1.25vmin) calc(16px + 2.5vmin);
-        visibility: visible;
-        padding: 0;
-        background-color: hsl(var(--background));
-        border: .5px solid hsla(var(--color),.2);
-        outline: none;
-        box-shadow: 0 0 6px hsla(var(--color),.25);
-        max-width: calc(48px + 2.5vmin);
-        min-height: calc(48px + 2.5vmin);
-        max-height: calc(48px + 2.5vmin);
-        overflow: hidden;
-        font: inherit;
-        cursor: pointer;
-        border-radius: calc(24px + 1.25vmin);
-        transition: max-width .5s ease;
+        display:block;
+        margin:calc(8px + 1.25vmin) calc(16px + 2.5vmin);
+        visibility:visible;
+        padding:0;
+        background-color:hsl(var(--background));
+        border:.5px solid hsla(var(--color),.2);
+        outline:none;
+        box-shadow:0 0 6px hsla(var(--color),.25);
+        max-width:calc(48px + 2.5vmin);
+        min-height:calc(48px + 2.5vmin);
+        max-height:calc(48px + 2.5vmin);
+        overflow:hidden;
+        font:inherit;
+        cursor:pointer;
+        border-radius:calc(24px + 1.25vmin);
+        transition:max-width .5s ease;
     }
 
     .fabs>button~button:focus,
     .fabs>button~button:hover {
-        max-width: calc(48px + 2.5vmin + 12em);
+        max-width:calc(48px + 2.5vmin + 12em);
     }
 
     .fabs>button~button::after {
-        color: hsl(var(--color));
-        vertical-align: top;
-        line-height: calc(48px + 2.5vmin);
-        content: attr(title);
-        margin-right: calc(24px + 1.25vmin);
+        color:hsl(var(--color));
+        vertical-align:top;
+        line-height:calc(48px + 2.5vmin);
+        content:attr(title);
+        margin-right:calc(24px + 1.25vmin);
     }
 
     .fabs svg {
-        width: calc(48px + 2.5vmin);
-        stroke: hsla(var(--color),.7);
+        width:calc(48px + 2.5vmin);
+        stroke:hsla(var(--color),.7);
     }
 
     .zero {
-        display: inline-block;
-        position: relative;
-        min-width: unset;
-        min-height: unset;
-        overflow: hidden;
-        text-align: center;
-        vertical-align: middle;
-        transform: translateY(-.05em);
-        border-radius: 50%;
-        user-select: none;
+        display:inline-block;
+        position:relative;
+        min-width:unset;
+        min-height:unset;
+        overflow:hidden;
+        text-align:center;
+        vertical-align:middle;
+        transform:translateY(-.05em);
+        border-radius:50%;
+        user-select:none;
     }
 
     .exist {
-        display: inline-block;
-        position: absolute;
-        background-color: hsl(var(--color));
-        min-width: unset;
-        min-height: unset;
-        transform: translateX(-50%) translateY(-50%);
+        display:inline-block;
+        position:absolute;
+        background-color:hsl(var(--color));
+        min-width:unset;
+        min-height:unset;
+        transform:translateX(-50%) translateY(-50%);
     }
 
 
-    @media only screen and (max-width: 795px) {
+    @media only screen and (max-width:795px) {
         main {
-            margin: 0 !important;
-            transform: none;
+            transform:none;
         }
 
         #zero-3d {
-            margin-top: 2em;
+            margin-top:2em;
         }
 
         #controller {
-            font-size: .5em !important;
+            font-size:.5em !important;
         }
     }
 
     #zero-3d,
     #zero-3d * {
-        position: relative;
-        background-color: hsla(var(--background), 5);
-        border: .5px solid hsl(var(--color));
-        box-shadow: 0 0 6px hsla(var(--color), .25);
-        transform: translateZ(var(--zero3d-separation));
-        transform-style: preserve-3d;
-        perspective: 1000px;
+        position:relative;
+        background-color:hsla(var(--background), 5);
+        border:.5px solid hsl(var(--color));
+        box-shadow:0 0 6px hsla(var(--color), .25);
+        transform:translateZ(var(--zero3d-separation));
+        transform-style:preserve-3d;
+        perspective:1000px;
     }
 
     #controller {
-        --background: 0, 0%, 93%;
-        --color: 0, 0%, 21%;
+        --background:0, 0%, 93%;
+        --color:0, 0%, 21%;
     }
 
     #content button {
-        --background: 0, 0%, 93%;
-        background-color: transparent;
-        --color: 0, 0%, 21%;
-        color: hsl(var(--background));
-        border: .5px solid hsl(var(--background));
-        box-shadow: 0 0 6px hsla(var(--background), .25);
-        width: 10em;
-        margin-bottom: .5em;
+        --background:0, 0%, 93%;
+        background-color:transparent;
+        --color:0, 0%, 21%;
+        color:hsl(var(--background));
+        border:.5px solid hsl(var(--background));
+        box-shadow:0 0 6px hsla(var(--background), .25);
+        width:10em;
+        margin-bottom:.5em;
     }
     </style>
 </head>
@@ -351,18 +350,18 @@
     <button onclick='smsrcoll(0)' title='Top'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='8' y1='7' x2='16' y2='7'></line><polyline points='8 13,12 9,16 13' fill='#fff0'></polyline><line x1='12' y1='10' x2='12' y2='18'></line></svg></button>
     <button onclick='theme(+1)' title='Turn Theme'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'><path fill='#fff0'd='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'></path></svg></button>
 </div>
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;background: hsl(0, 0%, 21%);touch-action: none;padding: 0;overflow: hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <div id='zero-3d' style='position: absolute; left: 50%; top: 50%; background: hsl(var(--background)); height: 50%; width: 50%; touch-action: none;user-select: none;'>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;background:hsl(0, 0%, 21%);touch-action:none;padding:0;overflow:hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <div id='zero-3d' style='position:absolute; left:50%; top:50%; background:hsl(var(--background)); height:50%; width:50%; touch-action:none;user-select:none;'>
         <div>123456789</div>
     </div>
-    <div id='content' style='font-size: .8em; position: fixed; left: 1em; top: 5em;' onpointerdown='event.stopPropagation()'>
+    <div id='content' style='font-size:.8em; position:fixed; left:1em; top:2em;' onpointerdown='event.stopPropagation()'>
         <button>set style</button><br>
         <button>set component</button><br>
         <button>set content</button><br>
         <button>update</button><br>
     </div>
-    <div id='controller' style='font-size: .8em;position: fixed; top: 10vh; right: 5vw; color: hsl(var(--background));' onpointerdown='event.stopPropagation()'>
-        <div id='rotate-controller' style='font-size: 2em;width: 5em; height: 5em; border: solid .2em; border-radius: 50%; line-height: 5em; transform: rotateZ(-60deg);user-select: none;'>⬤</div>
+    <div id='controller' style='font-size:.8em;position:fixed; top:5vh; right:5vw; color:hsl(var(--background));' onpointerdown='event.stopPropagation()'>
+        <div id='rotate-controller' style='font-size:2em;width:5em; height:5em; border:solid .2em; border-radius:50%; line-height:5em; transform:rotateZ(-60deg);user-select:none;'>⬤</div>
         <label>
             <br>separation separation<br>
             <input type='range' oninput='setSeparation(this.value)' value='500' min='1' max='1000'>
@@ -379,17 +378,17 @@
 <script src='/link/github/zero-3d.js/zero-3d.js'></script>
 <script>
     let ctl_3d = zero3d(document.getElementById('zero-3d'),{
-        rotatable: true,
-        scalable: true,
-        root: document,
-        x: '-50%',
-        y: '-50%',
-        rx: 30,
-        ry: 45,
-        rz: 60,
-        rzc: document.getElementById('rotate-controller'),
-        size: .8,
-        p: 13.71,
+        rotatable:true,
+        scalable:true,
+        root:document,
+        x:'-50%',
+        y:'-50%',
+        rx:30,
+        ry:45,
+        rz:60,
+        rzc:document.getElementById('rotate-controller'),
+        size:.8,
+        p:13.71,
     })
     function setSeparation(d){
         ctl_3d.p = 1/(1.001-(d/1000)**.1) - 1/1.001
