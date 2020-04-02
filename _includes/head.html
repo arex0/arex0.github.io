@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang='zh-CN'>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com ;form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
     <meta name='author' content='Arex0'>
-    <meta name='description' content='$1'>
+    <meta name='description' content='{{ page.description }}'>
     <meta name='generator' content='https://arex0.com/apps/design'>
-    <meta name='keywords' content='$2'>
+    <meta name='keywords' content='{{ page.keywords }}'>
     <meta name='referrer' content='no-referrer'>
     <meta name='theme-color' content='hsl(var(0,0%,8%))'>
     <meta name='color-scheme' content='dark light'>
     <meta name='publisher' content='arex0.com'>
     <meta name='viewport' id='viewportMeta' content='width=device-width,height=device-height,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no'>
-    <title>$3 | Arex0</title>
+    <title>{{ page.title }} | Arex0</title>
     <link rel='manifest' href='/manifest.webmanifest'>
     <link rel='shortcut icon' href='/icon.svg'>
     <link license='https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC'>
@@ -37,11 +35,13 @@
         }
         function jump(url) {
             document.activeElement.blur()
+            document.querySelector('footer').style.opacity=0
             setTimeout(()=>document.querySelector('main').style.opacity=0,300)
             setTimeout(()=>location.href=url,600)
         }
         function pageshow(){
             setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+            setTimeout(()=>{document.querySelector('footer').style.opacity=1},400)
         }
         function smsrcoll(h){
             scrollTo({top:h,behavior:"smooth"})
@@ -77,7 +77,7 @@
                 align-self:flex-start;
             }
             nav:focus-within li:nth-child(2)>a{
-                display:block !important;
+                display: block !important;
             }
         }
     </style></noscript>
@@ -124,10 +124,10 @@
         width:100%;
         height:100%;
         content:'';
+        cursor:'pointer';
     }
     @media only screen and (max-width:500px) {
         main {
-            margin:0 !important;
             min-height:calc(100vh - 1em - 8vmin) !important;
             margin-top:calc(1em + 8vmin) !important;
         }
@@ -189,9 +189,24 @@
             margin:4vmin 0;
         }
     }
-    @media only screen and (min-width:500px) and (max-width:1300px) {
-        main {
-            margin: calc(1em + 8vmin) 4em 0 !important;
+    footer a {
+        color:hsl(var(--background));
+        text-decoration:none;
+    }
+    @media only screen and (max-width:1300px) {
+        footer {
+            height:calc(4vh + 16.5em) !important;
+        }
+        footer>div,
+        footer>div>div {
+            flex-direction:column;
+        }
+        footer>div>*>* {
+            padding:0 !important;
+            text-align:center;
+        }
+        footer * {
+            border:none !important;
         }
     }
     .fabs {
@@ -255,75 +270,21 @@
         transform:translateX(-50%) translateY(-50%);
     }
 
-    .app {
-        display: flex;
-        margin: 1em;
-        padding: .8em;
-        color: hsl(var(--color));
-        width: 5em;
-        height: 5em;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
+    #content {
+        width:90vmin;
         font-size: .8em;
-        flex-direction: column;
-        justify-content: space-between;
+        padding-bottom: 20vh;
     }
-
-    .app:hover {
-        backdrop-filter: invert(.1);
+    @media only screen and (max-width:500px) {
+        #content {
+            width:95vw;
+        }
     }
-
-    .app::before {
-        line-height: 1em;
-        content: attr(short-name);
-        font-size: 4em;
+    #content  h1{
+        text-align: center;
+    }
+    img{
+        max-width: 100%;
     }
     </style>
 </head>
-<body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
-<nav id='nav' style='display:flex;position:fixed;top:0;z-index:2;background:hsl(var(--background));outline:none;box-shadow:0 0 6px hsla(var(--color),.25);width:100vw;min-height:1.7em;contain:layout style;align-items:center;border-bottom:solid 1px hsla(var(--color),.1);overflow:hidden'>
-    <div tabindex='-1' class='logo' style='position:relative;padding:0 1em;outline:none' onclick='document.getElementById("zerotext").focus(),setTimeout(()=>document.getElementById("zerotext").focus(),1000)'>
-        <b>Arex<span class='zero' style='border:solid .125em;width:.8em;height:.8em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span></b>
-        <span onclick='jump("/")' class='js zero' style='border:solid .125em;width:.8em;height:.8em;position:absolute;top:.4em;left:1.4em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span>
-        <input id='zerotext' class='js' onkeydown='(event.keyCode==13)&&(zero(this.value),this.value="")' onblur='this.parentElement.removeAttribute("open")' style='max-width:calc(80vw - 17em);background:transparent;border:solid .1em hsl(var(--color));color:hsl(var(--color));box-shadow:0 0 8px hsla(var(--color),.5),inset 0 0 8px hsla(var(--color),.5);font:calc(16px + 1vh) monaco,consolas,monospace;padding-left:1.8em'>
-    </div>
-    <ul tabindex='-1' style='display:flex;position:absolute;top:0;right:0;margin:0;padding:0;list-style-type:none;outline:none' onclick='this.parentElement.getAttribute("open")?this.parentElement.removeAttribute("open"):this.parentElement.setAttribute("open",true)'>
-        <li class='js'><a href='#nav' style='display:none' onclick='this.blur(),event.preventDefault()'>⨯<!--toggle item--></a></li>
-        <li class='nojs' style='display:none'><a href='#nav' style='display:none'>⨯</a></li>
-        <li class='nojs' style='display:none'><a href='/'>Home</a></li>
-        <li><a href='/blog/' onclick='event.preventDefault(),jump("/blog/")'>Blog</a></li>
-        <li><a href='/archive/' onclick='event.preventDefault(),jump("/archive/")'>Archive</a></li>
-        <li><a href='/about/' onclick='event.preventDefault(),jump("/about/")'>About</a></li>
-        <li><a href='/apps/' onclick='event.preventDefault(),jump("/apps/")'>Apps</a></li>
-        <li><a href='#nav' onclick='this.blur(),event.preventDefault()' style='color:hsl(var(--background));cursor:default'>⨯<!--safe item--></a></li>
-    </ul>
-</nav>
-<div class='js fabs' style='display:flex;position:fixed;right:0;bottom:0;z-index:2;max-height:100%;overflow:hidden;order:1;flex-direction:column-reverse;flex-wrap:wrap-reverse;align-content:baseline;will-change:clip-path,opacity;transition:clip-path .3s ease-out,opacity .3s ease;contain:layout style'>
-    <button onclick='void(0)' title='Expand'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='6' y1='12' x2='18' y2='12'></line><line x1='12' y1='6' x2='12' y2='18'></line></svg></button>
-    <button onclick='jump("/")' title='Home'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><polyline points='7 10.2,7 17,10.5 17,10.5 12,13.5 12,13.5 17,17 17,17 10.2' fill='#fff0'></polyline><polyline points='5 11,12 5,19 11' fill='#fff0'></polyline></svg></button>
-    <button onclick='smsrcoll(0)' title='Top'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 32 32'><line x1='8' y1='7' x2='16' y2='7'></line><polyline points='8 13,12 9,16 13' fill='#fff0'></polyline><line x1='12' y1='10' x2='12' y2='18'></line></svg></button>
-    <button onclick='theme(+1)' title='Turn Theme'><svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 40 40'><path fill='#fff0'd='M22.6 11.29L20 8.69V5c0-.55-.45-1-1-1h-3.69l-2.6-2.6c-.39-.39-1.02-.39-1.41 0L8.69 4H5c-.55 0-1 .45-1 1v3.69l-2.6 2.6c-.39.39-.39 1.02 0 1.41L4 15.3V19c0 .55.45 1 1 1h3.69l2.6 2.6c.39.39 1.02.39 1.41 0l2.6-2.6H19c.55 0 1-.45 1-1v-3.69l2.6-2.6c.39-.39.39-1.03 0-1.42zm-4.68 1.69c-.34 2.12-1.85 3.94-3.88 4.66-1.21.43-2.41.45-3.5.18-.41-.1-.48-.65-.13-.9C11.98 15.84 13 14.04 13 12s-1.02-3.84-2.58-4.92c-.35-.24-.29-.79.13-.9 1.09-.27 2.29-.25 3.5.18 2.02.72 3.54 2.54 3.88 4.66.05.33.07.66.07.98-.01.32-.03.65-.08.98z'></path></svg></button>
-</div>
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <a class='app' short-name='🔗' href='/link/' onclick='event.preventDefault(),jump("/link/")'>Links</a>
-</main>
-</body>
-<script>
-    theme(0)
-    let logo=document.querySelector('.logo')
-    logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
-    logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
-    pageshow()
-    let actions={
-        '主题':event=>theme(1),
-        '主页':()=>jump('/'),
-        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
-        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
-    }
-    function zero(command){
-        let match=false
-        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
-    }
-</script>
-</html>

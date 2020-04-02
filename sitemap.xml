@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
       <loc>http://arex0.com/</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
   <url>
       <loc>http://arex0.com/about</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
   <url>
       <loc>http://arex0.com/apps/design</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
   <url>
       <loc>http://arex0.com/apps/guestbook</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
@@ -32,7 +32,7 @@
   </url>
   <url>
       <loc>http://arex0.com/apps</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
@@ -43,26 +43,8 @@
       <priority>1</priority>
   </url>
   <url>
-      <loc>http://arex0.com/archive/article</loc>
-      <lastmod>2020-04-01</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1</priority>
-  </url>
-  <url>
       <loc>http://arex0.com/archive</loc>
-      <lastmod>2020-04-01</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1</priority>
-  </url>
-  <url>
-      <loc>http://arex0.com/archive/pad</loc>
-      <lastmod>2020-04-01</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1</priority>
-  </url>
-  <url>
-      <loc>http://arex0.com/archive/zero</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
@@ -80,13 +62,19 @@
   </url>
   <url>
       <loc>http://arex0.com/link/github</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
   <url>
       <loc>http://arex0.com/link</loc>
-      <lastmod>2020-04-01</lastmod>
+      <lastmod>2020-04-02</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1</priority>
+  </url>
+  <url>
+      <loc>http://arex0.com/share</loc>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
@@ -103,6 +91,12 @@
       <priority>.5</priority>
   </url>
   <url>
+      <loc>http://arex0.com/link/github/css</loc>
+      <lastmod>2020-04-02</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
       <loc>http://arex0.com/link/github/diff</loc>
       <lastmod>2020-03-31</lastmod>
       <changefreq>weekly</changefreq>
@@ -115,6 +109,12 @@
       <priority>.5</priority>
   </url>
   <url>
+      <loc>http://arex0.com/link/github/js</loc>
+      <lastmod>2020-04-02</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
       <loc>http://arex0.com/link/github/mail</loc>
       <lastmod>2020-03-29</lastmod>
       <changefreq>weekly</changefreq>
@@ -122,7 +122,7 @@
   </url>
   <url>
       <loc>http://arex0.com/link/github/pic</loc>
-      <lastmod>2020-03-29</lastmod>
+      <lastmod>2020-04-02</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
