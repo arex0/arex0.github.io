@@ -17,6 +17,7 @@
     <link rel='shortcut icon' href='/icon.svg'>
     <link license='https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC'>
     <script>
+        location.href.includes('.html')&&(location.href=location.href.slice(0,-5))
         let windowInnerHeight=window.innerHeight
         let metaEl=document.querySelector('#viewportMeta')
         metaEl.setAttribute('name','viewport')
@@ -475,17 +476,19 @@
             setTimeout(()=>recognizing=false,500)
         }
         recognition.onaudioend=()=>recognizing=false
+        let zeroele = document.getElementById('zero')
         function listen() {
             window.listen=()=>{}
-            document.getElementById('zero').setAttribute('listening',true)
-            document.getElementById('zero').addEventListener('click',()=>{hello.stop(),recognize()})
+            zeroele.setAttribute('listening',true)
+            zeroele.addEventListener('click',()=>{hello.stop(),recognize()})
+            zeroele.innerHTML = `<span class="exist" style="top:50%;left:50%;width:2em;height:2em;box-shadow:0 0 16px hsla(var(--color),.5)"></span>`
             document.addEventListener('keydown',({keyCode})=>(keyCode==32)&&(hello.stop(),recognize()))
             setInterval(()=>recognizing||(document.visibilityState=='visible'&&(type.innerHTML='"Hi zero"',value.innerHTML=`Listening`,recognizing=true,hello.start())),2000)
             hello.start()
             type.innerHTML='"Hi zero"',value.innerHTML=`Listening`
         }
         document.addEventListener('keydown',({keyCode})=>(keyCode==32)&&(audioCtx.resume(),listen()),{once:true})
-        document.getElementById('zero').addEventListener('click',()=>{audioCtx.resume(),listen()},{once:true})
+        zeroele.addEventListener('click',()=>{audioCtx.resume(),listen()},{once:true})
     }
 </script>
 </html>

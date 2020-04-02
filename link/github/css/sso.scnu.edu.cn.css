@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    height: max-content;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+}
+
+* {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+body.index {
+    background: unset;
+}
+
+#bannerbox {
+    display: none;
+}
+
+.wp {
+    display: flex;
+    flex-direction: column;
+}
+
+#hd {
+    display: none;
+}
+
+.campus {
+    display: none;
+}
+
+.personal {
+    order: 0;
+}
+
+.officeHall {
+    order: 1;
+}
+
+.campusapp {
+    order: 2;
+}
+
+#paginate-application> a:nth-child(2) {
+    display: none;
+}
+
+#ftfull {
+    display: none;
+}

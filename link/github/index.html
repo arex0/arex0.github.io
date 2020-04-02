@@ -73,12 +73,12 @@
         border-radius:4px;
     }
     nav ul a {
-        margin: 0 2vw;
-        color: hsl(var(--color));
-        line-height: 1.7em;
-        text-decoration: none;
-        flex: 1;
-        user-select: none;
+        margin:0 2vw;
+        color:hsl(var(--color));
+        line-height:1.7em;
+        text-decoration:none;
+        flex:1;
+        user-select:none;
     }
     .logo>*:not(:first-child),
     .logo[open]>b {
@@ -134,7 +134,7 @@
             align-self:flex-start;
         }
         nav[open] li:first-child>a{
-            display: block !important;
+            display:block !important;
         }
         nav ul a {
             display:block;
@@ -329,7 +329,7 @@
     }
     const Encode = (e => e.encode.bind(e))(new TextEncoder)
     const Color = async text => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-1', Encode(text)))).map(b => b.toString(16).padStart(2, '0')).join('').slice(4,10)
-    fetch("https://api.github.com/users/arex0/repos", {"mode":"cors"}).then(res=>res.json()).then(repos=>{
+    fetch('https://api.github.com/users/arex0/repos', {mode:'cors'}).then(res=>res.json()).then(repos=>{
         let ul = document.createElement('ul')
         repos.sort((r1,r2)=>r2.stargazers_count-r1.stargazers_count).forEach(async repo=>{
             let li = document.createElement('li')
