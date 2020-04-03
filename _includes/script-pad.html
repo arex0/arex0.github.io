@@ -22,11 +22,11 @@
         history.replaceState({top:document.documentElement.scrollTop},document.title)
         document.activeElement.blur()
         setTimeout(()=>document.querySelector('main').style.opacity=0,200)
-        setTimeout(()=>location.href=url,600)
+        setTimeout(()=>location.href=url,400)
     }
     function pageshow(){
         setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),76)
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},50)
+        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})

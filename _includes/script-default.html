@@ -23,15 +23,15 @@
         document.activeElement.blur()
         document.querySelector('footer').style.opacity=0
         setTimeout(()=>document.querySelector('main').style.opacity=0,200)
-        setTimeout(()=>location.href=url,600)
+        setTimeout(()=>location.href=url,400)
     }
     function snap(e) {
         snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
         snapObserver.observe(e)
     }
     function pageshow(){
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},50)
-        setTimeout(()=>{document.querySelector('footer').style.opacity=1},250)
+        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+        setTimeout(()=>{document.querySelector('footer').style.opacity=1},325)
         snap(document.querySelector('footer'))
     }
     function smsrcoll(h){
