@@ -41,7 +41,8 @@ description: "arex0 share things here"
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include fabs.html -%}
-<main style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <a icon="⍟" href="/share/extensions/stylish" style="opacity: 1;">stylish</a>
 </main>
 </body>
 <script>
@@ -49,6 +50,7 @@ description: "arex0 share things here"
     let logo=document.querySelector('.logo')
     logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
     logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
+    pageshow()
     let actions={
         '主题':event=>theme(1),
         '主页':()=>jump('/'),
@@ -67,20 +69,23 @@ description: "arex0 share things here"
         types.forEach(type=>{
             type.type=='dir'&&fetch('https://api.github.com/repos/arex0/arex0.github.io/contents/share/'+type.name,{mode:'cors'}).then(res=>res.json()).then(shares=>{
                 shares.forEach(share=>{
-                    let a = document.createElement('a')
-                    a.setAttribute('icon',icons[type.name])
-                    a.href = '/'+share.path.slice(0,-3)
-                    a.onclick = e =>{
-                        e.preventDefault()
-                        jump('/'+share.path.slice(0,-3))
+                    let name = share.name.slice(0,-3)
+                    if(!main.querySelector(`[name=${name}]`)){
+                        let a = document.createElement('a')
+                        a.setAttribute('name',name)
+                        a.innerHTML = name
+                        a.setAttribute('icon',icons[type.name])
+                        a.href = '/'+share.path.slice(0,-3)
+                        a.onclick = e =>{
+                            e.preventDefault()
+                            jump('/'+share.path.slice(0,-3))
+                        }
+                        main.appendChild(a)
+                        setTimeout(()=>a.style.opacity=1,0)
                     }
-                    a.innerHTML = share.name.slice(0,-3)
-                    main.appendChild(a)
-                    setTimeout(()=>a.style.opacity=1,0)
                 })
             })
         })
-        pageshow()
     })
 </script>
 </html>
