@@ -190,7 +190,7 @@ li>div li {
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main id='resume' class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main id='resume' class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <div id='page'>
         <!--基本信息-->
         <header>
@@ -278,8 +278,6 @@ li>div li {
     logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
     logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
     pageshow()
-    function snap(e) {new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]}).observe(e)}
-    snap(document.querySelector('footer'))
     let actions={
         '主题':event=>theme(1),
         '主页':()=>jump('/'),

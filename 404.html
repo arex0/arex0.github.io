@@ -44,10 +44,10 @@ description: "Arex0 404 page not found"
         }
     }
     #zero[listening] {
-        animation:outter 1s ease-in-out .3s infinite alternate;
+        animation:outter 1s ease-in-out .2s infinite alternate;
     }
     #zero[listening]>* {
-        animation:inner 1s ease-in-out .3s infinite alternate;
+        animation:inner 1s ease-in-out .2s infinite alternate;
     }
     #zero[listening]~#sounds {
         opacity:1 !important;
@@ -88,11 +88,11 @@ description: "Arex0 404 page not found"
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));opacity:0;contain:layout style;transition:opacity .3s ease-in-out;min-height:unset' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));opacity:0;contain:layout style;transition:opacity .2s ease-in-out;min-height:unset' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <span id='type' style='position:absolute;right:75vw;top:30vh'>Error</span>
     <span id='zero' class='zero' style='left:50vw;top:40vh;border:solid 0.3em;width:35vh;height:35vh;transform:translateX(-50%) translateY(-50%);box-shadow:0 0 16px hsla(var(--color),.5),inset 0 0 16px hsla(var(--color),.5);cursor:pointer;display: flex;justify-content: center;flex-direction: column;line-height: 1em'><span style='display: inline-block;font-size: 15vh;text-shadow: 0 0 8px hsla(var(--color), .5);'>404</span></span>
     <span id='value' style='position:absolute;left:75vw;top:30vh'>Page No Found</span>
-    <div id='sounds' onclick='this.getAttribute("close")?(this.removeAttribute("close"),audioCtx.resume()):(this.setAttribute("close",true),audioCtx.suspend())' style='position:absolute;top:1.4em;right:calc(16px + 2.5vmin);border:solid .05em;width:calc(48px + 2.5vmin);height:calc(48px + 2.5vmin);text-align:center;line-height:1.32em;cursor:pointer;font-size:2em;border-radius:50%;user-select:none;opacity:0;transition:opacity .3s;overflow:hidden'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='transform:scale(.8)'><path d='M126 192H56a8 8 0 0 0-8 8v112a8 8 0 0 0 8 8h69.65a15.93 15.93 0 0 1 10.14 3.54l91.47 74.89A8 8 0 0 0 240 392V120a8 8 0 0 0-12.74-6.43l-91.47 74.89A15 15 0 0 1 126 192zm194 128c9.74-19.38 16-40.84 16-64 0-23.48-6-44.42-16-64m48 176c19.48-33.92 32-64.06 32-112s-12-77.74-32-112m48 272c30-46 48-91.43 48-160s-18-113-48-160' fill='none' stroke='hsl(var(--color))' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg></div>
+    <div id='sounds' onclick='this.getAttribute("close")?(this.removeAttribute("close"),audioCtx.resume()):(this.setAttribute("close",true),audioCtx.suspend())' style='position:absolute;top:1.4em;right:calc(16px + 2.5vmin);border:solid .05em;width:calc(48px + 2.5vmin);height:calc(48px + 2.5vmin);text-align:center;line-height:1.32em;cursor:pointer;font-size:2em;border-radius:50%;user-select:none;opacity:0;transition:opacity .2s;overflow:hidden'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='transform:scale(.8)'><path d='M126 192H56a8 8 0 0 0-8 8v112a8 8 0 0 0 8 8h69.65a15.93 15.93 0 0 1 10.14 3.54l91.47 74.89A8 8 0 0 0 240 392V120a8 8 0 0 0-12.74-6.43l-91.47 74.89A15 15 0 0 1 126 192zm194 128c9.74-19.38 16-40.84 16-64 0-23.48-6-44.42-16-64m48 176c19.48-33.92 32-64.06 32-112s-12-77.74-32-112m48 272c30-46 48-91.43 48-160s-18-113-48-160' fill='none' stroke='hsl(var(--color))' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg></div>
 </main>
 </body>
 <script>
@@ -101,8 +101,6 @@ description: "Arex0 404 page not found"
     logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
     logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
     pageshow()
-    function snap(e) {new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]}).observe(e)}
-    snap(document.querySelector('footer'))
     let actions={
         '主题':event=>theme(1),
         '主页':()=>jump('/'),

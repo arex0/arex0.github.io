@@ -17,18 +17,26 @@
         localStorage.setItem('theme',theme)
         document.body.classList.add(theme)
     }
+    let snapObserver = null
     history.scrollRestoration = 'manual'
     function jump(url) {
+        snapObserver.disconnect()
         history.replaceState({top:document.documentElement.scrollTop},document.title)
         document.activeElement.blur()
+        snapObserver.unobserve(document.querySelector('footer'))
         document.querySelector('footer').style.opacity=0
         setTimeout(()=>document.querySelector('main').style.opacity=0,300)
         setTimeout(()=>location.href=url,600)
     }
+    function snap(e) {
+        snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
+        snapObserver.observe(e)
+    }
     function pageshow(){
-        setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),76)
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
-        setTimeout(()=>{document.querySelector('footer').style.opacity=1},400)
+        setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),800)
+        setTimeout(()=>{document.querySelector('main').style.opacity=1},1000)
+        setTimeout(()=>{document.querySelector('footer').style.opacity=1},1200)
+        snap(document.querySelector('footer'))
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})

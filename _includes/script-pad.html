@@ -21,12 +21,12 @@
     function jump(url) {
         history.replaceState({top:document.documentElement.scrollTop},document.title)
         document.activeElement.blur()
-        setTimeout(()=>document.querySelector('main').style.opacity=0,300)
+        setTimeout(()=>document.querySelector('main').style.opacity=0,200)
         setTimeout(()=>location.href=url,600)
     }
     function pageshow(){
         setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),76)
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+        setTimeout(()=>{document.querySelector('main').style.opacity=1},50)
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})

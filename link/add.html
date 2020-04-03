@@ -15,7 +15,7 @@ description: "share links with Arex0"
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;display:flex;justify-content: center;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main class='nojs' style='position:relative;z-index:1;display:flex;justify-content: center;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <div style='flex:1'>under construction</div>
 </main>
 </body>
@@ -25,8 +25,6 @@ description: "share links with Arex0"
     logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
     logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
     pageshow()
-    function snap(e) {new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]}).observe(e)}
-    snap(document.querySelector('footer'))
     let actions={
         '主题':event=>theme(1),
         '主页':()=>jump('/'),
