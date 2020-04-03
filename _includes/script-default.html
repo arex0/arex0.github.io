@@ -1,0 +1,34 @@
+<script>
+    let windowInnerHeight=window.innerHeight
+    let metaEl=document.querySelector('#viewportMeta')
+    metaEl.setAttribute('name','viewport')
+    metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+    window.addEventListener('resize',()=>{
+        if(window.innerHeight>windowInnerHeight){
+            windowInnerHeight=window.innerHeight
+            metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+        }
+    })
+    const themes=['light','dark']
+    function theme(i) {
+        let theme=localStorage.getItem('theme')
+        document.body.classList.remove(theme)
+        theme=themes[(themes.indexOf(theme||'light')+i) % themes.length]
+        localStorage.setItem('theme',theme)
+        document.body.classList.add(theme)
+    }
+    function jump(url) {
+        document.activeElement.blur()
+        document.querySelector('footer').style.opacity=0
+        setTimeout(()=>document.querySelector('main').style.opacity=0,300)
+        setTimeout(()=>location.href=url,600)
+    }
+    function pageshow(){
+        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+        setTimeout(()=>{document.querySelector('footer').style.opacity=1},400)
+    }
+    function smsrcoll(h){
+        scrollTo({top:h,behavior:"smooth"})
+    }
+    window.addEventListener('pageshow',pageshow)
+</script>

@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-{%- include head.html -%}
+<head>
+{%- include meta.html -%}
+{%- include script-default.html -%}
+{%- include style-default.html -%}
+<style>
+    #content {
+        width: 90vmin;
+        font-size: .8em;
+        padding-bottom: 20vh;
+    }
+
+    @media only screen and (max-width:500px) {
+        #content {
+            width: 95vw;
+        }
+    }
+
+    #content  h1 {
+        text-align: center;
+    }
+
+</style>
+</head>
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
 <main class='nojs' style='position:relative;z-index:1;display:flex;justify-content: center;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .3s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <div id='content'>
+        {%- if page.created_time -%}
+        <div style='opacity:.3;position:absolute;right:0;top:0;font-size:.9em;'><span>created: {{ page.created_time  }}</span> <span>modified: {{ page.modified_time }}&nbsp;</span></div>
+        {%- endif -%}
         {{ content }}
     </div>
 </main>

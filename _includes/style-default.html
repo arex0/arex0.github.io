@@ -1,0 +1,227 @@
+<noscript><style id='nojs'>
+    .js {
+        display:none !important;
+    }
+    .nojs {
+        display:unset !important;
+        opacity:1 !important;
+    }
+    main {
+        display:flex !important;
+        opacity:1 !important;
+    }
+    @media only screen and (max-width:500px) {
+        nav:focus-within {
+            border:none;
+            height:calc(6em + 8vmin + 15vh);
+            min-height:calc(160px + 1em + 8vmin + 15vh) !important;
+        }
+        nav:focus-within ul {
+            width:100vw;
+        }
+        nav:not(:focus-within) li:nth-child(2)::before {
+            display:inline-block;
+            padding:4vmin;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            text-align:center;
+            line-height:1em;
+            content:'☰';
+            font-size:1em;
+            align-self:flex-start;
+        }
+        nav:focus-within li:nth-child(2)>a {
+            display:block !important;
+        }
+    }
+</style></noscript>
+<style>
+    :root,
+    .light {
+        --background:0,0%,96%;
+        --color:0,0%,21%;
+    }
+    .dark {
+        --background:0,0%,8%;
+        --color:0,0%,90%;
+    }
+    * {
+        min-width:32px;
+        min-height:32px;
+        max-width: 100%;
+    }
+    div {
+        box-sizing:border-box;
+        border-radius:4px;
+    }
+    nav ul a {
+        margin:0 2vw;
+        color:hsl(var(--color));
+        line-height:1.7em;
+        text-decoration:none;
+        flex:1;
+        user-select:none;
+    }
+    .logo>*:not(:first-child),
+    .logo[open]>b {
+        display:none;
+    }
+    .logo:focus-within>*:not(:first-child) {
+        display:inline-block;
+        max-width:unset !important;
+    }
+    /*firefox so diffcult*/
+    .logo:not(:focus-within)::after {
+        display:block;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        cursor:'pointer';
+        content:'';
+    }
+    @media only screen and (max-width:500px) {
+        main {
+            min-height:calc(100vh - 1em - 8vmin) !important;
+            margin-top:calc(1em + 8vmin) !important;
+        }
+        nav {
+            height:calc(1em + 8vmin);
+            overflow:hidden;
+        }
+        nav[open] {
+            border:none;
+            height:calc(5em + 8vmin + 12vh);
+            min-height:calc(128px + 1em + 8vmin + 12vh) !important;
+        }
+        nav ul {
+            right:unset !important;
+            left:0;
+            width:calc(1em + 8vmin);
+            flex-direction:column;
+        }
+        nav[open] ul {
+            width:100vw;
+        }
+        nav:not([open]) li:first-child::before {
+            display:inline-block;
+            padding:4vmin;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            text-align:center;
+            line-height:1em;
+            content:'☰';
+            font-size:1em;
+            align-self:flex-start;
+        }
+        nav[open] li:first-child>a {
+            display:block !important;
+        }
+        nav ul a {
+            display:block;
+            margin:0;
+            padding:1.5vh 0;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            outline:solid 1px hsla(var(--background),.05);
+            text-align:center;
+            line-height:1em;
+        }
+        nav .logo {
+            width:100vw;
+            text-align:center;
+            padding-left:calc(8vmin + 1em) !important;
+            font-size:calc(1em + 4vmin);
+        }
+        .logo>span {
+            left:calc(8vw + 1em) !important;
+        }
+        .logo:focus-within>span {
+            transform:scale(.6) !important;
+        }
+        .logo input {
+            margin:4vmin 0;
+        }
+    }
+    footer a {
+        color:hsl(var(--background));
+        text-decoration:none;
+    }
+    @media only screen and (max-width:1300px) {
+        footer {
+            height:calc(4vh + 16.5em) !important;
+        }
+        footer>div,
+        footer>div>div {
+            flex-direction:column;
+        }
+        footer>div>*>* {
+            padding:0 !important;
+            text-align:center;
+        }
+        footer * {
+            border:none !important;
+        }
+    }
+    .fabs {
+        clip-path:inset(calc(100% - 64px - 5vmin) 0 0 calc(100% - 80px - 7.5vmin));
+    }
+    .fabs:focus-within,
+    .fabs:hover {
+        clip-path:inset(0);
+    }
+    .fabs>button {
+        display:block;
+        margin:calc(8px + 1.25vmin) calc(16px + 2.5vmin);
+        visibility:visible;
+        padding:0;
+        background-color:hsl(var(--background));
+        border:.5px solid hsla(var(--color),.2);
+        outline:none;
+        box-shadow:0 0 6px hsla(var(--color),.25);
+        max-width:calc(48px + 2.5vmin);
+        min-height:calc(48px + 2.5vmin);
+        max-height:calc(48px + 2.5vmin);
+        overflow:hidden;
+        font:inherit;
+        cursor:pointer;
+        border-radius:calc(24px + 1.25vmin);
+        transition:max-width .5s ease;
+    }
+    .fabs>button~button:focus,
+    .fabs>button~button:hover {
+        max-width:calc(48px + 2.5vmin + 12em);
+    }
+    .fabs>button~button::after {
+        color:hsl(var(--color));
+        vertical-align:top;
+        line-height:calc(48px + 2.5vmin);
+        content:attr(title);
+        margin-right:calc(24px + 1.25vmin);
+    }
+    .fabs svg {
+        width:calc(48px + 2.5vmin);
+        stroke:hsla(var(--color),.7);
+    }
+    .zero {
+        display:inline-block;
+        position:relative;
+        min-width:unset;
+        min-height:unset;
+        overflow:hidden;
+        text-align:center;
+        vertical-align:middle;
+        transform:translateY(-.05em);
+        border-radius:50%;
+        user-select:none;
+    }
+    .exist {
+        display:inline-block;
+        position:absolute;
+        background-color:hsl(var(--color));
+        min-width:unset;
+        min-height:unset;
+        transform:translateX(-50%) translateY(-50%);
+    }
+    </style>
