@@ -42,7 +42,7 @@ description: "arex0 share things here"
 {%- include nav.html -%}
 {%- include fabs.html -%}
 <main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex!important;flex-flow:row wrap;margin:4em 8em;border:.5px solid hsla(var(--color), .2);box-shadow:0 0 6px hsla(var(--color), .25);border-radius:1em;padding:1em 4vmin;min-height:70vh;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <a icon="⍟" href="/share/extensions/stylish" style="opacity: 1;">stylish</a>
+    <a name='stylish' icon="⍟" href="/share/extensions/stylish" style="opacity: 1;">stylish</a>
 </main>
 </body>
 <script>
@@ -70,7 +70,7 @@ description: "arex0 share things here"
             type.type=='dir'&&fetch('https://api.github.com/repos/arex0/arex0.github.io/contents/share/'+type.name,{mode:'cors'}).then(res=>res.json()).then(shares=>{
                 shares.forEach(share=>{
                     let name = share.name.slice(0,-3)
-                    if(!main.querySelector(`[name=${name}]`)){
+                    if(!main.querySelector(`[name="${name}""]`)){
                         let a = document.createElement('a')
                         a.setAttribute('name',name)
                         a.innerHTML = name
