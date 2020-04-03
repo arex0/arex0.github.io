@@ -30,9 +30,13 @@
         snapObserver.observe(e)
     }
     function pageshow(){
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
-        setTimeout(()=>{document.querySelector('footer').style.opacity=1},325)
-        snap(document.querySelector('footer'))
+        setTimeout(()=>{
+            document.querySelector('main').style.opacity=1
+            setTimeout(()=>{
+                document.querySelector('footer').style.opacity=1
+                snap(document.querySelector('footer'))
+            },200)
+        },100)
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})

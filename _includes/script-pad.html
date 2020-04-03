@@ -25,8 +25,10 @@
         setTimeout(()=>location.href=url,400)
     }
     function pageshow(){
-        setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),76)
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},100)
+        setTimeout(()=>{
+            scrollTo({top:history.state&&history.state.top||0})
+            setTimeout(()=>{document.querySelector('main').style.opacity=1},26)
+        },76)
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})

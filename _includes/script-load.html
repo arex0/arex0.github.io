@@ -33,10 +33,16 @@
         snapObserver.observe(e)
     }
     function pageshow(){
-        setTimeout(()=>scrollTo({top:history.state&&history.state.top||0}),800)
-        setTimeout(()=>{document.querySelector('main').style.opacity=1},1000)
-        setTimeout(()=>{document.querySelector('footer').style.opacity=1},1200)
-        snap(document.querySelector('footer'))
+        setTimeout(()=>{
+            scrollTo({top:history.state&&history.state.top||0})
+            setTimeout(()=>{
+                document.querySelector('main').style.opacity=1
+                setTimeout(()=>{
+                    document.querySelector('footer').style.opacity=1
+                    snap(document.querySelector('footer'))
+                },200)
+            },200)
+        },300)
     }
     function smsrcoll(h){
         scrollTo({top:h,behavior:"smooth"})
