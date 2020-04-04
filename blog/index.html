@@ -104,37 +104,46 @@ description: "Arex0 Blog List"
     }
     let ul = document.querySelector('main>ul')
     let template = document.getElementById('template')
-    function read(rd){
-        rd.read().then(({value, done}) => {
-            if (!done) {
-                let c = template.content.cloneNode(true)
-                let a = c.querySelector('a')
-                a.href = value.path
-                a.onclick = e => {e.preventDefault(),jump(value.path)}
-                a.children[0].innerHTML = value.name
-                a.children[1].innerHTML = value.description
-                a.children[2].children[0].innerHTML = value.created_time
-                a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
-                ul.appendChild(c)
-                read(rd);
-            }
-        })
+    function card(value){
+        let c = template.content.cloneNode(true)
+        let a = c.querySelector('a')
+        a.href = value.path
+        a.onclick = e => {e.preventDefault(),jump(value.path)}
+        a.children[0].innerHTML = value.name
+        a.children[1].innerHTML = value.description
+        a.children[2].children[0].innerHTML = value.created_time
+        a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
+        ul.appendChild(c)
     }
-    let buffer = '';
-    fetch('/blog/list.dn.json')
-    .then(res=>res.body.pipeThrough(new TextDecoderStream()))
-    .then(ts=>ts.pipeThrough(new TransformStream({
-        transform(chunk, controller) {
-            buffer += chunk;
-            const parts = buffer.split('\n')
-            parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
-            buffer = parts[parts.length - 1];
-        },
-        flush(controller) {
-            if (buffer) controller.enqueue(buffer);
+    if(window.ReadableStream&&ReadableStream.prototype.pipeThrough) {
+        function read(rd){
+            rd.read().then(({value, done}) => {
+                if (!done) {
+                    card(value)
+                    read(rd);
+                }
+            })
         }
-    })))
-    .then(js=>js.getReader())
-    .then(read)
+        let buffer = '';
+        fetch('/blog/list.dn.json')
+        .then(res=>res.body.pipeThrough(new TextDecoderStream()))
+        .then(ts=>ts.pipeThrough(new TransformStream({
+            transform(chunk, controller) {
+                buffer += chunk;
+                const parts = buffer.split('\n')
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
+                buffer = parts[parts.length - 1];
+            },
+            flush(controller) {
+                if (buffer) controller.enqueue(buffer);
+            }
+        })))
+        .then(js=>js.getReader())
+        .then(read)
+    }else{
+        fetch('/blog/list.json')
+        .then(res=>res.json())
+        .then(blogs=>blogs.forEach(card))
+    }
 </script>
 </html>
