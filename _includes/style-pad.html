@@ -1,41 +1,35 @@
 <noscript><style id='nojs'>
     .js {
-        display: none !important;
+        display:none !important;
     }
-
     .nojs {
-        display: unset !important;
-        opacity: 1 !important;
+        display:unset !important;
+        opacity:1 !important;
     }
-
     @media only screen and (max-width:500px) {
         nav:focus-within {
-            border: none;
-            height: calc(6em + 8vmin + 15vh);
-            min-height: calc(160px + 1em + 8vmin + 15vh) !important;
+            border:none;
+            height:calc(6em + 8vmin + 15vh);
+            min-height:calc(160px + 1em + 8vmin + 15vh) !important;
         }
-
         nav:focus-within ul {
-            width: 100vw;
+            width:100vw;
         }
-
         nav:not(:focus-within) li:nth-child(2)::before {
-            display: inline-block;
-            padding: 4vmin;
-            background-color: hsl(var(--color));
-            color: hsl(var(--background));
-            text-align: center;
-            line-height: 1em;
-            content: '☰';
-            font-size: 1em;
-            align-self: flex-start;
+            display:inline-block;
+            padding:4vmin;
+            background-color:hsl(var(--color));
+            color:hsl(var(--background));
+            text-align:center;
+            line-height:1em;
+            content:'☰';
+            font-size:1em;
+            align-self:flex-start;
         }
-
         nav:focus-within li:nth-child(2)>a {
-            display: block !important;
+            display:block !important;
         }
     }
-
 </style></noscript>
 <style>
     :root,
@@ -79,8 +73,8 @@
         left:0;
         width:100%;
         height:100%;
-        content:'';
         cursor:'pointer';
+        content:'';
     }
     @media only screen and (max-width:500px) {
         main {
@@ -117,7 +111,7 @@
             font-size:1em;
             align-self:flex-start;
         }
-        nav[open] li:first-child>a{
+        nav[open] li:first-child>a {
             display:block !important;
         }
         nav ul a {
@@ -148,7 +142,7 @@
     }
     @media only screen and (min-width:500px) and (max-width:1300px) {
         main {
-            margin: calc(1em + 8vmin) 4em 0 !important;
+            margin:calc(1em + 8vmin) 4em 0 !important;
         }
     }
     .fabs {
@@ -158,7 +152,7 @@
     .fabs:hover {
         clip-path:inset(0);
     }
-    .fabs>button {
+    .fabs>* {
         display:block;
         margin:calc(8px + 1.25vmin) calc(16px + 2.5vmin);
         visibility:visible;
@@ -166,21 +160,23 @@
         background-color:hsl(var(--background));
         border:.5px solid hsla(var(--color),.2);
         outline:none;
-        box-shadow:0 0 6px hsla(var(--color),.25);
+        box-shadow:0 0 2px hsla(var(--color),.25);
         max-width:calc(48px + 2.5vmin);
         min-height:calc(48px + 2.5vmin);
         max-height:calc(48px + 2.5vmin);
         overflow:hidden;
         font:inherit;
+        text-decoration:none;
         cursor:pointer;
+        filter:brightness(1.03);
         border-radius:calc(24px + 1.25vmin);
         transition:max-width .5s ease;
     }
-    .fabs>button~button:focus,
-    .fabs>button~button:hover {
+    .fabs>*~*:focus,
+    .fabs>*~*:hover {
         max-width:calc(48px + 2.5vmin + 12em);
     }
-    .fabs>button~button::after {
+    .fabs>*~*::after {
         color:hsl(var(--color));
         vertical-align:top;
         line-height:calc(48px + 2.5vmin);
@@ -200,6 +196,7 @@
         text-align:center;
         vertical-align:middle;
         transform:translateY(-.05em);
+        cursor:pointer;
         border-radius:50%;
         user-select:none;
     }

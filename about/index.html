@@ -1,6 +1,6 @@
 ---
 title: "About"
-keywords: "Arex0,About,resume"
+keywords: [About,Resume]
 description: "Arex0 about, personal reume."
 ---
 
@@ -17,6 +17,7 @@ description: "Arex0 about, personal reume."
     padding: .3em 0 0 2.6em;
     overflow: hidden;
 }
+
 .timeline::before {
     position: absolute;
     top: .5em;
@@ -26,10 +27,12 @@ description: "Arex0 about, personal reume."
     height: 100%;
     content: '';
 }
+
 .timeline>li {
     display: block;
     position: relative;
 }
+
 .timeline>li::before {
     display: block;
     position: absolute;
@@ -41,149 +44,153 @@ description: "Arex0 about, personal reume."
     transform: rotate(45deg) translateX(.2em) translateY(.2em);
     content: '';
 }
+
 .timeline>li>label {
     font-weight: bold;
 }
+
 .timeline>li>div {
     margin: 0 0 1em 0;
 }
+
 a {
-    color:inherit;
-    font-weight:100;
-    text-decoration:none;
+    color: inherit;
+    font-weight: 100;
+    text-decoration: none;
 }
 
 #resume {
-    min-width:794px;
-    height:1240px;
-    font:15px monaco, consolas, monospace;
-    line-height:20px;
-    padding-top:calc(64px + 1vh);
+    min-width: 794px;
+    height: 1240px;
+    font: 15px monaco, consolas, monospace;
+    line-height: 20px;
+    padding-top: calc(64px + 1vh);
 }
 
 #page {
     /*A4*/
-    position:absolute;
-    margin:0 0 0 50vw;
-    padding:0;
-    background-color:hsl(var(--background));
-    color:hsl(var(--color));
-    border:1px solid hsla(var(--color), .12);
-    box-shadow:0 0 8px 0 hsla(var(--color), .08), 0 0 15px 0 hsla(var(--color), .02), 0 0 20px 4px hsla(var(--color), .06);
-    width:794px;
-    height:1123px;
-    transform:translateX(-50%);
-    filter:brightness(1.05);
+    position: absolute;
+    margin: 0 0 0 50vw;
+    padding: 0;
+    background-color: hsl(var(--background));
+    color: hsl(var(--color));
+    border: 1px solid hsla(var(--color), .12);
+    box-shadow: 0 0 8px 0 hsla(var(--color), .08), 0 0 15px 0 hsla(var(--color), .02), 0 0 20px 4px hsla(var(--color), .06);
+    width: 794px;
+    height: 1123px;
+    transform: translateX(-50%);
+    filter: brightness(1.05);
 }
 
 @media only screen and (max-width:795px) {
     #page {
-        margin:0;
-        transform:none;
+        margin: 0;
+        transform: none;
     }
 }
 
 header {
-    display:flex;
-    padding:16px;
-    background-color:hsl(var(--color));
-    color:hsl(var(--background));
-    box-sizing:border-box;
-    width:794px;
-    font-weight:bolder;
-    border-bottom:solid 1px;
-    justify-content:space-between;
+    display: flex;
+    padding: 16px;
+    background-color: hsl(var(--color));
+    color: hsl(var(--background));
+    box-sizing: border-box;
+    width: 794px;
+    font-weight: bolder;
+    border-bottom: solid 1px;
+    justify-content: space-between;
 }
 
 #main {
-    display:flex;
-    padding:0 8px;
-    width:794px;
+    display: flex;
+    padding: 0 8px;
+    width: 794px;
 }
 
 #main>div {
-    width:50%;
+    width: 50%;
 }
 
 #main>div>section>h3 {
-    display:block;
-    padding:2px 16px 4px 8px;
-    background-color:hsl(var(--color));
-    color:hsl(var(--background));
-    width:max-content;
-    min-width:103px;
-    text-align:center;
-    line-height:32px;
+    display: block;
+    padding: 2px 16px 4px 8px;
+    background-color: hsl(var(--color));
+    color: hsl(var(--background));
+    width: max-content;
+    min-width: 103px;
+    text-align: center;
+    line-height: 32px;
 }
 
 section>div {
-    margin:-8px 16px 0 8px;
-    word-break:break-word;
+    margin: -8px 16px 0 8px;
+    word-break: break-word;
 }
 
 ul {
-    padding:.3em 1em;
-    list-style:disc;
+    padding: .3em 1em;
+    list-style: disc;
 }
 
 #skill {
-    display:flex;
-    flex-wrap:wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #skill>div {
-    position:relative;
-    padding:4px 0 8px 32px;
-    width:50%;
+    position: relative;
+    padding: 4px 0 8px 32px;
+    width: 50%;
 }
 
 #skill>div>label {
-    vertical-align:text-top;
-    line-height:.9em;
-    font-weight:bold;
-    font-size:1.2em;
+    vertical-align: text-top;
+    line-height: .9em;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 #skill>div>label::before {
-    display:block;
-    position:absolute;
-    left:8px;
-    background-color:hsl(var(--color));
-    width:.8em;
-    height:.8em;
-    content:'';
+    display: block;
+    position: absolute;
+    left: 8px;
+    background-color: hsl(var(--color));
+    width: .8em;
+    height: .8em;
+    content: '';
 }
 
 #skill>div>ul {
-    margin:0;
+    margin: 0;
 }
 
 li>div li {
-    min-height:unset;
+    min-height: unset;
 }
 
 @media print {
     html {
-        padding:0;
-        height:1123px;
+        padding: 0;
+        height: 1123px;
     }
 
     #resume {
-        padding:0;
-        height:1123px;
+        padding: 0;
+        height: 1123px;
     }
 
     #page {
-        border:none;
-        box-shadow:none;
+        border: none;
+        box-shadow: none;
     }
 
     .nav,
     .footer,
     .fabs {
-        display:none;
+        display: none;
     }
 }
+
 </style>
 </head>
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>

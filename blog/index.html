@@ -1,22 +1,89 @@
 ---
 title: "Blog"
-keywords: "Arex0,Blog,List"
+keywords: [Blog,List]
 description: "Arex0 Blog List"
 ---
 
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 <head>
+<noscript><meta http-equiv='refresh' content='0; url=shot'></noscript>
 {%- include meta.html -%}
 {%- include script-default.html -%}
 {%- include style-default.html -%}
+<style>
+    main>ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .card {
+        margin: .8em;
+        padding: .8em .8em .5em;
+        background: hsl(var(--background));
+        border: .5px solid hsla(var(--color), .2);
+        box-shadow: 0 0 2px hsla(var(--color), .25);
+        width: 80vmin;
+        filter: brightness(1.03);
+    }
+
+    .card a {
+        color: inherit;
+        font: inherit;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .card div:nth-child(2) {
+        font-size: .6em;
+    }
+
+    .card div:nth-child(3) {
+        font-size: .5em;
+    }
+
+    .card div:nth-child(3)>span {
+        display: inline-block;
+        height: 1.5em;
+        min-height: unset;
+        overflow: hidden;
+        margin-right: calc(.5em + 1vw);
+    }
+    .card div:nth-child(3)>span:first-child::before{
+        content: '⏲ ';
+    }
+    .card div:nth-child(3)>span:last-child::before{
+        content: '👁 ';
+    }
+    .card div:nth-child(3)>span:last-child{
+        transform: translateY(.01em);
+    }
+    .card div:nth-child(3)>span>img {
+        max-width: 10em;
+        height: 1em;
+        min-height: unset;
+        transform: translateY(-2em);
+        filter: drop-shadow(0 2em hsl(var(--color)));
+    }
+
+</style>
 </head>
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;display:flex;justify-content: center;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <div style='flex:1'>under construction</div>
+<main style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex;justify-content:center' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <ul>
+        <template id='template'>
+            <li class="card">
+                <a><div></div>
+                <div></div>
+                <div><span></span>
+                    <span><img alt='-'></span>
+                </div></a>
+            </li>
+        </template>
+    </ul>
 </main>
 </body>
 <script>
@@ -35,5 +102,39 @@ description: "Arex0 Blog List"
         let match=false
         Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
     }
+    let ul = document.querySelector('main>ul')
+    let template = document.getElementById('template')
+    function read(rd){
+        rd.read().then(({value, done}) => {
+            if (!done) {
+                let c = template.content.cloneNode(true)
+                let a = c.querySelector('a')
+                a.href = value.path
+                a.onclick = e => {e.preventDefault(),jump(value.path)}
+                a.children[0].innerHTML = value.name
+                a.children[1].innerHTML = value.description
+                a.children[2].children[0].innerHTML = value.created_time
+                a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
+                ul.appendChild(c)
+                read(rd);
+            }
+        })
+    }
+    let buffer = '';
+    fetch('/blog/list.dn.json')
+    .then(res=>res.body.pipeThrough(new TextDecoderStream()))
+    .then(ts=>ts.pipeThrough(new TransformStream({
+        transform(chunk, controller) {
+            buffer += chunk;
+            const parts = buffer.split('\n')
+            parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
+            buffer = parts[parts.length - 1];
+        },
+        flush(controller) {
+            if (buffer) controller.enqueue(buffer);
+        }
+    })))
+    .then(js=>js.getReader())
+    .then(read)
 </script>
 </html>

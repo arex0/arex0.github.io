@@ -1,6 +1,6 @@
 ---
 title: "Share Stylish"
-keywords: "Arex0,Share,Stylish"
+keywords: [Arex0,Share,Stylish]
 description: "Arex0 share stylish"
 created_time: "2020-04-02"
 modified_time: "2020-04-02"

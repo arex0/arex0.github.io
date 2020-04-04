@@ -1,6 +1,6 @@
 ---
 title: "Design 3D"
-keywords: "Arex0,design,html"
+keywords: [design,html]
 description: "design html in Arex0 design 3d"
 js: must
 ---
@@ -14,39 +14,45 @@ js: must
 <style>
     @media only screen and (max-width:795px) {
         main {
-            transform:none;
+            transform: none;
         }
+
         #zero-3d {
-            margin-top:2em;
+            margin-top: 2em;
         }
+
         #controller {
-            font-size:.5em !important;
+            font-size: .5em !important;
         }
     }
+
     #zero-3d,
     #zero-3d * {
-        position:relative;
-        background-color:hsla(var(--background), 5);
-        border:.5px solid hsl(var(--color));
-        box-shadow:0 0 6px hsla(var(--color), .25);
-        transform:translateZ(var(--zero3d-separation));
-        transform-style:preserve-3d;
-        perspective:1000px;
+        position: relative;
+        background-color: hsla(var(--background), 5);
+        border: .5px solid hsl(var(--color));
+        box-shadow: 0 0 2px hsla(var(--color), .25);
+        transform: translateZ(var(--zero3d-separation));
+        transform-style: preserve-3d;
+        perspective: 1000px;
     }
+
     #controller {
-        --background:0, 0%, 93%;
-        --color:0, 0%, 21%;
+        --background: 0, 0%, 93%;
+        --color: 0, 0%, 21%;
     }
+
     #content button {
-        --background:0, 0%, 93%;
-        background-color:transparent;
-        --color:0, 0%, 21%;
-        color:hsl(var(--background));
-        border:.5px solid hsl(var(--background));
-        box-shadow:0 0 6px hsla(var(--background), .25);
-        width:10em;
-        margin-bottom:.5em;
+        --background: 0, 0%, 93%;
+        background-color: transparent;
+        --color: 0, 0%, 21%;
+        color: hsl(var(--background));
+        border: .5px solid hsl(var(--background));
+        box-shadow: 0 0 2px hsla(var(--background), .25);
+        width: 10em;
+        margin-bottom: .5em;
     }
+
 </style>
 </head>
 <body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>

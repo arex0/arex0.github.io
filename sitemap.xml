@@ -10,73 +10,85 @@
       <loc>https://arex0.com/about</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/design</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/guestbook</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/icons</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps</loc>
-      <lastmod>2020-04-03</lastmod>
+      <lastmod>2020-04-04</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/mail</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/archive</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
+  </url>
+  <url>
+      <loc>https://arex0.com/blog/example</loc>
+      <lastmod>2020-04-03</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog</loc>
-      <lastmod>2020-04-03</lastmod>
+      <lastmod>2020-04-04</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
+  </url>
+  <url>
+      <loc>https://arex0.com/blog/stream-json-array</loc>
+      <lastmod>2020-04-04</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/add</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.8</priority>
   </url>
   <url>
       <loc>https://arex0.com/link</loc>
-      <lastmod>2020-04-03</lastmod>
+      <lastmod>2020-04-04</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/share</loc>
       <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>1</priority>
+      <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/baidu_not_in_home</loc>

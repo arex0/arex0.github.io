@@ -47,8 +47,8 @@
     }
     * {
         min-width:32px;
+        max-width:100%;
         min-height:32px;
-        max-width: 100%;
     }
     div {
         box-sizing:border-box;
@@ -171,29 +171,31 @@
     .fabs:hover {
         clip-path:inset(0);
     }
-    .fabs>button {
+    .fabs>* {
         display:block;
         margin:calc(8px + 1.25vmin) calc(16px + 2.5vmin);
         visibility:visible;
         padding:0;
         background-color:hsl(var(--background));
+        filter:brightness(1.03);
         border:.5px solid hsla(var(--color),.2);
         outline:none;
-        box-shadow:0 0 6px hsla(var(--color),.25);
+        box-shadow:0 0 2px hsla(var(--color),.25);
         max-width:calc(48px + 2.5vmin);
         min-height:calc(48px + 2.5vmin);
         max-height:calc(48px + 2.5vmin);
         overflow:hidden;
         font:inherit;
+        text-decoration:none;
         cursor:pointer;
         border-radius:calc(24px + 1.25vmin);
         transition:max-width .5s ease;
     }
-    .fabs>button~button:focus,
-    .fabs>button~button:hover {
+    .fabs>*~*:focus,
+    .fabs>*~*:hover {
         max-width:calc(48px + 2.5vmin + 12em);
     }
-    .fabs>button~button::after {
+    .fabs>*~*::after {
         color:hsl(var(--color));
         vertical-align:top;
         line-height:calc(48px + 2.5vmin);
@@ -213,6 +215,7 @@
         text-align:center;
         vertical-align:middle;
         transform:translateY(-.05em);
+        cursor:pointer;
         border-radius:50%;
         user-select:none;
     }

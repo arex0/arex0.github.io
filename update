@@ -21,7 +21,7 @@ function sitemap(){
                     echo '      <loc>https://arex0.com/'$dir/$file'</loc>' >> sitemap.xml
                     echo '      <lastmod>'$(ls --full-time "$dir/$file/index.md" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
                     echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
-                    echo '      <priority>1</priority>' >> sitemap.xml
+                    echo '      <priority>.8</priority>' >> sitemap.xml
                     echo '  </url>' >> sitemap.xml
                 elif  [[ -f "$dir/$file/index.html" ]]
                 then
@@ -29,21 +29,35 @@ function sitemap(){
                     echo '      <loc>https://arex0.com/'$dir/$file'</loc>' >> sitemap.xml
                     echo '      <lastmod>'$(ls --full-time "$dir/$file/index.html" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
                     echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
-                    echo '      <priority>1</priority>' >> sitemap.xml
+                    echo '      <priority>.8</priority>' >> sitemap.xml
                     echo '  </url>' >> sitemap.xml
                 fi
             else
-                echo '  <url>' >> sitemap.xml
                 if [[  $file == "index.html" ]]
                 then
+                    echo '  <url>' >> sitemap.xml
                     echo '      <loc>https://arex0.com/'$dir'</loc>' >> sitemap.xml
-                else
+                    echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+                    echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+                    echo '      <priority>.5</priority>' >> sitemap.xml
+                    echo '  </url>' >> sitemap.xml
+                elif [[  $file == *.html ]]
+                then
+                    echo '  <url>' >> sitemap.xml
                     echo '      <loc>https://arex0.com/'$dir/${file%.html}'</loc>' >> sitemap.xml
+                    echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+                    echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+                    echo '      <priority>.5</priority>' >> sitemap.xml
+                    echo '  </url>' >> sitemap.xml
+                elif [[  $file == *.md ]]
+                then
+                    echo '  <url>' >> sitemap.xml
+                    echo '      <loc>https://arex0.com/'$dir/${file%.md}'</loc>' >> sitemap.xml
+                    echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
+                    echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
+                    echo '      <priority>.5</priority>' >> sitemap.xml
+                    echo '  </url>' >> sitemap.xml
                 fi
-                echo '      <lastmod>'$(ls --full-time "$dir/$file" | awk '{print  $6}')'</lastmod>' >> sitemap.xml
-                echo '      <changefreq>weekly</changefreq>' >> sitemap.xml
-                echo '      <priority>1</priority>' >> sitemap.xml
-                echo '  </url>' >> sitemap.xml
             fi
         done
     done
@@ -72,13 +86,19 @@ function sitemap(){
 }
 
 function blog(){
-    for file in $(ls blog | grep -v '^_')
+    echo '[' > blog/list.json
+    :> blog/list.dn.json
+    for file in $( ls -lt blog | awk '{print  $9}' | sed '1d' | grep -v '^_' | grep '\.md')
     do
-        if [[ $file == *.html ]]
-        then
-            echo 'ok'
-        fi
+        time=$(ls --full-time "blog/$file" | awk '{print  $6}')
+        sed -i "s/^modified_time: .*$/modified_time: \"$time\"/" "blog/$file"
+        touch -t ${time//-}0000 "blog/$file"
+        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"}' >> blog/list.dn.json
+        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"},' >> blog/list.json
     done
+    sed -i '$ s/.$//' blog/list.json
+    echo ']' >> blog/list.json
 }
 
 sitemap
+blog
