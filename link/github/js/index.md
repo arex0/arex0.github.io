@@ -4,5 +4,5 @@ keywords: "Arex0,Javascipts"
 description: "link Javascipts for all live demo and README.md."
 ---
 
-# pic
+# Javascript
 link Javascipts for all live demo and README.md.

@@ -11,6 +11,14 @@
     {
       "src": "icon.svg",
       "sizes": "150x150"
+    },
+    {
+      "src": "icon512.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icon192.png",
+      "sizes": "192x192"
     }
   ],
   "screenshots" : [
