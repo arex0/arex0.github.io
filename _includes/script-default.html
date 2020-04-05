@@ -42,6 +42,30 @@
         scrollTo({top:h,behavior:"smooth"})
     }
     window.addEventListener('pageshow',pageshow)
+    window.StylePropertyMap&&document.addEventListener('DOMContentLoaded',()=>{
+        let nav=document.querySelector('nav'),
+            h=nav.offsetHeight,
+            pre=document.documentElement.scrollTop,
+            hidden = new CSSTransformValue([new CSSTranslate(CSS.px(0),CSS.percent(-100))]),
+            show = new CSSTransformValue([new CSSTranslate(CSS.px(0),CSS.px(0))]),
+            showing = true
+        function autoShowNav() {
+            let cur=document.documentElement.scrollTop
+            if(cur>pre+h){
+                pre=cur
+                if(showing){
+                    nav.attributeStyleMap.set('transform',hidden)
+                    showing = false
+                }
+            }else if(cur<pre){
+                pre=cur
+                if(showing) return
+                nav.attributeStyleMap.set('transform',show)
+                showing = true
+            }
+        }
+        window.addEventListener('scroll',()=>requestAnimationFrame(autoShowNav));
+    },{once:true})
     document.addEventListener('keydown',e=>e.keyCode==122&&(location.href=((location.hash!='#focus')?location.href.slice(0,-location.hash.length):location.href)+'#focus'),{passive:true})
     document.addEventListener('keydown',e=>e.keyCode==27&&(location.hash=='#focus')&&(location.href=location.href.slice(0,-location.hash.length)+'#'),{passive:true})
 </script>
