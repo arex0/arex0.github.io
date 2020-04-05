@@ -55,7 +55,7 @@ js: must
 
 </style>
 </head>
-<body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
+<body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include fabs.html -%}
 <main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;background:hsl(0, 0%, 21%);touch-action:none;padding:0;overflow:hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>

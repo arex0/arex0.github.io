@@ -4,7 +4,7 @@
     metaEl.setAttribute('name','viewport')
     metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
     window.addEventListener('resize',()=>{
-        if(window.innerHeight>windowInnerHeight){
+        if(window.innerHeight>windowInnerHeight*.8){
             windowInnerHeight=window.innerHeight
             metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
         }
@@ -23,7 +23,6 @@
         snapObserver.disconnect()
         history.replaceState({top:document.documentElement.scrollTop},document.title)
         document.activeElement.blur()
-        snapObserver.unobserve(document.querySelector('footer'))
         document.querySelector('footer').style.opacity=0
         setTimeout(()=>document.querySelector('main').style.opacity=0,200)
         setTimeout(()=>location.href=url,400)

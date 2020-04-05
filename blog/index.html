@@ -24,7 +24,7 @@ description: "Arex0 Blog List"
         border: .5px solid hsla(var(--color), .2);
         box-shadow: 0 0 2px hsla(var(--color), .25);
         width: 80vmin;
-        filter: brightness(1.03);
+        filter: brightness(1.01);
     }
 
     .card a {
@@ -52,23 +52,23 @@ description: "Arex0 Blog List"
     .card div:nth-child(3)>span:first-child::before{
         content: '⏲ ';
     }
-    .card div:nth-child(3)>span:last-child::before{
+    .card div:nth-child(3)>span:nth-child(2)::before{
         content: '👁 ';
     }
-    .card div:nth-child(3)>span:last-child{
-        transform: translateY(.01em);
+    .card div:nth-child(3)>span:nth-child(3)::before{
+        content: '❤ ';
     }
     .card div:nth-child(3)>span>img {
-        max-width: 10em;
+        max-width: 4em;
         height: 1em;
         min-height: unset;
-        transform: translateY(-2em);
+        transform: translateY(-1.99em);
         filter: drop-shadow(0 2em hsl(var(--color)));
     }
 
 </style>
 </head>
-<body style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
+<body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
@@ -78,7 +78,9 @@ description: "Arex0 Blog List"
             <li class="card">
                 <a><div></div>
                 <div></div>
-                <div><span></span>
+                <div>
+                    <span></span>
+                    <span><img alt='-'></span>
                     <span><img alt='-'></span>
                 </div></a>
             </li>
@@ -113,6 +115,7 @@ description: "Arex0 Blog List"
         a.children[1].innerHTML = value.description
         a.children[2].children[0].innerHTML = value.created_time
         a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
+        a.children[2].children[2].children[0].src = 'https://arex0.com/api/like_count/arex0.com'+value.path
         ul.appendChild(c)
     }
     if(window.ReadableStream&&ReadableStream.prototype.pipeThrough) {

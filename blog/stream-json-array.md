@@ -5,6 +5,7 @@ description: "use stream api to read JSON Array"
 created_time: "2020-04-04"
 modified_time: "2020-04-04"
 markdown: true
+share: true
 ---
 
 # Javascript 流式解析JSON数组
@@ -44,7 +45,7 @@ new TransformStream({
         buffer = parts[parts.length - 1]
     },
     flush(controller) {
-        if (buffer) controller.enqueue(buffer);
+        if (buffer) controller.enqueue(buffer)
     }
 })
 ```
@@ -54,7 +55,7 @@ let rd = ReadableStream.getReader()
     rd.read().then(({value, done}) => {
         if (!done) {
             console.log(value)
-            read(rd);
+            read(rd)
         }
     })
 }
@@ -62,12 +63,12 @@ read()
 ```
 #### 汇总
 ```js
-let buffer = '';
+let buffer = ''
 function read(rd){
     rd.read().then(({value, done}) => {
         if (!done) {
             console.log(value)
-            read(rd);
+            read(rd)
         }
     })
 }
@@ -75,13 +76,13 @@ fetch('/blog/list.dn.json')
 .then(res=>res.body.pipeThrough(new TextDecoderStream()))
 .then(ts=>ts.pipeThrough(new TransformStream({
     transform(chunk, controller) {
-        buffer += chunk;
+        buffer += chunk
         const parts = buffer.split('\n')
-        parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
-        buffer = parts[parts.length - 1];
+        parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)))
+        buffer = parts[parts.length - 1]
     },
     flush(controller) {
-        if (buffer) controller.enqueue(buffer);
+        if (buffer) controller.enqueue(buffer)
     }
 })))
 .then(js=>js.getReader())

@@ -45,6 +45,29 @@
         --background:0,0%,8%;
         --color:0,0%,90%;
     }
+    #focus:target> * {
+        display:none !important;
+    }
+    #focus:target main{
+        margin-top:0 !important;
+        display:flex !important;
+    }
+    @media print{
+        @page {
+            margin: 0;
+            padding: 0;
+        }
+        body>*,.noprint{display:none !important}
+        .print{display: block !important}
+        main{
+            margin-top:0 !important;
+            display:flex !important;
+            font-size: .8em !important;
+        }
+        #content {
+            padding-bottom: 0 !important;
+        }
+    }
     * {
         min-width:32px;
         max-width:100%;
@@ -177,7 +200,7 @@
         visibility:visible;
         padding:0;
         background-color:hsl(var(--background));
-        filter:brightness(1.03);
+        filter:brightness(1.01);
         border:.5px solid hsla(var(--color),.2);
         outline:none;
         box-shadow:0 0 2px hsla(var(--color),.25);

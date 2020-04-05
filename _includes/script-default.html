@@ -4,7 +4,7 @@
     metaEl.setAttribute('name','viewport')
     metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
     window.addEventListener('resize',()=>{
-        if(window.innerHeight>windowInnerHeight){
+        if(window.innerHeight>windowInnerHeight*.8){
             windowInnerHeight=window.innerHeight
             metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
         }
@@ -42,4 +42,6 @@
         scrollTo({top:h,behavior:"smooth"})
     }
     window.addEventListener('pageshow',pageshow)
+    document.addEventListener('keydown',e=>e.keyCode==122&&(location.href=((location.hash!='#focus')?location.href.slice(0,-location.hash.length):location.href)+'#focus'),{passive:true})
+    document.addEventListener('keydown',e=>e.keyCode==27&&(location.hash=='#focus')&&(location.href=location.href.slice(0,-location.hash.length)+'#'),{passive:true})
 </script>

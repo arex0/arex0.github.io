@@ -4,7 +4,7 @@
     metaEl.setAttribute('name','viewport')
     metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
     window.addEventListener('resize',()=>{
-        if(window.innerHeight>windowInnerHeight){
+        if(window.innerHeight>windowInnerHeight*.8){
             windowInnerHeight=window.innerHeight
             metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
         }

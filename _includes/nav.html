@@ -1,4 +1,4 @@
-<nav id='nav' style='display:flex;position:fixed;top:0;z-index:2;left:0;right:0;background:hsl(var(--background));filter:brightness(1.03);outline:none;box-shadow:0 0 2px hsla(var(--color),.25);min-height:1.7em;contain:layout style;align-items:center;border-bottom:solid 1px hsla(var(--color),.1);overflow:hidden'>
+<nav id='nav' style='display:flex;position:fixed;top:0;z-index:2;left:0;right:0;background:hsla(var(--background),.9);filter:brightness(1.01);outline:none;box-shadow:0 0 2px hsla(var(--color),.25);min-height:1.7em;contain:layout style;align-items:center;border-bottom:solid 1px hsla(var(--color),.1);overflow:hidden'>
     <div tabindex='-1' class='logo' style='position:relative;padding:0 1em;outline:none' onclick='document.getElementById("zerotext").focus(),setTimeout(()=>document.getElementById("zerotext").focus(),1000)'>
         <b>Arex<span class='zero' style='border:solid .125em;width:.8em;height:.8em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span></b>
         <span onclick='jump("/")' class='js zero' style='border:solid .125em;width:.8em;height:.8em;position:absolute;top:.4em;left:1.4em'><span class='exist' style='top:.4em;left:.4em;width:.25em;height:.25em'></span></span>
@@ -8,8 +8,8 @@
         <li class='js'><a href='#nav' style='display:none' onclick='this.blur(),event.preventDefault()'>⨯<!--toggle item--></a></li>
         <li class='nojs' style='display:none'><a href='#nav' style='display:none'>⨯</a></li>
         <li class='nojs' style='display:none'><a href='/'>Home</a></li>
-        <li><a href='/blog/shot' onclick='event.preventDefault(),jump("/blog/")'>Blog</a></li>
-        <li><a href='/archive/shot' onclick='event.preventDefault(),jump("/archive/")'>Archive</a></li>
+        <li><a href='/blog/' onclick='event.preventDefault(),jump("/blog/")'>Blog</a></li>
+        <li><a href='/archive/' onclick='event.preventDefault(),jump("/archive/")'>Archive</a></li>
         <li><a href='/about/' onclick='event.preventDefault(),jump("/about/")'>About</a></li>
         <li><a href='/apps/' onclick='event.preventDefault(),jump("/apps/")'>Apps</a></li>
         <li><a href='#nav' onclick='this.blur(),event.preventDefault()' style='color:hsl(var(--background));cursor:default'>⨯<!--safe item--></a></li>
