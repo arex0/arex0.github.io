@@ -57,9 +57,9 @@
             margin: 0;
             padding: 0;
         }
-        body>*,.noprint{display:none !important}
-        .print{display: block !important}
-        main{
+        body>*,body>*.nojs,.noprint{display:none !important}
+        .print.print.nojs{display: block !important}
+        main,main.nojs{
             margin-top:0 !important;
             display:flex !important;
             font-size: .8em !important;

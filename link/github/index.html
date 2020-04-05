@@ -11,6 +11,7 @@ description: "Repositories of Arex0"
 {%- include meta.html -%}
 {%- include script-load.html -%}
 {%- include style-default.html -%}
+<script>var redirectTimeout = setTimeout(()=>location.href='./shot',3000)</script>
 <style>
     main>ul {
         padding: 0;
@@ -46,7 +47,7 @@ description: "Repositories of Arex0"
         margin-right: calc(.5em + 1vw);
     }
 
-    </style>
+</style>
 </head>
 <body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
@@ -99,6 +100,7 @@ description: "Repositories of Arex0"
         })
         document.querySelector('main').appendChild(ul)
         pageshow()
+        clearTimeout(redirectTimeout)
     })
 </script>
 </html>

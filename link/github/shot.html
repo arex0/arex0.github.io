@@ -8,6 +8,7 @@ description: "Repositories of Arex0"
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 <head>
 {%- include meta.html -%}
+{%- include script-default.html -%}
 {%- include style-default.html -%}
 <style>
     main>ul {
@@ -43,113 +44,126 @@ description: "Repositories of Arex0"
     .card div:nth-child(3)>span {
         margin-right: calc(.5em + 1vw);
     }
-
     </style>
 </head>
 <body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex;justify-content:center' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <ul>
-        <li class="card">
-        <a href="ui" onclick="event.preventDefault(),jump('ui')"><div>ui</div>
-        <div>Simple and consistent cross-platform responsive UI components, Ultra-lightweight but beautiful.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    GPL-3.0
-                </span>
-            <span>0 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="clash-script" onclick="event.preventDefault(),jump('clash-script')"><div>clash-script</div>
-        <div>a scipt use to manage clash</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#fd5d3c"></span>Shell</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>1 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="diff" onclick="event.preventDefault(),jump('diff')"><div>diff</div>
-        <div>offers algorithms to perform operations required for synchronizing bytes.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>1 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="resume" onclick="event.preventDefault(),jump('resume')"><div>resume</div>
-        <div>A black and white resume and generator.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#8ce845"></span>HTML</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    GPL-3.0
-                </span>
-            <span>1 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="zero-3d.js" onclick="event.preventDefault(),jump('zero-3d.js')"><div>zero-3d.js</div>
-        <div>The smallest cross-platform 3d solution in JS.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#0923ff"></span>JavaScript</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>1 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="arex0.github.io" onclick="event.preventDefault(),jump('arex0.github.io')"><div>arex0.github.io</div>
-        <div>No description</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#8ce845"></span>HTML</span>
-            
-            <span>0 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="baidu_not_in_home" onclick="event.preventDefault(),jump('baidu_not_in_home')"><div>baidu_not_in_home</div>
-        <div>百度的linux客户端不遵守linux软件开发规则，随意在home目录读写文件且不隐藏，我的目的是修复它</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#fd5d3c"></span>Shell</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>0 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="go-ext" onclick="event.preventDefault(),jump('go-ext')"><div>go-ext</div>
-        <div>Expanded some official packages.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>0 stars</span>
-            <span>0 forks</span>
-        </div></a></li><li class="card">
-        <a href="mail" onclick="event.preventDefault(),jump('mail')"><div>mail</div>
-        <div> simple and quick golang email solution.</div>
-        <div style="max-width: 500px;display: flex;justify-content: space-between;">
-            <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
-            <span>
-                    <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
-                    MIT
-                </span>
-            <span>0 stars</span>
-            <span>0 forks</span>
-        </div></a></li>
-    </ul>
+<main style="position: relative; z-index: 1; background: hsl(var(--background)); min-height: calc(100vh - 1.7em); margin-top: 1.7em; opacity: 1; contain: layout style; transition: opacity 0.2s ease-in-out 0s; display: flex; justify-content: center;" onclick="document.body.firstElementChild.removeAttribute(&quot;open&quot;)">
+    <ul><li class="card">
+    <a href="ui" onclick="event.preventDefault(),jump(&quot;ui&quot;)"><div>ui</div>
+    <div>Simple and consistent cross-platform responsive UI components, Ultra-lightweight but beautiful.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                GPL-3.0
+            </span>
+        <span>0 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="clash-script" onclick="event.preventDefault(),jump(&quot;clash-script&quot;)"><div>clash-script</div>
+    <div>a scipt use to manage clash</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#fd5d3c"></span>Shell</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>1 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="diff" onclick="event.preventDefault(),jump(&quot;diff&quot;)"><div>diff</div>
+    <div>offers algorithms to perform operations required for synchronizing bytes.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>1 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="resume" onclick="event.preventDefault(),jump(&quot;resume&quot;)"><div>resume</div>
+    <div>A black and white resume and generator.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#8ce845"></span>HTML</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                GPL-3.0
+            </span>
+        <span>1 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="zero-3d.js" onclick="event.preventDefault(),jump(&quot;zero-3d.js&quot;)"><div>zero-3d.js</div>
+    <div>The smallest cross-platform 3d solution in JS.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#0923ff"></span>JavaScript</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>1 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="arex0.github.io" onclick="event.preventDefault(),jump(&quot;arex0.github.io&quot;)"><div>arex0.github.io</div>
+    <div>No description</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#8ce845"></span>HTML</span>
+        
+        <span>0 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="baidu_not_in_home" onclick="event.preventDefault(),jump(&quot;baidu_not_in_home&quot;)"><div>baidu_not_in_home</div>
+    <div>百度的linux客户端不遵守linux软件开发规则，随意在home目录读写文件且不隐藏，我的目的是修复它</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#fd5d3c"></span>Shell</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>0 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="go-ext" onclick="event.preventDefault(),jump(&quot;go-ext&quot;)"><div>go-ext</div>
+    <div>Expanded some official packages.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>0 stars</span>
+        <span>0 forks</span>
+    </div></a></li><li class="card">
+    <a href="mail" onclick="event.preventDefault(),jump(&quot;mail&quot;)"><div>mail</div>
+    <div> simple and quick golang email solution.</div>
+    <div style="max-width: 500px;display: flex;justify-content: space-between;">
+        <span><span style="display: inline-block;width: .8em;height: .8em;border-radius: 50%;min-width: unset;min-height: unset;background:#45f2a4"></span>Go</span>
+        <span>
+                <svg style="width: 1.1em; height: 1.2em; min-height: unset; min-width: unset;"><path style="fill: hsl(var(--color));" fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z"></path></svg>
+                MIT
+            </span>
+        <span>0 stars</span>
+        <span>0 forks</span>
+    </div></a></li></ul>
 </main>
 </body>
+<script>
+    theme(0)
+    let logo=document.querySelector('.logo')
+    logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
+    logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
+    let actions={
+        '主题':event=>theme(1),
+        '主页':()=>jump('/'),
+        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
+        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
+    }
+    function zero(command){
+        let match=false
+        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+    }
+</script>
 </html>
