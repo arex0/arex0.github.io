@@ -1,0 +1,326 @@
+---
+title: "Matrix in ASCII"
+keywords: [Matrix,ASCII]
+description: "Matrix in ASCII"
+js: must
+---
+
+<!DOCTYPE html>
+<html lang='{{ page.lang | default: site.lang | default: "en" }}'>
+<head>
+{%- include meta.html -%}
+{%- include script-default.html -%}
+{%- include style-default.html -%}
+<style>
+    main>div {
+        display: flex;
+        margin: 2.5vmin;
+        padding: 2.5vmin;
+        background: hsl(var(--background));
+        border: .5px solid hsla(var(--color), .2);
+        box-shadow: 0 0 2px hsla(var(--color), .25);
+        min-width: 95vmin;
+        filter: brightness(1.01);
+        contain: layout style;
+        flex-flow: row wrap;
+        flex-direction: column;
+        border-radius: 1em;
+        flex: 1;
+    }
+
+    section {
+        margin: .5em 0;
+    }
+
+    input,
+    button {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        border: solid .5px hsla(var(--background),.1);
+        box-sizing: border-box;
+        height: 1em;
+        line-height: 1em;
+        font-size: 1em;
+    }
+
+    section {
+        outline: solid .5px hsla(var(--color),.3);
+    }
+
+    input {
+        background: hsl(var(--background));
+    }
+
+    textarea {
+        background: hsl(var(--background));
+        border: solid .5px hsla(var(--color),.3);
+        flex: 1;
+    }
+
+    #expression {
+        width: calc(100% - 3em);
+    }
+
+    #input {
+        width: calc(100% - 6em);
+        min-width: 12em;
+    }
+
+    html[lang='en'] #expression {
+        width: calc(100% - 7em);
+    }
+
+    html[lang='en'] #input {
+        width: calc(100% - 14em);
+        min-width: 12em;
+    }
+
+    button {
+        background: hsl(var(--color));
+        color: hsl(var(--background));
+        width: 3em;
+    }
+
+    html[lang='en'] button {
+        width: 7em;
+    }
+
+    html:not([lang='en']) main>* {
+        font-size: .75em;
+    }
+
+</style>
+</head>
+<body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;flex-direction:column;overflow-y:scroll'>
+{%- include nav.html -%}
+{%- include footer.html -%}
+{%- include fabs.html -%}
+<main class='nojs' style='position: relative;z-index: 1;background: hsl(var(--background));opacity: 1;contain: layout style;transition: opacity 0.2s ease-in-out 0s;margin-top: 2.5em;height: calc(95vh - 10em);display: flex;flex-wrap: wrap;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <div>
+        <section>
+            <input id='expression' placeholder='(a,b,c,d)*(x,y)'><button onclick='gen()'>生成</button>
+        </section>
+        <section><input id='input' placeholder='(a,b,c,d)* [Enter] Add to up' onkeydown='(event.keyCode==13)&&(transpose(),transpose(),addtoup())'><button onclick='transpose()'>转置</button><button onclick='complate()'>补全</button></section>
+        <section style='display:flex;flex:1;flex-direction:column;outline:none;'>
+            <textarea id='adder' style='max-width: 100%;min-width: 100%;flex: 1;' placeholder='根据输出高度自动生成矩形&#13;&#10;例如:&#13;&#10;" . " 输出高度是5&#13;&#10;生成(忽略边框):&#13;&#10;|   |&#13;&#10;|   |&#13;&#10;| . |&#13;&#10;|   |&#13;&#10;|   |&#13;&#10;'></textarea>
+            <button  onclick='addtoright()' onpointerdown='(id=>{document.addEventListener(`pointerup`,()=>clearInterval(id))})(setInterval(addtoright,100))'>添加</button>
+        </section>
+    </div>
+    <div>
+        <textarea id='shower' placeholder='# 生成按钮将生成类似下面的图,现在支持 {*}&#13;&#10;                   *(a,b,c,d,tx,ty)&#13;&#10;(x, y, z, 1-z/d)--------------------->(a*x+c*y+tx, b*x+d*y+ty, z)&#13;&#10;&#13;&#10;+-           -+   +-     -+   +-                  -+&#13;&#10;| a  c  0  tx |   |   x   |   | a*x+c*y+tx*(1-z/d) |&#13;&#10;| b  d  0  ty | . |   y   | = | b*x+d*y+ty*(1-z/d) |&#13;&#10;| 0  0  1  0  |   |   z   |   |         z          |&#13;&#10;| 0  0  0  1  |   | 1-z/d |   |         1          |&#13;&#10;+-           -+   +-     -+   +-                  -+&#13;&#10;&#13;&#10;# add to up 可以按照(a,b,c,d)的格式按列输入方阵,回车会添加到第一个输入框&#13;&#10;[(a,b,c,d)]                [(a,b,c,d)*(x,y)]&#13;&#10;[(x,y)*]------------------>[(x,y)]&#13;&#10;# add to up 右方按钮可以简单对其进行处理，补全支持CSS matrix补全&#13;&#10;                 补全&#13;&#10;(a,b,c,d,tx,ty)------->(a,b,0,0,c,d,0,0,0,0,1,0,tx,ty,0,1)&#13;&#10;&#13;&#10;# 添加输入到当前生成ASCII图的右侧，一个拓展性应用，按照最长行补全空格&#13;&#10;+-           -+                     +-           -+   |&#13;&#10;| a  c  0  tx |       添加          | a  c  0  tx |   |&#13;&#10;| b  d  0  ty |-------------------->| b  d  0  ty | . |&#13;&#10;| 0  0  1  0  |       |   |         | 0  0  1  0  |   |&#13;&#10;| 0  0  0  1  |       |   |         | 0  0  0  1  |   |&#13;&#10;+-           -+       | . |         +-           -+   |&#13;&#10;                      |   |&#13;&#10;                      |   |&#13;&#10;                      |   |&#13;&#10;'></textarea>
+    </div>
+</main>
+</body>
+<script>
+    theme(0)
+    let logo=document.querySelector('.logo')
+    logo.addEventListener('pointerdown',()=>logo.setAttribute('open',true),{passive:true})
+    logo.addEventListener('touchstart',()=>logo.setAttribute('open',true),{passive:true})//for firefox
+    pageshow()
+    let actions={
+        '主题':event=>theme(1),
+        '主页':()=>jump('/'),
+        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
+        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
+    }
+    function zero(command){
+        let match=false
+        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+    }
+    
+    let expression = document.getElementById('expression'),
+        input = document.getElementById('input'),
+        adder = document.getElementById('adder'),
+        shower = document.getElementById('shower')
+    let cMap = {
+        '+':true,
+        '-':true,
+        '*':true,
+    }
+    function isNum(str){return !isNaN(Number(str))}
+    function same(a,b){
+        if(a[0] == b[0]){
+            if(a[1] == b[1]){
+                return [0,1]
+            }
+            return [0]
+        }else if(a[0] == b[1]){
+            if(a[1] == b[0]){
+                return [1,0]
+            }
+            return [1]
+        }else if(a[1] == b[0]){
+            return [2]
+        }else if(a[1] == b[1]){
+            return [3]
+        }
+    }
+    function mul(a,b){
+        if((a=='0')||(b=='0')) return 0
+        else if(isNum(a)&&isNum(b)) return a*b+''
+        else return `${a}*${b}`
+    }
+    function add(a,b,c,d){
+        let e = Array(4),i=0
+        e[i] = a
+        i+=(a!=0)
+        e[i] = b
+        i+=(b!=0)
+        e[i] = c
+        i+=(c!=0)
+        e[i] = d
+        i+=(d!=0)
+        let ep = Array(i)
+        for(let j=0;j<i;j++) ep[j] = e[j].split('*')
+        let j = i
+        while(j--){
+            let m = -1, n = -1;
+            for(let k=0;k<j;k++){
+                if(ep[j].findIndex(p=>(n=ep[k].indexOf(p)) != -1)!=-1) m = k
+            }
+            if(m!=-1){
+                i--
+                let s = same(ep[m],ep[j])
+                if(s.length==2) ep[m][0]='2*'+ep[m][0]
+                else{
+                    switch(s[0]){
+                        case 0:
+                            ep[m][1] = `(${ep[m][1]||1}+${ep[j][1]})`
+                            break;
+                        case 1:
+                            ep[m][1] = `(${ep[m][1]||1}+${ep[j][0]})`
+                            break;
+                        case 2:
+                            ep[m][0] = `(${ep[m][0]}+${ep[j][1]||1})`
+                            break;
+                        case 3:
+                            if(ep[m][1]) `(${ep[m][0]}+${ep[j][0]})`
+                            break;
+                    }
+                }
+                m = -1
+            }
+        }
+        return ep.slice(0,i).map(p=>p.join('*')).join('+')||'0'
+    }
+    function center(str,len){
+        let l = len-str.length,
+            r = l>>1
+            l -= r
+        return `${Array(l+1).join(' ')}${str}${Array(r+1).join(' ')}`
+    }
+    function gen(){
+        let vs = expression.value.split('*'),
+            m1 = vs[0].slice(1,-1).split(','),
+            m2 = vs[1].slice(1,-1).split(','),
+            m = Array(16)
+            // for(let i=0;i<4;i++)for(let j=0;j<4;j++) console.log(`m[${4*i+j}] = add(mul(m1[${j}],m2[${4*i}]), mul(m1[${j+4}],m2[${4*i+1}]), mul(m1[${j+8}],m2[${4*i+2}]), mul(m1[${j+12}],m2[${4*i+3}]))`)
+            m[0] = add(mul(m1[0],m2[0]), mul(m1[4],m2[1]), mul(m1[8],m2[2]), mul(m1[12],m2[3]))
+            m[1] = add(mul(m1[1],m2[0]), mul(m1[5],m2[1]), mul(m1[9],m2[2]), mul(m1[13],m2[3]))
+            m[2] = add(mul(m1[2],m2[0]), mul(m1[6],m2[1]), mul(m1[10],m2[2]), mul(m1[14],m2[3]))
+            m[3] = add(mul(m1[3],m2[0]), mul(m1[7],m2[1]), mul(m1[11],m2[2]), mul(m1[15],m2[3]))
+            m[4] = add(mul(m1[0],m2[4]), mul(m1[4],m2[5]), mul(m1[8],m2[6]), mul(m1[12],m2[7]))
+            m[5] = add(mul(m1[1],m2[4]), mul(m1[5],m2[5]), mul(m1[9],m2[6]), mul(m1[13],m2[7]))
+            m[6] = add(mul(m1[2],m2[4]), mul(m1[6],m2[5]), mul(m1[10],m2[6]), mul(m1[14],m2[7]))
+            m[7] = add(mul(m1[3],m2[4]), mul(m1[7],m2[5]), mul(m1[11],m2[6]), mul(m1[15],m2[7]))
+            m[8] = add(mul(m1[0],m2[8]), mul(m1[4],m2[9]), mul(m1[8],m2[10]), mul(m1[12],m2[11]))
+            m[9] = add(mul(m1[1],m2[8]), mul(m1[5],m2[9]), mul(m1[9],m2[10]), mul(m1[13],m2[11]))
+            m[10] = add(mul(m1[2],m2[8]), mul(m1[6],m2[9]), mul(m1[10],m2[10]), mul(m1[14],m2[11]))
+            m[11] = add(mul(m1[3],m2[8]), mul(m1[7],m2[9]), mul(m1[11],m2[10]), mul(m1[15],m2[11]))
+            m[12] = add(mul(m1[0],m2[12]), mul(m1[4],m2[13]), mul(m1[8],m2[14]), mul(m1[12],m2[15]))
+            m[13] = add(mul(m1[1],m2[12]), mul(m1[5],m2[13]), mul(m1[9],m2[14]), mul(m1[13],m2[15]))
+            m[14] = add(mul(m1[2],m2[12]), mul(m1[6],m2[13]), mul(m1[10],m2[14]), mul(m1[14],m2[15]))
+            m[15] = add(mul(m1[3],m2[12]), mul(m1[7],m2[13]), mul(m1[11],m2[14]), mul(m1[15],m2[15]))
+        let  mm = Array(4), mm1 = Array(4), mm2 = Array(4)
+        for(let i=0;i<4;i++)for(let j=0;j<4;j++){
+            let t = m[4*i+j].length
+            mm[i] = (mm[i]||0)<t?t:mm[i]
+        }
+        for(let i=0;i<4;i++)for(let j=0;j<4;j++){
+            let t = m1[4*i+j].length
+            mm1[i] = (mm1[i]||0)<t?t:mm1[i]
+        }
+        for(let i=0;i<4;i++)for(let j=0;j<4;j++){
+            let t = m2[4*i+j].length
+            mm2[i] = (mm2[i]||0)<t?t:mm2[i]
+        }
+        let padsp1 = Array(mm1.reduce((i,j)=>i+j,0)+7).join(' '), padsp2 = Array(mm2.reduce((i,j)=>i+j,0)+7).join(' '), padsp = Array(mm.reduce((i,j)=>i+j,0)+7).join(' ')
+        let lm = Array(4), lm1 = Array(4), lm2 = Array(4)
+        for(let i=0;i<4;i++){
+            lm[i] = Array(4)
+            for(let j=0;j<4;j++){
+                lm[i][j] = m[i+4*j]
+            }
+        }
+        for(let i=0;i<4;i++){
+            lm1[i] = Array(4)
+            for(let j=0;j<4;j++){
+                lm1[i][j] = m1[i+4*j]
+            }
+        }
+        for(let i=0;i<4;i++){
+            lm2[i] = Array(4)
+            for(let j=0;j<4;j++){
+                lm2[i][j] = m2[i+4*j]
+            }
+        }
+        lm = lm.map(l=>l.map((w,i)=>center(w,mm[i])).join('  '))
+        lm1 = lm1.map(l=>l.map((w,i)=>center(w,mm1[i])).join('  '))
+        lm2 = lm2.map(l=>l.map((w,i)=>center(w,mm2[i])).join('  '))
+        shower.value = `${Array(vs[0].length+4).join(' ')}*${vs[1]}
+${vs[0]}${Array(vs[1].length+7).join('-')}>(${m.join(',')})
+
++-${padsp1}-+   +-${padsp2}-+   +-${padsp}-+
+| ${lm1[0]} |   | ${lm2[0]} |   | ${lm[0]} |
+| ${lm1[1]} | . | ${lm2[1]} | = | ${lm[1]} |
+| ${lm1[2]} |   | ${lm2[2]} |   | ${lm[2]} |
+| ${lm1[3]} |   | ${lm2[3]} |   | ${lm[3]} |
++-${padsp1}-+   +-${padsp2}-+   +-${padsp}-+
+`
+    }
+    function addtoup(){
+        expression.value = expression.value.length?input.value+expression.value:input.value.slice(0,-1)
+    }
+    function transpose(){
+        let t = input.value.slice(-1),
+            v = input.value.trim(),
+            c = '*'
+        if(cMap[t]){
+            c = t
+            v = v.slice(0,-1)
+        }
+        let m = v.slice(v.indexOf('(')+1,v.indexOf(')')).split(',').map(t=>t.trim())
+        let tmp
+        tmp = m[ 1 ]; m[ 1 ] = m[ 4 ]; m[ 4 ] = tmp;
+		tmp = m[ 2 ]; m[ 2 ] = m[ 8 ]; m[ 8 ] = tmp;
+		tmp = m[ 6 ]; m[ 6 ] = m[ 9 ]; m[ 9 ] = tmp;
+
+		tmp = m[ 3 ]; m[ 3 ] = m[ 12 ]; m[ 12 ] = tmp;
+		tmp = m[ 7 ]; m[ 7 ] = m[ 13 ]; m[ 13 ] = tmp;
+		tmp = m[ 11 ]; m[ 11 ] = m[ 14 ]; m[ 14 ] = tmp;
+        input.value = `(${m.join(',')})${c}`
+    }
+    function complate(){
+        let v = input.value.split(','),
+            t = v[5].split(')')
+        if(v.length==16) return
+        input.value = `${v[0]},${v[1]},0,0,${v[2]},${v[3]},0,0,0,0,1,0,${v[4]},${t[0]},0,1)${t[1]}`
+        transpose()
+        transpose()
+    }
+    function addtoright(){
+        if(shower.value){
+            let vs = shower.value.split('\n'),
+                vm = vs.reduce((p,c)=>Math.max(c.length,p),0),
+                ad = adder.value.split('\n'),
+                dm = ad.reduce((p,c)=>Math.max(c.length,p),0)
+            shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')+ad[i]+Array(dm-ad[i].length+1).join(' ')).join('\n')
+        }else{
+            let vs = adder.value.split('\n'),
+                vm = vs.reduce((p,c)=>Math.max(c.length,p),0)
+            shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')).join('\n')
+        }
+    }
+</script>
+</html>

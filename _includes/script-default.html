@@ -39,9 +39,11 @@
         },100)
     }
     function smsrcoll(h){
-        scrollTo({top:h,behavior:"smooth"})
+        scrollTo({top:h,behavior:'smooth'})
     }
-    window.addEventListener('pageshow',pageshow)
+    window.addEventListener('pageshow',pageshow);
+    {%- if page.markdown -%}
+
     window.StylePropertyMap&&document.addEventListener('DOMContentLoaded',()=>{
         let nav=document.querySelector('nav'),
             fabs=document.querySelector('.fabs'),
@@ -60,7 +62,7 @@
                     fabs.attributeStyleMap.set('transform',fhidden)
                     showing = false
                 }
-            }else if(cur<pre){
+            }else if(cur+32<pre){
                 pre=cur
                 if(showing) return
                 nav.attributeStyleMap.set('transform',show)
@@ -72,4 +74,5 @@
     },{once:true})
     document.addEventListener('keydown',e=>e.keyCode==122&&(location.href=((location.hash!='#focus')?location.href.slice(0,-location.hash.length):location.href)+'#focus'),{passive:true})
     document.addEventListener('keydown',e=>e.keyCode==27&&(location.hash=='#focus')&&(location.href=location.href.slice(0,-location.hash.length)+'#'),{passive:true})
+    {%- endif -%}
 </script>

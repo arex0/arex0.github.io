@@ -5,7 +5,7 @@ description: "Arex0 Blog List"
 ---
 
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang='zh-Hans'>
 <head>
 <noscript><meta http-equiv='refresh' content='0; url=shot'></noscript>
 {%- include meta.html -%}
@@ -49,15 +49,19 @@ description: "Arex0 Blog List"
         overflow: hidden;
         margin-right: calc(.5em + 1vw);
     }
-    .card div:nth-child(3)>span:first-child::before{
+
+    .card div:nth-child(3)>span:first-child::before {
         content: '⏲ ';
     }
-    .card div:nth-child(3)>span:nth-child(2)::before{
+
+    .card div:nth-child(3)>span:nth-child(2)::before {
         content: '👁 ';
     }
-    .card div:nth-child(3)>span:nth-child(3)::before{
+
+    .card div:nth-child(3)>span:nth-child(3)::before {
         content: '❤ ';
     }
+
     .card div:nth-child(3)>span>img {
         max-width: 4em;
         height: 1em;
@@ -75,7 +79,7 @@ description: "Arex0 Blog List"
 <main style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex;justify-content:center' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <ul>
         <template id='template'>
-            <li class="card">
+            <li class='card'>
                 <a><div></div>
                 <div></div>
                 <div>

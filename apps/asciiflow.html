@@ -59,22 +59,7 @@ js: must
 {%- include nav.html -%}
 {%- include fabs.html -%}
 <main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;background:hsl(0, 0%, 21%);touch-action:none;padding:0;overflow:hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <div id='zero-3d' style='position:absolute; left:50%; top:50%; background:hsl(var(--background)); height:50%; width:50%; touch-action:none;user-select:none;'>
-        <div>123456789</div>
-    </div>
-    <div id='content' style='font-size:.8em; position:fixed; left:1em; top:2em;' onpointerdown='event.stopPropagation()'>
-        <button>set style</button><br>
-        <button>set component</button><br>
-        <button>set content</button><br>
-        <button>update</button><br>
-    </div>
-    <div id='controller' style='font-size:.8em;position:fixed; top:5vh; right:5vw; color:hsl(var(--background));' onpointerdown='event.stopPropagation()'>
-        <div id='rotate-controller' style='font-size:2em;width:5em; height:5em; border:solid .2em; border-radius:50%; line-height:5em; transform:rotateZ(-60deg);user-select:none;'>⬤</div>
-        <label>
-            <br>separation separation<br>
-            <input type='range' oninput='setSeparation(this.value)' value='500' min='1' max='1000'>
-        </label>
-    </div>
+
 </main>
 </body>
 <script>
@@ -82,29 +67,6 @@ js: must
     let logo=document.querySelector('.logo')
     logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
     logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
-</script>
-<script src='/link/github/zero-3d.js/zero-3d.js'></script>
-<script>
-    let ctl_3d = zero3d(document.getElementById('zero-3d'),{
-        rotatable:true,
-        scalable:true,
-        root:document,
-        x:'-50%',
-        y:'-50%',
-        rx:30,
-        ry:45,
-        rz:60,
-        rzc:document.getElementById('rotate-controller'),
-        size:.8,
-        p:13.71,
-    })
-    function setSeparation(d){
-        ctl_3d.p = 1/(1.001-(d/1000)**.1) - 1/1.001
-    }
-    setTimeout(() => {
-        scrollTo({top:0})
-        pageshow()
-    }, 100)
-    setTimeout(() => scrollTo({top:0}),200)
+    pageshow()
 </script>
 </html>
