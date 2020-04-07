@@ -34,7 +34,7 @@ js: must
         box-shadow: 0 0 2px hsla(var(--color), .25);
         transform: translateZ(var(--zero3d-separation));
         transform-style: preserve-3d;
-        perspective: 1000px;
+        perspective: 100vmax;
     }
 
     #controller {
@@ -58,7 +58,7 @@ js: must
 <body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;background:hsl(0, 0%, 21%);touch-action:none;padding:0;overflow:hidden;perspective:1000px;' onclick='document.body.firstElementChild.removeAttribute("open")'>
+<main class='nojs' style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);max-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;background:hsl(0, 0%, 21%);touch-action:none;padding:0;overflow:hidden;perspective:1000vmax;' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <div id='zero-3d' style='position:absolute; left:50%; top:50%; background:hsl(var(--background)); height:50%; width:50%; touch-action:none;user-select:none;'>
         <div>123456789</div>
     </div>
@@ -85,12 +85,15 @@ js: must
 </script>
 <script src='/link/github/zero-3d.js/zero-3d.js'></script>
 <script>
-    let ctl_3d = zero3d(document.getElementById('zero-3d'),{
+    let ele = document.getElementById('zero-3d')
+    ele.style.top = `calc(50vh - ${ele.offsetHeight/2}px)`
+    ele.style.left = `calc(50vw - ${ele.offsetWidth/2}px)`
+    let ctl_3d = zero3d(ele,{
         rotatable:true,
         scalable:true,
         root:document,
-        x:'-50%',
-        y:'-50%',
+        x:-ele.offsetWidth/2,
+        y:-ele.offsetHeight/2,
         rx:30,
         ry:45,
         rz:60,

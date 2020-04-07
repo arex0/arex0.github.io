@@ -20,7 +20,7 @@
   </url>
   <url>
       <loc>https://arex0.com/apps/design</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-04-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -74,19 +74,25 @@
   </url>
   <url>
       <loc>https://arex0.com/blog</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-04-07</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
+      <loc>https://arex0.com/blog/matrix3d-2</loc>
+      <lastmod>2020-04-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/matrix3d</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-04-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/shot</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-04-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -182,7 +188,7 @@
   </url>
   <url>
       <loc>https://arex0.com/link/github/zero-3d.js</loc>
-      <lastmod>2020-03-31</lastmod>
+      <lastmod>2020-04-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>

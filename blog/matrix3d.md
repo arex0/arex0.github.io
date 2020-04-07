@@ -3,7 +3,7 @@ title: "CSS matrix3d 旋转3D物体（原理篇）"
 keywords: [CSS,Math]
 description: "use css matrix3d rotate object in 3d"
 created_time: "2020-04-06"
-modified_time: "2020-04-06"
+modified_time: "2020-04-07"
 markdown: true
 share: true
 ---
@@ -159,11 +159,11 @@ rotateY(a) === (cos(a),0,-sin(a),0,0,1,0,0,sin(a),0,cos(a),0,0,0,0,1)
 |    0     0     0    1 |
 +-                     -+
 
-rotateZ(a) === (cos(a),sin(a),0,0,-sin(a),cos(a),0,0,0,0,0,0,0,0,0,1)
+rotateZ(a) === (cos(a),sin(a),0,0,-sin(a),cos(a),0,0,0,0,1,0,0,0,0,1)
 +-                     -+
 | cos(a)  -sin(a)  0  0 |
 | sin(a)   cos(a)  0  0 |
-|    0       0     0  0 |
+|    0       0     1  0 |
 |    0       0     0  1 |
 +-                     -+
 
