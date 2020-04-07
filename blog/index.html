@@ -110,6 +110,7 @@ description: "Arex0 Blog List"
     }
     let ul = document.querySelector('main>ul')
     let template = document.getElementById('template')
+    let vlc = {}//visit_like_count
     function card(value){
         let c = template.content.cloneNode(true)
         let a = c.querySelector('a')
@@ -118,11 +119,44 @@ description: "Arex0 Blog List"
         a.children[0].innerHTML = value.name
         a.children[1].innerHTML = value.description
         a.children[2].children[0].innerHTML = value.created_time
-        a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
-        a.children[2].children[2].children[0].src = 'https://arex0.com/api/like_count/arex0.com'+value.path
+        let v = vlc['/visited_count/arex0.com'+value.path]
+        if(v!=undefined){
+            a.children[2].children[1].children[0].replaceWith(document.createTextNode(v))
+        }else{
+            a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
+        }
+        let l = vlc['/like_count/arex0.com'+value.path]
+        if(l!=undefined){
+            a.children[2].children[2].children[0].replaceWith(document.createTextNode(l))
+        }else{
+            a.children[2].children[2].children[0].src = 'https://arex0.com/api/like_count/arex0.com'+value.path
+        }
         ul.appendChild(c)
     }
     if(window.ReadableStream&&ReadableStream.prototype.pipeThrough) {
+        function setVLC(rd){
+            rd.read().then(({value, done}) => {
+                if (!done) {
+                    Object.assign(vlc,value)
+                    setVLC(rd);
+                }
+            })
+        }
+        fetch('https://arex0.com/api/visit_like_count')
+        .then(res=>res.body.pipeThrough(new TextDecoderStream()))
+        .then(ts=>ts.pipeThrough(new TransformStream({
+            transform(chunk, controller) {
+                buffer += chunk;
+                const parts = buffer.split('\n')
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
+                buffer = parts[parts.length - 1];
+            },
+            flush(controller) {
+                if (buffer) controller.enqueue(buffer);
+            }
+        })))
+        .then(js=>js.getReader())
+        .then(setVLC)
         function read(rd){
             rd.read().then(({value, done}) => {
                 if (!done) {
@@ -148,6 +182,9 @@ description: "Arex0 Blog List"
         .then(js=>js.getReader())
         .then(read)
     }else{
+        fetch('https://arex0.com/api/visit_like_count')
+        .then(res=>res.text())
+        .then(text=>text.split(',\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
         fetch('/blog/list.json')
         .then(res=>res.json())
         .then(blogs=>blogs.forEach(card))
