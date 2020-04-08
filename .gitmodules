@@ -1,9 +1,6 @@
 [submodule "link/github/resume"]
 	path = link/github/resume
 	url = https://github.com/arex0/resume.git
-[submodule "link/github/ui"]
-	path = link/github/ui
-	url = https://github.com/arex0/ui.git
 [submodule "link/github/zero-3d.js"]
 	path = link/github/zero-3d.js
 	url = https://github.com/arex0/zero-3d.js.git
