@@ -3,7 +3,7 @@ title: "Javascript 流式解析JSON数组"
 keywords: [Stream,Javascript,JSON]
 description: "use stream api to read JSON Array"
 created_time: "2020-04-04"
-modified_time: "2020-04-05"
+modified_time: "2020-04-08"
 markdown: true
 share: true
 ---
@@ -72,7 +72,7 @@ function read(rd){
         }
     })
 }
-fetch('/blog/list.dn.json')
+fetch('/blog/list.json')
 .then(res=>res.body.pipeThrough(new TextDecoderStream()))
 .then(ts=>ts.pipeThrough(new TransformStream({
     transform(chunk, controller) {
@@ -89,3 +89,37 @@ fetch('/blog/list.dn.json')
 .then(read)
 ```
 非常遗憾，firefox还不支持上面的代码，不过我相信firefox也很快会支持这个API的
+## 兼容
+对于不支持流式解析的浏览器，我们可以用以下代码来兼容
+```js
+    if(window.ReadableStream&&ReadableStream.prototype.pipeThrough) {
+        function read(rd){
+            rd.read().then(({value, done}) => {
+                if (!done) {
+                    /*use json*/
+                    read(rd);
+                }
+            })
+        }
+        let buffer = '';
+        fetch(/*url*/)
+        .then(res=>res.body.pipeThrough(new TextDecoderStream()))
+        .then(ts=>ts.pipeThrough(new TransformStream({
+            transform(chunk, controller) {
+                buffer += chunk;
+                const parts = buffer.split('\n')
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
+                buffer = parts[parts.length - 1];
+            },
+            flush(controller) {
+                if (buffer) controller.enqueue(buffer);
+            }
+        })))
+        .then(js=>js.getReader())
+        .then(read)
+    }else{
+        fetch(/*url*/)
+        .then(res=>res.text())
+        .then(text=>text.slice(0,-1).split('\n').map(JSON.parse).forEach(/*use json*/))
+    }
+```

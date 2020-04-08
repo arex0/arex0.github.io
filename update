@@ -86,19 +86,33 @@ function sitemap(){
 }
 
 function blog(){
-    echo '[' > blog/list.json
-    :> blog/list.dn.json
+    :> blog/list.json
     for file in $( ls -lt blog | awk '{print  $9}' | sed '1d' | grep -v '^_' | grep '\.md')
     do
         time=$(ls --full-time "blog/$file" | awk '{print  $6}')
         sed -i "s/^modified_time: .*$/modified_time: \"$time\"/" "blog/$file"
         touch -t ${time//-}0000 "blog/$file"
-        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"}' >> blog/list.dn.json
-        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"},' >> blog/list.json
+        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"}' >> blog/list.json
     done
-    sed -i '$ s/.$//' blog/list.json
-    echo ']' >> blog/list.json
+}
+
+function share(){
+    :> share/list.json
+    for dir in $(ls share)
+    do
+        if [[ -d "share/$dir" ]]
+        then
+            for file in $( ls -lt share/$dir | awk '{print  $9}' | sed '1d' | grep -v '^_' | grep '\.md')
+            do
+                time=$(ls --full-time "share/$dir/$file" | awk '{print  $6}')
+                sed -i "s/^modified_time: .*$/modified_time: \"$time\"/" "share/$dir/$file"
+                touch -t ${time//-}0000 "share/$dir/$file"
+                echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "share/$dir/$file")'","type": "'$dir'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "share/$dir/$file")'","path":"/share/$dir/'${file%.md}'"}' >> share/list.json
+            done
+        fi
+    done
 }
 
 sitemap
 blog
+share

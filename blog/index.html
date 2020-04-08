@@ -166,7 +166,7 @@ description: "Arex0 Blog List"
             })
         }
         let buffer = '';
-        fetch('/blog/list.dn.json')
+        fetch('/blog/list.json')
         .then(res=>res.body.pipeThrough(new TextDecoderStream()))
         .then(ts=>ts.pipeThrough(new TransformStream({
             transform(chunk, controller) {
@@ -184,10 +184,10 @@ description: "Arex0 Blog List"
     }else{
         fetch('https://api.arex0.com/visit_like_count')
         .then(res=>res.text())
-        .then(text=>text.split(',\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
+        .then(text=>text.split('\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
         fetch('/blog/list.json')
-        .then(res=>res.json())
-        .then(blogs=>blogs.forEach(card))
+        .then(res=>res.text())
+        .then(text=>text.slice(0,-1).split('\n').map(JSON.parse).forEach(card))
     }
 </script>
 </html>

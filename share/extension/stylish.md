@@ -1,9 +1,9 @@
 ---
-title: "Share Stylish"
-keywords: [Arex0,Share,Stylish]
-description: "Arex0 share stylish"
+title: "Stylish"
+keywords: [Share,Stylish]
+description: "share a extension stylish"
 created_time: "2020-04-02"
-modified_time: "2020-04-02"
+modified_time: "2020-04-08"
 markdown: true
 ---
 
