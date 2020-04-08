@@ -123,13 +123,13 @@ description: "Arex0 Blog List"
         if(v!=undefined){
             a.children[2].children[1].children[0].replaceWith(document.createTextNode(v))
         }else{
-            a.children[2].children[1].children[0].src = 'https://api.arex0.com/visited_count/arex0.com'+value.path
+            a.children[2].children[1].children[0].src = 'https://phlashing.me/visited_count/arex0.com'+value.path
         }
         let l = vlc['/like_count/arex0.com'+value.path]
         if(l!=undefined){
             a.children[2].children[2].children[0].replaceWith(document.createTextNode(l))
         }else{
-            a.children[2].children[2].children[0].src = 'https://api.arex0.com/like_count/arex0.com'+value.path
+            a.children[2].children[2].children[0].src = 'https://phlashing.me/like_count/arex0.com'+value.path
         }
         ul.appendChild(c)
     }
@@ -138,21 +138,21 @@ description: "Arex0 Blog List"
             rd.read().then(({value, done}) => {
                 if (!done) {
                     Object.assign(vlc,value)
-                    setVLC(rd);
+                    setVLC(rd)
                 }
             })
         }
-        fetch('https://api.arex0.com/visit_like_count')
+        fetch('https://phlashing.me/visit_like_count',{mode:'cors'})
         .then(res=>res.body.pipeThrough(new TextDecoderStream()))
         .then(ts=>ts.pipeThrough(new TransformStream({
             transform(chunk, controller) {
-                buffer += chunk;
+                buffer += chunk
                 const parts = buffer.split('\n')
-                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
-                buffer = parts[parts.length - 1];
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)))
+                buffer = parts[parts.length - 1]
             },
             flush(controller) {
-                if (buffer) controller.enqueue(buffer);
+                if (buffer) controller.enqueue(buffer)
             }
         })))
         .then(js=>js.getReader())
@@ -161,28 +161,28 @@ description: "Arex0 Blog List"
             rd.read().then(({value, done}) => {
                 if (!done) {
                     card(value)
-                    read(rd);
+                    read(rd)
                 }
             })
         }
-        let buffer = '';
+        let buffer = ''
         fetch('/blog/list.json')
         .then(res=>res.body.pipeThrough(new TextDecoderStream()))
         .then(ts=>ts.pipeThrough(new TransformStream({
             transform(chunk, controller) {
-                buffer += chunk;
+                buffer += chunk
                 const parts = buffer.split('\n')
-                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
-                buffer = parts[parts.length - 1];
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)))
+                buffer = parts[parts.length - 1]
             },
             flush(controller) {
-                if (buffer) controller.enqueue(buffer);
+                if (buffer) controller.enqueue(buffer)
             }
         })))
         .then(js=>js.getReader())
         .then(read)
     }else{
-        fetch('https://api.arex0.com/visit_like_count')
+        fetch('https://phlashing.me/visit_like_count',{mode:'cors'})
         .then(res=>res.text())
         .then(text=>text.split('\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
         fetch('/blog/list.json')

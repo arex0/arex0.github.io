@@ -98,7 +98,7 @@
   </url>
   <url>
       <loc>https://arex0.com/blog/shot</loc>
-      <lastmod>2020-04-07</lastmod>
+      <lastmod>2020-04-08</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -183,12 +183,6 @@
   <url>
       <loc>https://arex0.com/link/github/resume</loc>
       <lastmod>2020-04-04</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/link/github/ui</loc>
-      <lastmod>2020-03-31</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>

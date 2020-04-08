@@ -97,22 +97,22 @@ fetch('/blog/list.json')
             rd.read().then(({value, done}) => {
                 if (!done) {
                     /*use json*/
-                    read(rd);
+                    read(rd)
                 }
             })
         }
-        let buffer = '';
+        let buffer = ''
         fetch(/*url*/)
         .then(res=>res.body.pipeThrough(new TextDecoderStream()))
         .then(ts=>ts.pipeThrough(new TransformStream({
             transform(chunk, controller) {
-                buffer += chunk;
+                buffer += chunk
                 const parts = buffer.split('\n')
-                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)));
-                buffer = parts[parts.length - 1];
+                parts.slice(0, -1).forEach(part => controller.enqueue(JSON.parse(part)))
+                buffer = parts[parts.length - 1]
             },
             flush(controller) {
-                if (buffer) controller.enqueue(buffer);
+                if (buffer) controller.enqueue(buffer)
             }
         })))
         .then(js=>js.getReader())
