@@ -92,7 +92,7 @@ Share和Donate是我们希望每个用户点击的按钮。但是只要考虑到
 
 用户按下`F11`全屏时，我们能够感受到他有强烈的要关注文章的意愿，此时自动进入`focus`模式，按下`ESC`则可以选择退出此模式。
 ```js
-document.addEventListener('keydown',e=>e.keyCode==122&&(location.href=(((location.hash!='#focus')&&(location.hash.length))?location.href.slice(0,-location.hash.length):location.href)+'#focus'),{passive:true})
+document.addEventListener('keydown',e=>e.keyCode==122&&(location.href=(((location.hash.length)&&(location.hash!='#focus'))?location.href.slice(0,-location.hash.length):location.href)+'#focus'),{passive:true})
 document.addEventListener('keydown',e=>e.keyCode==27&&(location.hash=='#focus')&&(location.href=location.href.slice(0,-location.hash.length)+'#'),{passive:true})
 ```
 ### 控件智能隐藏

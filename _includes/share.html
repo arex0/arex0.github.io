@@ -1,7 +1,25 @@
 {%- if page.share -%}
 <div class='noprint js'>
     <hr style="margin-top: 5em;min-height:unset;border: .5px solid hsla(var(--color),.08);">
-    <button style="background: hsl(var(--color));border: none;border-radius: 1.1em;font: inherit;width: 6em;height: 2.2em;line-height: 2em;color: hsla(var(--background),.9);outline: none;cursor: pointer;text-align: left;padding-left: 1.2em;margin: 1em 1vw 1.5em;padding-bottom: 1em;" onclick="(this.innerHTML='share ❤'),(fetch(`https:\/\/arex0.com/api/like_count/arex0.com/{{ page.path | remove:'.md' }}?count++`)),navigator.share?navigator.share({title:document.title,text:document.querySelector(`meta[name='description']`).content,url:location.href.slice(0,-location.hash.length)+'#focus'}):(navigator.clipboard.writeText(`${document.querySelector(`meta[name='description']`).content}\n[${document.title}](${((location.hash!='#focus')&&(location.hash.length))?location.href.slice(0,-location.hash.length):location.href}#focus)`),alert('unsupport share api, copy share text in your clipboard'))">share ♡</button>
-    <button style="background: hsl(var(--color));border: none;border-radius: 1.1em;font: inherit;width: 6em;height: 2.2em;line-height: 2em;color: hsla(var(--background),.9);outline: none;cursor: pointer;text-align: left;padding-left: 1.1em;margin: 1em 1vw 1.5em;padding-bottom: 1em;">donate🔋</button>
+    <a href="https://api.arex0.com/like_count/arex0.com/{{ page.path | remove:'.md' }}?count++" target='_blank' style="display: inline-block; text-decoration: none; background: hsl(var(--color)); border: none; border-radius: 1.1em; font: inherit; width: 6em; height: 2.05em; line-height: 2em; color: hsla(var(--background),.9); outline: none; cursor: pointer; text-align: center; margin: 1em 1vw 1.5em; padding: 0 0 .1em .3em;" onclick="event.preventDefault(),(this.innerHTML='share ❤'),share()">share ♡</a>
+    <a href='https://www.paypal.me/arex0' target='_blank' style="display: inline-block; text-decoration: none; background: hsl(var(--color)); border: none; border-radius: 1.1em; font: inherit; width: 6em; height: 2.05em; line-height: 2em; color: hsla(var(--background),.9); outline: none; cursor: pointer; text-align: center; margin: 1em 1vw 1.5em; padding: 0 0 .1em .3em;" onclick="event.preventDefault(),donate()">donate🔋</a>
+    <script defer>
+        let img = document.createElement('img'),
+            title = document.title,
+            text = document.querySelector(`meta[name='description']`).content,
+            url = ((location.hash.length)&&(location.hash!='#focus'))?location.href.slice(0,-location.hash.length):location.href
+        function share(){
+            img.src = `https://api.arex0.com/like_count/arex0.com/{{ page.path | remove:'.md' }}?count++`
+            if(navigator.share){
+                navigator.share({title,text,url})
+            }else{
+                navigator.clipboard.writeText(`${text}\n[${title}](${url}#focus)`)
+                alert('unsupport share api, copy share text in your clipboard')
+            }
+        }
+        function donate(){
+            location.href='https://www.paypal.me/arex0'
+        }
+    </script>
 </div>
 {%- endif -%}

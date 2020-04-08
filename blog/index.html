@@ -123,13 +123,13 @@ description: "Arex0 Blog List"
         if(v!=undefined){
             a.children[2].children[1].children[0].replaceWith(document.createTextNode(v))
         }else{
-            a.children[2].children[1].children[0].src = 'https://arex0.com/api/visited_count/arex0.com'+value.path
+            a.children[2].children[1].children[0].src = 'https://api.arex0.com/visited_count/arex0.com'+value.path
         }
         let l = vlc['/like_count/arex0.com'+value.path]
         if(l!=undefined){
             a.children[2].children[2].children[0].replaceWith(document.createTextNode(l))
         }else{
-            a.children[2].children[2].children[0].src = 'https://arex0.com/api/like_count/arex0.com'+value.path
+            a.children[2].children[2].children[0].src = 'https://api.arex0.com/like_count/arex0.com'+value.path
         }
         ul.appendChild(c)
     }
@@ -142,7 +142,7 @@ description: "Arex0 Blog List"
                 }
             })
         }
-        fetch('https://arex0.com/api/visit_like_count')
+        fetch('https://api.arex0.com/visit_like_count')
         .then(res=>res.body.pipeThrough(new TextDecoderStream()))
         .then(ts=>ts.pipeThrough(new TransformStream({
             transform(chunk, controller) {
@@ -182,7 +182,7 @@ description: "Arex0 Blog List"
         .then(js=>js.getReader())
         .then(read)
     }else{
-        fetch('https://arex0.com/api/visit_like_count')
+        fetch('https://api.arex0.com/visit_like_count')
         .then(res=>res.text())
         .then(text=>text.split(',\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
         fetch('/blog/list.json')

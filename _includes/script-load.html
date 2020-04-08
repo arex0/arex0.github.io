@@ -4,7 +4,7 @@
     metaEl.setAttribute('name','viewport')
     metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
     window.addEventListener('resize',()=>{
-        if(window.innerHeight>windowInnerHeight*.8){
+        if((window.innerHeight<windowInnerHeight*.9)&&(window.innerHeight>windowInnerHeight*.8)){
             windowInnerHeight=window.innerHeight
             metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
         }
@@ -28,7 +28,7 @@
         setTimeout(()=>location.href=url,400)
     }
     function snap(e) {
-        snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
+        snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight*.99,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
         snapObserver.observe(e)
     }
     function pageshow(){

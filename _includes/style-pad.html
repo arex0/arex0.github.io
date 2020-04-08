@@ -61,12 +61,13 @@
     .logo[open]>b {
         display:none;
     }
-    .logo:focus-within>*:not(:first-child) {
+    .logo:focus-within>*:not(:first-child),
+    .logo[open]>*:not(:first-child) {
         display:inline-block;
         max-width:unset !important;
     }
     /*firefox so diffcult*/
-    .logo:not(:focus-within)::after {
+    .logo:not([open]:focus-within)::after {
         display:block;
         position:absolute;
         top:0;
@@ -133,6 +134,7 @@
         .logo>span {
             left:calc(8vw + 1em) !important;
         }
+        .logo[open]>span,
         .logo:focus-within>span {
             transform:scale(.6) !important;
         }

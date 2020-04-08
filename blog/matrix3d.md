@@ -1,6 +1,6 @@
 ---
 title: "CSS matrix3d 旋转3D物体（原理篇）"
-keywords: [CSS,Math]
+keywords: [CSS,3D]
 description: "use css matrix3d rotate object in 3d"
 created_time: "2020-04-06"
 modified_time: "2020-04-07"

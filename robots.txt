@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /api/
 Disallow: /*?*
 Sitemap: https://arex0.com/sitemap.xml

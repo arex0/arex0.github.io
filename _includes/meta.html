@@ -1,6 +1,6 @@
 {%- if !page.js -%}<noscript><meta http-equiv='refresh' content='0; url=/'></noscript>{%- endif -%}
 <meta charset='utf-8'>
-<meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline' https://phlashing.me https://static.cloudflareinsights.com https://raw.githubusercontent.com https://api.github.com ;form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
+<meta http-equiv='Content-Security-Policy' content="default-src 'self' 'unsafe-inline' https://api.arex0.com https://www.paypal.me https://static.cloudflareinsights.com https://raw.githubusercontent.com https://api.github.com ;form-action 'self';block-all-mixed-content;upgrade-insecure-requests">
 <meta name='author' content='Arex0'>
 <meta name='description' content='{{ page.description }}'>
 <meta name='generator' content='https://arex0.com/apps/design'>
@@ -15,4 +15,10 @@
 <link rel='shortcut icon' href='/icon.svg'>
 <link license='https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC'>
 <link rel='apple-touch-icon' href='/icon192w.png'>
-{%- if page.markdown -%}<link rel='stylesheet' href='/link/github/css/markdown.css'>{%- endif -%}
+<link rel='preconnect' href='https://api.arex0.com/'>
+<link rel='dns-prefetch' href='https://api.arex0.com/'>
+{%- if page.markdown -%}
+<link rel='stylesheet' href='/link/github/css/markdown.css'>
+<link rel='next' href='/blog/'>
+<link rel='dns-prefetch' href='https://www.paypal.me/'>
+{%- endif -%}

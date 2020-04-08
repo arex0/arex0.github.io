@@ -104,7 +104,7 @@ js: must
         <section><input id='input' placeholder='(a,b,c,d)* [Enter] Add to up' onkeydown='(event.keyCode==13)&&(transpose(),transpose(),addtoup())'><button onclick='transpose()'>转置</button><button onclick='complate()'>补全</button></section>
         <section style='display:flex;flex:1;flex-direction:column;outline:none;'>
             <textarea id='adder' style='max-width: 100%;min-width: 100%;flex: 1;' placeholder='根据输出高度自动生成矩形&#13;&#10;例如:&#13;&#10;" . " 输出高度是5&#13;&#10;生成(忽略边框):&#13;&#10;|   |&#13;&#10;|   |&#13;&#10;| . |&#13;&#10;|   |&#13;&#10;|   |&#13;&#10;'></textarea>
-            <button  onclick='addtoright()' onpointerdown='(id=>{document.addEventListener(`pointerup`,()=>clearInterval(id))})(setInterval(addtoright,100))'>添加</button>
+            <button  onclick='addtoright()' onpointerdown='(id=>{document.addEventListener(`pointerup`,()=>clearInterval(id))})(setInterval(keeptoright,100))'>添加</button>
         </section>
     </div>
     <div>
@@ -344,11 +344,36 @@ ${vs[1]}${Array(vs[0].length+7).join('-')}>(${m.join(',')})
                 vm = vs.reduce((p,c)=>Math.max(c.length,p),0),
                 ad = adder.value.split('\n'),
                 dm = ad.reduce((p,c)=>Math.max(c.length,p),0)
-            shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')+ad[i]+Array(dm-ad[i].length+1).join(' ')).join('\n')
+            if(ad.length<vs.length){
+                Array.prototype.unshift.apply(ad,Array((vs.length-ad.length)>>1))
+                shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')+(ad[i]||'')+Array(dm-(ad[i]?ad[i].length:0)+1).join(' ')).join('\n')
+            }else if(ad.length>vs.length){
+                Array.prototype.unshift.apply(vs,Array((ad.length-vs.length)>>1))
+                shower.value = ad.map((v,i)=>(vm[i]||'')+Array(vm-(vs[i]?vs[i].length:0)+1).join(' ')+v+Array(dm-v.length+1).join(' ')).join('\n')
+            }else{
+                shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')+ad[i]+Array(dm-ad[i].length+1).join(' ')).join('\n')
+            }
         }else{
             let vs = adder.value.split('\n'),
                 vm = vs.reduce((p,c)=>Math.max(c.length,p),0)
             shower.value = vs.map((v,i)=>v+Array(vm-v.length+1).join(' ')).join('\n')
+        }
+    }
+    let pending=false,keeping = false,aborter = null
+    function canceltoright(){
+        keeping = false
+        pending = false
+        aborter = null
+    }
+    function keeptoright(){
+        if(keeping == true){
+            clearTimeout(aborter)
+            aborter = setTimeout(canceltoright,200)
+            requestAnimationFrame(addtoright)
+        }else if(!pending){
+            pending=true
+            setTimeout(()=>keeping = true,300)
+            aborter = setTimeout(canceltoright,500)
         }
     }
 </script>
