@@ -8,7 +8,7 @@
   </url>
   <url>
       <loc>https://arex0.com/about</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-04-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -20,7 +20,7 @@
   </url>
   <url>
       <loc>https://arex0.com/apps/design</loc>
-      <lastmod>2020-04-07</lastmod>
+      <lastmod>2020-04-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -50,25 +50,25 @@
   </url>
   <url>
       <loc>https://arex0.com/apps/matrix3d</loc>
-      <lastmod>2020-04-08</lastmod>
+      <lastmod>2020-04-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/archive</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/concise-blog-interface</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-06</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/example</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -80,13 +80,13 @@
   </url>
   <url>
       <loc>https://arex0.com/blog/matrix3d-2</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-08</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/matrix3d</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-08</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -104,7 +104,7 @@
   </url>
   <url>
       <loc>https://arex0.com/blog/stream-json-array</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-04-05</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -188,7 +188,7 @@
   </url>
   <url>
       <loc>https://arex0.com/link/github/zero-3d.js</loc>
-      <lastmod>2020-04-07</lastmod>
+      <lastmod>2020-04-10</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>

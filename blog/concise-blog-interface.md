@@ -3,7 +3,7 @@ title: "设计简洁的博客界面"
 keywords: [Design,Blog,Concise]
 description: "Design a concise blog interface"
 created: "2020-04-05"
-modified: "2020-04-09"
+modified: "2020-04-06"
 markdown: true
 share: true
 ---

@@ -1,23 +1,259 @@
 ---
 title: "Archive"
-keywords: [Archive]
-description: "Arex0 Blog Archive"
+keywords: [Archive,List]
+description: "Arex0 Archive List"
 ---
 
 <!DOCTYPE html>
-<html lang='{{ page.lang | default: site.lang | default: "en" }}'>
+<html lang='zh-Hans'>
 <head>
+<noscript><meta http-equiv='refresh' content='0; url=shot'></noscript>
 {%- include meta.html -%}
-{%- include script-default.html -%}
+<script>
+    let windowInnerHeight=window.innerHeight
+    let metaEl=document.querySelector('#viewportMeta')
+    metaEl.setAttribute('name','viewport')
+    metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+    window.addEventListener('resize',()=>{
+        if((window.innerHeight<windowInnerHeight*.9)&&(window.innerHeight>windowInnerHeight*.8)){
+            windowInnerHeight=window.innerHeight
+            metaEl.setAttribute('content',`height=${windowInnerHeight},width=device-width,initial-scale=1.0,user-scalable=no`)
+        }
+    })
+    const themes=['light','dark']
+    function theme(i) {
+        let theme=localStorage.getItem('theme')
+        document.body.classList.remove(theme)
+        theme=themes[(themes.indexOf(theme||'light')+i) % themes.length]
+        localStorage.setItem('theme',theme)
+        document.body.classList.add(theme)
+    }
+    let snapObserver = null
+    function jump(url) {
+        snapObserver.disconnect()
+        document.activeElement.blur()
+        document.querySelector('footer').style.opacity=0
+        setTimeout(()=>document.querySelector('main').style.opacity=0,200)
+        setTimeout(()=>location.href=url,400)
+    }
+    function snap(e) {
+        snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight*.99,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
+        snapObserver.observe(e)
+    }
+    function pageshow(){
+        setTimeout(()=>{
+            document.querySelector('main').style.opacity=1
+            setTimeout(()=>{
+                document.querySelector('footer').style.opacity=1
+                snap(document.querySelector('footer'))
+            },200)
+        },100)
+    }
+    function smsrcoll(h){
+        scrollTo({top:h,behavior:'smooth'})
+    }
+    window.addEventListener('pageshow',pageshow);
+    window.StylePropertyMap&&document.addEventListener('DOMContentLoaded',()=>{
+        let ctl=document.getElementById('controller'),
+            h=nav.offsetHeight,
+            pre=document.documentElement.scrollTop,
+            chidden = CSS.number(0),
+            cshow = CSS.number(1),
+            showing = true
+        function autoShowControls() {
+            let cur=document.documentElement.scrollTop
+            if(cur>pre+h){
+                pre=cur
+                if(showing){
+                    ctl.attributeStyleMap.set('opacity',chidden)
+                    showing = false
+                }
+            }else if(cur+32<pre){
+                pre=cur
+                if(showing) return
+                ctl.attributeStyleMap.set('opacity',cshow)
+                showing = true
+            }
+        }
+        window.addEventListener('scroll',()=>requestAnimationFrame(autoShowControls));
+    },{once:true})
+</script>
 {%- include style-default.html -%}
+<style>
+    main>ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        min-height: unset;
+        overflow: hidden;
+    }
+
+    .card {
+        display: block;
+        margin: .8em;
+        padding: .8em .8em .5em;
+        background: hsl(var(--background));
+        color: inherit;
+        border: .5px solid hsla(var(--color), .2);
+        box-shadow: 0 0 2px hsla(var(--color), .25);
+        width: 80vmin;
+        font: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        filter: brightness(1.01);
+    }
+
+    .card>div:nth-child(2) {
+        font-size: .6em;
+    }
+
+    .card>div:nth-child(3) {
+        font-size: .5em;
+    }
+
+    .card>div:nth-child(3)>span {
+        display: inline-block;
+        height: 1.5em;
+        min-height: unset;
+        overflow: hidden;
+        margin-right: calc(.5em + 1vw);
+    }
+
+    .card>div:nth-child(3)>span:first-child::before {
+        content: '⏲ ';
+    }
+
+    .card>div:nth-child(3)>span:nth-child(2)::before {
+        content: '👁 ';
+    }
+
+    .card>div:nth-child(3)>span:nth-child(3)::before {
+        content: '❤ ';
+    }
+
+    .card>div:nth-child(3)>span>img {
+        max-width: 4em;
+        height: 1em;
+        min-height: unset;
+        transform: translateY(-1.99em);
+        filter: drop-shadow(0 2em hsl(var(--color)));
+    }
+
+    #controller {
+        display: flex;
+        position: fixed;
+        top: 10vmin;
+        z-index: 3;
+        opacity: 1;
+        font-size: .9em;
+        transition: opacity .3s;
+        pointer-events: none;
+    }
+
+    #spread {
+        width: 100vmin;
+    }
+
+    .wrapper {
+        display: flex;
+        width: calc(50vmax - 50vmin);
+        justify-content: center;
+    }
+
+    #sorter {
+        display: flex;
+        height: max-content;
+        justify-content: center;
+        flex-direction: column;
+        pointer-events: all;
+    }
+
+    #sorter::before {
+        content: 'Sort By:';
+    }
+
+    #filter {
+        display: flex;
+        height: max-content;
+        flex-flow: row wrap;
+        pointer-events: all;
+    }
+
+    #filter::before {
+        width: 100%;
+        content: 'Filter By:';
+    }
+
+    #sorter>span {
+        width: 5em;
+    }
+
+    #sorter>span,
+    #filter>span {
+        margin: .2em;
+        padding: 0 .25em;
+        background-color: hsla(var(--color), .1);
+        color: hsla(var(--color), .6);
+        border: solid .1em hsla(var(--color), .6);
+        box-sizing: border-box;
+        height: 1em;
+        text-align: center;
+        line-height: 1em;
+        cursor: pointer;
+        border-radius: .25em;
+        user-select: none;
+    }
+
+    #sorter>span[selected='true'],
+    #filter>span[selected='true'] {
+        background-color: hsla(var(--color), .2);
+        color: hsl(var(--color));
+    }
+
+    #filter>span[empty] {
+        background-color: hsla(var(--color), .05);
+        color: hsla(var(--color),.25);
+        border: solid .1em hsla(var(--color), .25);
+    }
+
+</style>
 </head>
 <body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
 {%- include fabs.html -%}
-<main class='nojs' style='position:relative;z-index:1;display:flex;justify-content: center;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;' onclick='document.body.firstElementChild.removeAttribute("open")'>
-    <div style='flex:1'>under construction</div>
+<main style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex;justify-content:center' onclick='document.body.firstElementChild.removeAttribute("open")'>
+    <ul>
+        <template id='template'>
+            <li>
+                <a class='card'><div></div>
+                <div></div>
+                <div>
+                    <span></span>
+                    <span>-</span>
+                    <span>-</span>
+                </div></a>
+            </li>
+        </template>
+    </ul>
 </main>
+<div id='controller'>
+    <div class='wrapper'>
+        <div id='sorter'>
+            <span>created</span>
+            <span>modified</span>
+            <span>like</span>
+            <span>visit</span>
+        </div>
+    </div>
+    <div id='spread'></div>
+    <div class='wrapper'>
+        <div id='filter'>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     theme(0)
@@ -35,5 +271,103 @@ description: "Arex0 Blog Archive"
         let match=false
         Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
     }
+    function SortByCount(array){
+        let counter = {}, mapper = []
+        array.forEach(i=>counter[i] = (counter[i]||0)+1)
+        Object.entries(counter).forEach(([k,v])=>{
+            if(mapper[v]) mapper[v].push(k)
+            else mapper[v] = [k]
+        })
+        return mapper.filter(i=>i).reverse().flat()
+    }
+    let ul = document.querySelector('main>ul')
+    let template = document.getElementById('template')
+    let blogs = {}, pathList = [], onread = {}, filters = [], sortby, vlc = {}//visit_like_count
+    function card(value){
+        let c = template.content.cloneNode(true)
+        let a = c.querySelector('a')
+        a.href = value.path
+        a.onclick = e => {e.preventDefault(),jump(value.path)}
+        a.children[0].innerHTML = value.name
+        a.children[1].innerHTML = value.description
+        a.children[2].children[0].innerHTML = value.created
+        let v = vlc['/visit_count'+value.path]
+        if(v!=undefined){
+            a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
+        }else{
+            onread['/visit_count'+value.path] = v =>{
+                delete onread['/visit_count'+value.path]
+                a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
+            }
+        }
+        let l = vlc['/like_count'+value.path]
+        if(l!=undefined){
+            a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
+        }else{
+            onread['/like_count'+value.path] = l =>{
+                delete onread['/like_count'+value.path]
+                a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
+            }
+        }
+        return c.children[0]
+    }
+    function updateView(){
+        let p = document.createElement('ul')
+        let ps = pathList
+        .filter(path=>{
+            let ws = blogs[path].keywords
+            return filters.every(w=>ws.includes(w))
+        })
+        ps.forEach(path=>{
+            let dom = blogs[path].dom
+            p.appendChild(dom)
+        })
+
+        /*.sort((p1,p2)=>{
+            let b1 = blogs[p1], b2 = blogs[p2]
+            return 
+        })*/
+        document.querySelector('main>ul').replaceWith(p)
+    }
+    fetch('/archive/list.json').then(res=>res.json()).then(list=>{
+        list.forEach(json=>{
+            blogs[json.path] = json
+            pathList.push(json.path)
+            blogs[json.path].dom = card(json)
+        })
+        let f = document.getElementById('filter'),KeywordsCounter = []
+        pathList.forEach(path=>{Array.prototype.push.apply(KeywordsCounter,blogs[path].keywords)})
+        SortByCount(KeywordsCounter).forEach(w=>{
+            let t = document.createElement('span')
+            t.innerHTML = w
+            t.onclick = () =>{
+                if(t.getAttribute('selected')=='true'){
+                    t.setAttribute('selected','false')
+                    filters.splice(filters.findIndex(p=>p==w),1)
+                }else{
+                    t.setAttribute('selected','true')
+                    filters.push(w)
+                }
+                updateView()
+            }
+            f.appendChild(t)
+        })
+        updateView()
+        //ArchiveExplorer.Show()
+        //ArchiveExplorer.Archives(location.search.slice(1).split('&').map(q => q.split('=')).reduce((q, p)=>({...q,[p[0]]:q.hasOwnProperty(p[0])?[...q[p[0]], p[1]]:[p[1]]}),{}))
+    })
+    fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).then(res=>res.text()).then(text=>{
+        text.split('\n').map(JSON.parse).forEach(json=>{
+            let key = Object.keys(json)[0]
+            if(!blogs[key]){blogs[key] = {}}
+            if(key.startsWith('/like_count')){
+                blogs[key.slice(11)]['like'] = json[key]
+            }else if(key.startsWith('/visit_count')){
+                blogs[key.slice(12)]['visit'] = json[key]
+            }
+        })
+        //ArchiveExplorer.allow vlc sort
+    })
+        
 </script>
 </html>

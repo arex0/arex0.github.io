@@ -3,7 +3,7 @@ title: "CSS matrix3d 旋转3D物体（实践篇）"
 keywords: [Javascript,3D]
 description: "use css matrix3d rotate object in 3d"
 created: "2020-04-06"
-modified: "2020-04-09"
+modified: "2020-04-08"
 markdown: true
 share: true
 ---
@@ -219,14 +219,14 @@ function render(){
 ```
 在用户的视觉效果中，是整个页面绕Z轴旋转了90度，这一点也不符合直觉。我们的目标可是***让3d物体按照用户想法，跟随指尖旋转***，所以我们的旋转操作必须是根据新的坐标系来操作的。
 
-我们需要使用矩阵乘法，`(O.size,0,0,0,0,O.size,0,0,0,0,O.size,0,0,0,0,1)`和每个轴变换`(1,0,0,0,0,cx,sx,0,0,-sx,cx,0,0,0,0,1)`,`(cy,0,-sy,0,0,1,0,0,sy,0,cy,0,0,0,0,1)`,`(cz,sz,0,0,-sz,cz,0,0,0,0,1,0,0,0,0,1)`
+我们需要使用矩阵乘法，缩放`(O.size,0,0,0,0,O.size,0,0,0,0,O.size,0,0,0,0,1)`，平移`(1,0,0,0,0,1,0,0,0,0,1,0,O.x,O.y,O.z,1)`和每个轴变换`(1,0,0,0,0,cx,sx,0,0,-sx,cx,0,0,0,0,1)`,`(cy,0,-sy,0,0,1,0,0,sy,0,cy,0,0,0,0,1)`,`(cz,sz,0,0,-sz,cz,0,0,0,0,1,0,0,0,0,1)`
 ```
-+-                                                                  -+
-|       cy*cz*O.size            -cy*sz*O.size         sy*O.size    0 |
-| (cx*sz+sx*sy*cz)*O.size  (cx*cz-sx*sy*sz)*O.size  -sx*cy*O.size  0 |
-| (sx*sz-cx*sy*cz)*O.size  (sx*cz+cx*sy*sz)*O.size   cx*cy*O.size  0 |
-|            0                        0                   0        1 |
-+-                                                                  -+
++-                                                                    -+
+|       cy*cz*O.size            -cy*sz*O.size         sy*O.size    O.x |
+| (cx*sz+sx*sy*cz)*O.size  (cx*cz-sx*sy*sz)*O.size  -sx*cy*O.size  O.y |
+| (sx*sz-cx*sy*cz)*O.size  (sx*cz+cx*sy*sz)*O.size   cx*cy*O.size  O.z |
+|            0                        0                   0         1  |
++-                                                                    -+
 ```
 ```js
 let style = ele.style
@@ -236,31 +236,31 @@ function rotateZ(e){
   O.rz = Math.atan2(e.pageY - Zy, e.pageX - Zx) / PI + 180 - rzcv
   requestAnimationFrame(render)
 }
-    function render(){
-        let x = O.rx*PI, y = O.ry*PI, z = O.rz*PI
-        let cx = cos(x), sx = sin(x), cy = cos(y), sy = sin(y), cz = cos(z), sz = sin(z)
-        
-        O.m.preMultiplySelf(
-        new DOMMatrix([
+function render(){
+    let x = O.rx*PI, y = O.ry*PI, z = O.rz*PI
+    let cx = cos(x), sx = sin(x), cy = cos(y), sy = sin(y), cz = cos(z), sz = sin(z)
+    
+    O.m.preMultiplySelf(
+    new DOMMatrix([
             cy*cz*O.size,   (cx*sz+sx*sy*cz)*O.size,    (sx*sz-cx*sy*cz)*O.size,    0,
             -cy*sz*O.size,  (cx*cz-sx*sy*sz)*O.size,    (sx*cz+cx*sy*sz)*O.size,    0,
             sy*O.size,      -sx*cy*O.size,              cx*cy*O.size,               0,
-            0,              0,                          0,                          1
-        ]))
-        style.transform = O.m.toString()
-        rzcv = (rzcv+O.rz)%360
-        O.rzc&&O.rzc.style&&(O.rzc.style.transform = `rotateZ(${rzcv}deg)`)
+            O.x,            O.y,                        O.z,                        1
+    ]))
+    style.transform = O.m.toString()
+    rzcv = (rzcv+O.rz)%360
+    O.rzc&&O.rzc.style&&(O.rzc.style.transform = `rotateZ(${rzcv}deg)`)
 
-        O.x = 0
-        O.y = 0
-        O.z = 0
-        O.rx = 0
-        O.ry = 0
-        O.rz = 0
-        O.size = 1
+    O.x = 0
+    O.y = 0
+    O.z = 0
+    O.rx = 0
+    O.ry = 0
+    O.rz = 0
+    O.size = 1
 
-        style.setProperty('--zero3d-separation', O.p + 'px')
-    }
+    style.setProperty('--zero3d-separation', O.p + 'px')
+}
 ```
 ### 可选择
 不是每个人都需要完整的实现，所以我们可以加上开关
