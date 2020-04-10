@@ -125,7 +125,7 @@ function share(){
                 time=$(ls --full-time "share/$dir/$file" | awk '{print  $6}')
                 sed -i "s/^modified: .*$/modified: \"$time\"/" "share/$dir/$file"
                 touch -t ${time//-}0000 "share/$dir/$file"
-                echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "share/$dir/$file")'","type": "'$dir'","created": "'$(sed -n -e 's/^created: "\(.*\)"$/\1/p' "share/$dir/$file")'","path":"/share/$dir/'${file%.md}'"}' >> share/list.json
+                echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "share/$dir/$file")'","type": "'$dir'","created": "'$(sed -n -e 's/^created: "\(.*\)"$/\1/p' "share/$dir/$file")'","path":"/share/'$dir'/'${file%.md}'"}' >> share/list.json
             done
         fi
     done
