@@ -2,8 +2,8 @@
 title: "设计简洁的博客界面"
 keywords: [Design,Blog,Concise]
 description: "Design a concise blog interface"
-created_time: "2020-04-05"
-modified_time: "2020-04-08"
+created: "2020-04-05"
+modified: "2020-04-09"
 markdown: true
 share: true
 ---

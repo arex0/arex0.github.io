@@ -41,9 +41,23 @@
         --background:0,0%,8%;
         --color:0,0%,93%;
     }
+    ::-webkit-scrollbar {
+        height: 8px;
+        width:8px;
+    }
+    ::-webkit-scrollbar-track {
+        background:hsla(var(--background),.9);
+    }
+    ::-webkit-scrollbar-thumb {
+        background:hsla(var(--color),.3);
+        border-radius:4px;
+    }
     * {
         min-width:32px;
         min-height:32px;
+    }
+    hr{
+        min-height:unset;
     }
     div {
         box-sizing:border-box;

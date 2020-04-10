@@ -84,8 +84,8 @@ description: "Arex0 Blog List"
                 <div></div>
                 <div>
                     <span></span>
-                    <span><img alt='-'></span>
-                    <span><img alt='-'></span>
+                    <span>-</span>
+                    <span>-</span>
                 </div></a>
             </li>
         </template>
@@ -111,6 +111,14 @@ description: "Arex0 Blog List"
     let ul = document.querySelector('main>ul')
     let template = document.getElementById('template')
     let vlc = {}//visit_like_count
+    let onread = {}
+    function count(value){
+        let key = Object.keys(value)[0]
+        if(onread[key]){
+            onread[key](value[key])
+        }
+        vlc[key]=value[key]
+    }
     function card(value){
         let c = template.content.cloneNode(true)
         let a = c.querySelector('a')
@@ -118,18 +126,24 @@ description: "Arex0 Blog List"
         a.onclick = e => {e.preventDefault(),jump(value.path)}
         a.children[0].innerHTML = value.name
         a.children[1].innerHTML = value.description
-        a.children[2].children[0].innerHTML = value.created_time
-        let v = vlc['/visited_count/arex0.com'+value.path]
+        a.children[2].children[0].innerHTML = value.created
+        let v = vlc['/visit_count'+value.path]
         if(v!=undefined){
-            a.children[2].children[1].children[0].replaceWith(document.createTextNode(v))
+            a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
         }else{
-            a.children[2].children[1].children[0].src = 'https://phlashing.me/visited_count/arex0.com'+value.path
+            onread['/visit_count'+value.path] = v =>{
+                delete onread['/visit_count'+value.path]
+                a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
+            }
         }
-        let l = vlc['/like_count/arex0.com'+value.path]
+        let l = vlc['/like_count'+value.path]
         if(l!=undefined){
-            a.children[2].children[2].children[0].replaceWith(document.createTextNode(l))
+            a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
         }else{
-            a.children[2].children[2].children[0].src = 'https://phlashing.me/like_count/arex0.com'+value.path
+            onread['/like_count'+value.path] = l =>{
+                delete onread['/like_count'+value.path]
+                a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
+            }
         }
         ul.appendChild(c)
     }
@@ -137,7 +151,7 @@ description: "Arex0 Blog List"
         function setVLC(rd){
             rd.read().then(({value, done}) => {
                 if (!done) {
-                    Object.assign(vlc,value)
+                    count(value)
                     setVLC(rd)
                 }
             })
@@ -184,7 +198,7 @@ description: "Arex0 Blog List"
     }else{
         fetch('https://phlashing.me/visit_like_count',{mode:'cors'})
         .then(res=>res.text())
-        .then(text=>text.split('\n').map(JSON.parse).forEach(json=>{Object.assign(vlc,json)}))
+        .then(text=>text.split('\n').map(JSON.parse).forEach(count))
         fetch('/blog/list.json')
         .then(res=>res.text())
         .then(text=>text.slice(0,-1).split('\n').map(JSON.parse).forEach(card))

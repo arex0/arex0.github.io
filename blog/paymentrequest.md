@@ -1,9 +1,9 @@
 ---
 title: "Payment Request API"
-keywords: ["Payment Request",Javascript,API]
+keywords: [PaymentRequest,Javascript,API]
 description: "use Payment Request API"
-created_time: "2020-04-08"
-modified_time: "2020-04-08"
+created: "2020-04-08"
+modified: "2020-04-09"
 markdown: true
 share: true
 ---

@@ -1,4 +1,10 @@
 #! /bin/bash
+function quote {
+    for arg in "$@"; do
+        echo '"'$(sed -e 's/^"//' -e 's/"$//' <<< "$arg")'"'
+    done
+}
+function join_by { local IFS="$1"; shift; echo "$*"; }
 function sitemap(){
     echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
     echo '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
@@ -87,13 +93,25 @@ function sitemap(){
 
 function blog(){
     :> blog/list.json
+    echo '[' > archive/list.json
     for file in $( ls -lt blog | awk '{print  $9}' | sed '1d' | grep -v '^_' | grep '\.md')
     do
         time=$(ls --full-time "blog/$file" | awk '{print  $6}')
-        sed -i "s/^modified_time: .*$/modified_time: \"$time\"/" "blog/$file"
+        sed -i "s/^modified: .*$/modified: \"$time\"/" "blog/$file"
         touch -t ${time//-}0000 "blog/$file"
-        echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'","description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "blog/$file")'","path":"/blog/'${file%.md}'"}' >> blog/list.json
+        name='"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "blog/$file")'"'
+        IFS=',' read -r -a keyword <<< "$(sed -n -e 's/^keywords: \?\[\(.*\)\]$/\1/p' "blog/$file")"
+        keywords='"keywords": ['$(join_by , $(quote "${keyword[@]}"))']'
+        description='"description": "'$(sed -n -e 's/^description: "\(.*\)"$/\1/p' "blog/$file")'"'
+        created='"created": "'$(sed -n -e 's/^created: "\(.*\)"$/\1/p' "blog/$file")'"'
+        modified='"modified": "'$(sed -n -e 's/^modified: "\(.*\)"$/\1/p' "blog/$file")'"'
+        path='"path":"/blog/'${file%.md}'"'
+        echo '{'$name','$description','$created','$path'}' >> blog/list.json
+        echo '{'$name','$keywords','$description','$created','$modified','$path'},' >> archive/list.json
     done
+
+    sed -i '$ s/,$//' archive/list.json
+    echo ']' >> archive/list.json
 }
 
 function share(){
@@ -105,9 +123,9 @@ function share(){
             for file in $( ls -lt share/$dir | awk '{print  $9}' | sed '1d' | grep -v '^_' | grep '\.md')
             do
                 time=$(ls --full-time "share/$dir/$file" | awk '{print  $6}')
-                sed -i "s/^modified_time: .*$/modified_time: \"$time\"/" "share/$dir/$file"
+                sed -i "s/^modified: .*$/modified: \"$time\"/" "share/$dir/$file"
                 touch -t ${time//-}0000 "share/$dir/$file"
-                echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "share/$dir/$file")'","type": "'$dir'","created_time": "'$(sed -n -e 's/^created_time: "\(.*\)"$/\1/p' "share/$dir/$file")'","path":"/share/$dir/'${file%.md}'"}' >> share/list.json
+                echo '{"name": "'$(sed -n -e 's/^title: "\(.*\)"$/\1/p' "share/$dir/$file")'","type": "'$dir'","created": "'$(sed -n -e 's/^created: "\(.*\)"$/\1/p' "share/$dir/$file")'","path":"/share/$dir/'${file%.md}'"}' >> share/list.json
             done
         fi
     done
