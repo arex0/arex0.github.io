@@ -198,7 +198,7 @@ description: "Arex0 Blog List"
     }else{
         fetch('https://phlashing.me/visit_like_count',{mode:'cors'})
         .then(res=>res.text())
-        .then(text=>text.split('\n').map(JSON.parse).forEach(count))
+        .then(text=>text.slice(0,-1).split('\n').map(JSON.parse).forEach(count))
         fetch('/blog/list.json')
         .then(res=>res.text())
         .then(text=>text.slice(0,-1).split('\n').map(JSON.parse).forEach(card))

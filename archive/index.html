@@ -33,16 +33,21 @@ description: "Arex0 Archive List"
         snapObserver.disconnect()
         document.activeElement.blur()
         document.querySelector('footer').style.opacity=0
-        setTimeout(()=>document.querySelector('main').style.opacity=0,200)
+        setTimeout(()=>{
+            document.querySelector('main').style.opacity=0
+            document.getElementById('controller').style.opacity=0
+        },200)
         setTimeout(()=>location.href=url,400)
     }
     function snap(e) {
         snapObserver = new IntersectionObserver(([{intersectionRatio:i}])=>window.autoscrolling=(window.autoscrolling === false) ? (i > 0.01)&&(i < .99)&&(scrollBy({top:Math.sign(i - .5) * -e.scrollHeight*.99,behavior:'smooth'}),true) :(window.autoscrolling === true) ? false :((i > 0.01)&&(i < .99)),{threshold:[0.01,0.99]})
         snapObserver.observe(e)
     }
+    var loaded = false
     function pageshow(){
         setTimeout(()=>{
             document.querySelector('main').style.opacity=1
+            if(loaded) document.getElementById('controller').style.opacity=1
             setTimeout(()=>{
                 document.querySelector('footer').style.opacity=1
                 snap(document.querySelector('footer'))
@@ -144,12 +149,14 @@ description: "Arex0 Archive List"
     #controller {
         display: flex;
         position: fixed;
-        top: 10vmin;
+        top: 3em;
         z-index: 3;
-        opacity: 1;
+        opacity: 0;
         font-size: .9em;
         transition: opacity .3s;
         pointer-events: none;
+        contain: layout style;
+        transition: opacity .2s ease-in-out;
     }
 
     #spread {
@@ -160,6 +167,7 @@ description: "Arex0 Archive List"
         display: flex;
         width: calc(50vmax - 50vmin);
         justify-content: center;
+        min-width: 6em;
     }
 
     #sorter {
@@ -186,6 +194,11 @@ description: "Arex0 Archive List"
         content: 'Filter By:';
     }
 
+    #filter::after {
+        width: 100%;
+        content: attr(data-number);
+    }
+
     #sorter>span {
         width: 5em;
     }
@@ -194,7 +207,7 @@ description: "Arex0 Archive List"
     #filter>span {
         margin: .2em;
         padding: 0 .25em;
-        background-color: hsla(var(--color), .1);
+        background-color: hsla(var(--color), .02);
         color: hsla(var(--color), .6);
         border: solid .1em hsla(var(--color), .6);
         box-sizing: border-box;
@@ -206,16 +219,16 @@ description: "Arex0 Archive List"
         user-select: none;
     }
 
+    #filter>span:not([exist]) {
+        background-color: hsla(var(--color), .01);
+        color: hsla(var(--color),.15);
+        border: solid .1em hsla(var(--color), .15);
+    }
+
     #sorter>span[selected='true'],
     #filter>span[selected='true'] {
         background-color: hsla(var(--color), .2);
         color: hsl(var(--color));
-    }
-
-    #filter>span[empty] {
-        background-color: hsla(var(--color), .05);
-        color: hsla(var(--color),.25);
-        border: solid .1em hsla(var(--color), .25);
     }
 
 </style>
@@ -242,10 +255,10 @@ description: "Arex0 Archive List"
 <div id='controller'>
     <div class='wrapper'>
         <div id='sorter'>
-            <span>created</span>
-            <span>modified</span>
-            <span>like</span>
-            <span>visit</span>
+            <span draggable='true'>created</span>
+            <span draggable='true'>modified</span>
+            <span draggable='true'>like</span>
+            <span draggable='true'>visit</span>
         </div>
     </div>
     <div id='spread'></div>
@@ -280,9 +293,8 @@ description: "Arex0 Archive List"
         })
         return mapper.filter(i=>i).reverse().flat()
     }
-    let ul = document.querySelector('main>ul')
-    let template = document.getElementById('template')
-    let blogs = {}, pathList = [], onread = {}, filters = [], sortby, vlc = {}//visit_like_count
+    let template = document.getElementById('template'), ctl = document.getElementById('controller'), filter = document.getElementById('filter')
+    let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = [], sortby, vlc = {}//visit_like_count
     function card(value){
         let c = template.content.cloneNode(true)
         let a = c.querySelector('a')
@@ -312,30 +324,36 @@ description: "Arex0 Archive List"
         return c.children[0]
     }
     function updateView(){
-        let p = document.createElement('ul')
-        let ps = pathList
-        .filter(path=>{
+        let p = document.createElement('ul'), ul = document.querySelector('main>ul')
+        let KeywordsCollector = {}
+        ctl.querySelectorAll('[exist]').forEach(p=>p.removeAttribute('exist'))
+        let list = pathList.filter(path=>{
             let ws = blogs[path].keywords
-            return filters.every(w=>ws.includes(w))
+            return filterList.every(w=>ws.includes(w))
         })
-        ps.forEach(path=>{
-            let dom = blogs[path].dom
-            p.appendChild(dom)
+        filter.setAttribute('data-number',list.length+' Result')
+        list.forEach(path=>{
+            let blog = blogs[path]
+            blog.keywords.forEach(w=>KeywordsCollector[w]=true)
+            p.appendChild(blog.dom)
         })
-
+        Object.keys(KeywordsCollector).forEach(w=>filters[w].setAttribute('exist','true'))
+        scrollTo({top:0})
+        ul.replaceWith(p)
         /*.sort((p1,p2)=>{
             let b1 = blogs[p1], b2 = blogs[p2]
             return 
         })*/
-        document.querySelector('main>ul').replaceWith(p)
     }
     fetch('/archive/list.json').then(res=>res.json()).then(list=>{
+        loaded = true
+        ctl.style.opacity=1
         list.forEach(json=>{
             blogs[json.path] = json
             pathList.push(json.path)
             blogs[json.path].dom = card(json)
         })
-        let f = document.getElementById('filter'),KeywordsCounter = []
+        let KeywordsCounter = []
         pathList.forEach(path=>{Array.prototype.push.apply(KeywordsCounter,blogs[path].keywords)})
         SortByCount(KeywordsCounter).forEach(w=>{
             let t = document.createElement('span')
@@ -343,21 +361,22 @@ description: "Arex0 Archive List"
             t.onclick = () =>{
                 if(t.getAttribute('selected')=='true'){
                     t.setAttribute('selected','false')
-                    filters.splice(filters.findIndex(p=>p==w),1)
+                    filterList.splice(filterList.findIndex(p=>p==w),1)
                 }else{
                     t.setAttribute('selected','true')
-                    filters.push(w)
+                    filterList.push(w)
                 }
                 updateView()
             }
-            f.appendChild(t)
+            filter.appendChild(filters[w] = t)
         })
         updateView()
         //ArchiveExplorer.Show()
         //ArchiveExplorer.Archives(location.search.slice(1).split('&').map(q => q.split('=')).reduce((q, p)=>({...q,[p[0]]:q.hasOwnProperty(p[0])?[...q[p[0]], p[1]]:[p[1]]}),{}))
     })
-    fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).then(res=>res.text()).then(text=>{
-        text.split('\n').map(JSON.parse).forEach(json=>{
+    fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).then(res=>res.text())
+    .then(text=>{
+        text.slice(0,-1).split('\n').map(JSON.parse).forEach(json=>{
             let key = Object.keys(json)[0]
             if(!blogs[key]){blogs[key] = {}}
             if(key.startsWith('/like_count')){
@@ -368,6 +387,74 @@ description: "Arex0 Archive List"
         })
         //ArchiveExplorer.allow vlc sort
     })
-        
+</script>
+<script>
+const ArrayMethods = Array.prototype
+const copyTouch = touch => ({ id: touch.identifier, pageX: touch.pageX, pageY: touch.pageY })
+const findTouch = (touches, id) => ArrayMethods.find.call(touches, ({ identifier }) => identifier == id)
+function on(ele,type,handle,opts){ele.addEventListener(type,handle,opts)}
+function un(ele,type,handle,opts){ele.removeEventListener(type,handle,opts)}
+var dragging = false
+let touches = []
+function draggable(ele){
+    on(ele,'contextmenu',e=>e.preventDefault())
+    on(ele,'touchstart',e=>{
+        if (touches.length >= 2) return
+        let cancel = false
+        ArrayMethods.push.apply(touches, ArrayMethods.map.call(e.changedTouches, copyTouch))
+        function cancelDrag(){
+            cancel = true
+            ArrayMethods.forEach.call(e.changedTouches, touch => touches.splice(touches.findIndex(({ id }) => id == touch.identifier), 1))
+        }
+        on(document,'touchmove',cancelDrag,{once:true,passive:false})
+        on(document,'touchend',cancelDrag,{once:true})
+        setTimeout(()=>{
+            un(document,'touchend',cancelDrag,{once:true})
+            un(document,'touchmove',cancelDrag,{once:true,passive:false})
+            if(!cancel){
+                dragging = true;
+                let shadow = ele.cloneNode(true),
+                    src = ele.getBoundingClientRect(), srcX = src.x, srcY = src.y,
+                    baseX = e.changedTouches[0].pageX, baseY = e.changedTouches[0].pageY
+                Object.entries(getComputedStyle(ele)).forEach(([attr,val])=>{shadow.style[attr] = val})
+                shadow.style.position = 'fixed'
+                shadow.style.left = srcX+'px'
+                shadow.style.top = srcY+'px'
+                shadow.style.opacity = parseFloat(document.body.style.opacity||1) * 0.5
+                shadow.style.pointerEvent = 'none'
+                shadow.style.zIndex = 999
+                document.body.appendChild(shadow)
+                function DragMove(e){
+                    ele.dispatchEvent(new DragEvent('drag',e.changedTouches[0]))
+                    shadow.style.left = srcX-baseX+e.changedTouches[0].pageX+'px'
+                    shadow.style.top  = srcY-baseY+e.changedTouches[0].pageY+'px'
+                }
+                function RenderDragMove(e){
+                    if (touches.length >= 2){
+                        DragEnd(e)
+                        return
+                    }
+                    e.preventDefault()
+                    e.stopPropagation()
+                    requestAnimationFrame(()=>DragMove(e))
+                }
+                function DragEnd(e){
+                    dragging = false
+                    ArrayMethods.forEach.call(e.changedTouches, touch => touches.splice(touches.findIndex(({ id }) => id == touch.identifier), 1))
+                    shadow.remove()
+                    ele.dispatchEvent(new DragEvent('dragend',e.changedTouches[0]))
+                    un(document,'touchcancel',DragEnd,{once:true})
+                    un(document,'touchend',DragEnd,{once:true})
+                    un(document,'touchmove',RenderDragMove,{passive:false})
+                }
+                ele.dispatchEvent(new DragEvent('dragstart',e.changedTouches[0]))
+                on(document,'touchmove',RenderDragMove,{passive:false})
+                on(document,'touchend',DragEnd,{once:true})
+                on(document,'touchcancel',DragEnd,{once:true})
+            }
+        },300)
+    })
+}
+document.querySelectorAll('[draggable="true"]').forEach(draggable)
 </script>
 </html>
