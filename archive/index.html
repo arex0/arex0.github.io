@@ -390,71 +390,164 @@ description: "Arex0 Archive List"
 </script>
 <script>
 const ArrayMethods = Array.prototype
+const hypot = (p1, p2) => Math.hypot(p1.pageX - p2.pageX, p1.pageY - p2.pageY)
 const copyTouch = touch => ({ id: touch.identifier, pageX: touch.pageX, pageY: touch.pageY })
 const findTouch = (touches, id) => ArrayMethods.find.call(touches, ({ identifier }) => identifier == id)
 function on(ele,type,handle,opts){ele.addEventListener(type,handle,opts)}
 function un(ele,type,handle,opts){ele.removeEventListener(type,handle,opts)}
-var dragging = false
-let touches = []
 function draggable(ele){
+    let touch = null
     on(ele,'contextmenu',e=>e.preventDefault())
     on(ele,'touchstart',e=>{
-        if (touches.length >= 2) return
-        let cancel = false
-        ArrayMethods.push.apply(touches, ArrayMethods.map.call(e.changedTouches, copyTouch))
-        function cancelDrag(){
+        if (touch) return
+        let cancel = false,
+            u = e.changedTouches.length-1,
+            tc = e.changedTouches[u]
+        touch = copyTouch(tc)
+        function cancelDrag(e){
+            if(e.type!='touchstart'&&touch&&e.type=='touchmove'&&ArrayMethods.every.call(e.changedTouches,tc=>hypot(tc,touch)>50)) return
             cancel = true
-            ArrayMethods.forEach.call(e.changedTouches, touch => touches.splice(touches.findIndex(({ id }) => id == touch.identifier), 1))
+            touch = null
         }
-        on(document,'touchmove',cancelDrag,{once:true,passive:false})
+        on(document,'touchstart',()=>on(document,'touchstart',cancelDrag,{once:true}),{once:true})
+        on(document,'touchmove',cancelDrag,{passive:false})
         on(document,'touchend',cancelDrag,{once:true})
+        on(document,'touchcancel',cancelDrag,{once:true})
         setTimeout(()=>{
+            un(document,'touchcancel',cancelDrag,{once:true})
             un(document,'touchend',cancelDrag,{once:true})
-            un(document,'touchmove',cancelDrag,{once:true,passive:false})
+            un(document,'touchmove',cancelDrag,{passive:false})
+            un(document,'touchstart',cancelDrag,{once:true})
             if(!cancel){
-                dragging = true;
-                let shadow = ele.cloneNode(true),
+                let shadow = ele.cloneNode(true), style = shadow.style
                     src = ele.getBoundingClientRect(), srcX = src.x, srcY = src.y,
-                    baseX = e.changedTouches[0].pageX, baseY = e.changedTouches[0].pageY
-                Object.entries(getComputedStyle(ele)).forEach(([attr,val])=>{shadow.style[attr] = val})
-                shadow.style.position = 'fixed'
-                shadow.style.left = srcX+'px'
-                shadow.style.top = srcY+'px'
-                shadow.style.opacity = parseFloat(document.body.style.opacity||1) * 0.5
-                shadow.style.pointerEvent = 'none'
-                shadow.style.zIndex = 999
+                    baseX = tc.pageX, baseY = tc.pageY
+                Object.entries(getComputedStyle(ele)).forEach(([attr,val])=>{style[attr] = val})
+                style.position = 'fixed'
+                style.left = srcX+'px'
+                style.top = srcY+'px'
+                style.opacity = parseFloat(document.body.style.opacity||1) * 0.5
+                style.pointerEvents = 'none'
+                style.zIndex = 999
                 document.body.appendChild(shadow)
-                function DragMove(e){
-                    ele.dispatchEvent(new DragEvent('drag',e.changedTouches[0]))
-                    shadow.style.left = srcX-baseX+e.changedTouches[0].pageX+'px'
-                    shadow.style.top  = srcY-baseY+e.changedTouches[0].pageY+'px'
+
+                let target = null, overTimer = null, fireover = true
+                function getElementByPoint(e){
+                    let el = document.elementFromPoint(e.clientX, e.clientY)
+                    while (el && getComputedStyle(el).pointerEvents == 'none') {
+                        el = el.parentElement;
+                    }
+                    return el;
+                }
+                function dispatchEvent(e){
+                    shadow.remove()
+                    let t = getElementByPoint(e)
+                    document.body.appendChild(shadow)
+                    let init = {
+                        screenX: e.screenX,
+                        screenY: e.screenY,
+                        clientX: e.clientX,
+                        clientY: e.clientY,
+                        pageX: e.pageX,
+                        pageY: e.pageY,
+                    }
+                    if(t!=target){
+                        init.relatedTarget = target
+                        t.dispatchEvent(new DragEvent('dragenter',init))
+                        init.relatedTarget = t
+                        target.dispatchEvent(new DragEvent('dragleave',init))
+                        target = t
+                        init.relatedTarget = null
+                    }
+                    clearInterval(overTimer)
+                    target.dispatchEvent(new DragEvent('dragover',init))
+                    overTimer = setInterval(()=>target.dispatchEvent(new DragEvent('dragover',init)),350)
                 }
                 function RenderDragMove(e){
-                    if (touches.length >= 2){
-                        DragEnd(e)
-                        return
+                    ele.dispatchEvent(new DragEvent('drag',e))
+                    shadow.style.left = srcX-baseX+e.pageX+'px'
+                    shadow.style.top  = srcY-baseY+e.pageY+'px'
+                }
+                function DragMove(e){
+                    let t = findTouch(e.changedTouches,touch.id)
+                    if (t){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        requestAnimationFrame(()=>{
+                            dispatchEvent(t)
+                            RenderDragMove(t)
+                        })
                     }
-                    e.preventDefault()
-                    e.stopPropagation()
-                    requestAnimationFrame(()=>DragMove(e))
                 }
                 function DragEnd(e){
-                    dragging = false
-                    ArrayMethods.forEach.call(e.changedTouches, touch => touches.splice(touches.findIndex(({ id }) => id == touch.identifier), 1))
-                    shadow.remove()
-                    ele.dispatchEvent(new DragEvent('dragend',e.changedTouches[0]))
-                    un(document,'touchcancel',DragEnd,{once:true})
-                    un(document,'touchend',DragEnd,{once:true})
-                    un(document,'touchmove',RenderDragMove,{passive:false})
+                    let t = findTouch(e.changedTouches,touch.id)
+                    if(t&&(t.identifier==touch.id)){
+                        touch = null
+                        shadow.remove()
+                        shadow = null
+                        clearInterval(overTimer)
+                        target.dispatchEvent(new DragEvent('drop',{
+                            screenX: t.screenX,
+                            screenY: t.screenY,
+                            clientX: t.clientX,
+                            clientY: t.clientY,
+                            pageX: t.pageX,
+                            pageY: t.pageY,
+                        }))
+                        ele.dispatchEvent(new DragEvent('dragend',t))
+                        un(document,'touchcancel',DragEnd)
+                        un(document,'touchend',DragEnd)
+                        un(document,'touchmove',DragMove,{passive:false})
+                    }
                 }
-                ele.dispatchEvent(new DragEvent('dragstart',e.changedTouches[0]))
-                on(document,'touchmove',RenderDragMove,{passive:false})
-                on(document,'touchend',DragEnd,{once:true})
-                on(document,'touchcancel',DragEnd,{once:true})
+                ele.dispatchEvent(new DragEvent('dragstart', tc))
+                ele.dispatchEvent(new DragEvent('dragenter',tc))
+                target = ele
+                let evt = new DragEvent('dragover',{
+                    screenX: e.screenX,
+                    screenY: e.screenY,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    pageX: e.pageX,
+                    pageY: e.pageY,
+                })
+                ele.dispatchEvent(evt)
+                overTimer = setInterval(()=>ele.dispatchEvent(evt),350)
+                on(document,'touchmove',DragMove,{passive:false})
+                on(document,'touchend',DragEnd)
+                on(document,'touchcancel',DragEnd)
+
             }
         },300)
     })
 }
 document.querySelectorAll('[draggable="true"]').forEach(draggable)
+let sortID = 0
+document.querySelectorAll('[draggable="true"]').forEach(ele=>{
+    ele.setAttribute('sort-id',sortID++)
+    on(ele,'dragstart',e=>{
+        e.dataTransfer.setData('text/plain', ele.getAttribute('sort-id'))
+    })
+    on(ele,'dragover',e=>e.preventDefault())
+    on(ele,'drop',e=>{
+        let t = e.target, rect = t.getBoundingClientRect(), next = (e.clientY - rect.top)/(rect.bottom - rect.top) > .5
+        if(next&&!t.nextElementSibling){
+            t.parentNode.appendChild(document.querySelector(`[sort-id="${e.dataTransfer.getData('text/plain')}"]`))
+        }else{
+            t.parentNode.insertBefore(document.querySelector(`[sort-id="${e.dataTransfer.getData('text/plain')}"]`), next && t.nextElementSibling || t)
+        }
+    })
+})
+/*
+document.querySelectorAll('[draggable="true"]').forEach(ele=>{
+    on(ele,'dragenter',e=>{
+        console.log(e)
+        let t = e.target
+        if(e.relatedTarget&&t.getAttribute('draggable')=='true'){
+            debugger
+            t.parentNode.insertBefore(e.relatedTarget,t.nextElementSibling)
+        }
+    })
+})*/
 </script>
 </html>
