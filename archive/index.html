@@ -294,7 +294,7 @@ function SortByCount(array){
     return mapper.filter(i=>i).reverse().flat()
 }
 let template = document.getElementById('template'), ctl = document.getElementById('controller'), filter = document.getElementById('filter'), sorter = document.getElementById('sorter')
-let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = [], vlc = {}//visit_like_count
+let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = []
 sorter.order = ['created','modified','like','visit']
 function compare(a,b){
     if(b==a) return 0
@@ -309,9 +309,8 @@ function card(value){
     a.children[0].innerHTML = value.name
     a.children[1].innerHTML = value.description
     a.children[2].children[0].innerHTML = value.created
-    let v = vlc['/visit_count'+value.path]
-    a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(vlc['/visit_count'+value.path]||'0'))
-    a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(vlc['/like_count'+value.path]||'0'))
+    a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(blogs[value.path].visit||'0'))
+    a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(blogs[value.path].like||'0'))
     return c.children[0]
 }
 function updateView(){
@@ -339,9 +338,13 @@ let vlcLoaded = fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).the
         let key = Object.keys(json)[0]
         if(!blogs[key]){blogs[key] = {}}
         if(key.startsWith('/like_count')){
-            blogs[key.slice(11)]['like'] = json[key]
+            let path = key.slice(11)
+            if(!blogs[path]) blogs[path] = {}
+            blogs[path]['like'] = json[key]
         }else if(key.startsWith('/visit_count')){
-            blogs[key.slice(12)]['visit'] = json[key]
+            let path = key.slice(12)
+            if(!blogs[path]) blogs[path] = {}
+            blogs[path]['visit'] = json[key]
         }
     })
 })
@@ -350,7 +353,7 @@ fetch('/archive/list.json').then(res=>res.json()).then(list=>{
         loaded = true
         ctl.style.opacity=1
         list.forEach(json=>{
-            blogs[json.path] = json
+            Object.assign(blogs[json.path],json)
             pathList.push(json.path)
             blogs[json.path].dom = card(json)
         })
