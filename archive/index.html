@@ -296,9 +296,14 @@ function SortByCount(array){
 let template = document.getElementById('template'), ctl = document.getElementById('controller'), filter = document.getElementById('filter'), sorter = document.getElementById('sorter')
 let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = []
 sorter.order = ['created','modified','like','visit']
+function isNum(str){return !isNaN(Number(str))}
 function compare(a,b){
     if(b==a) return 0
-    if(b>a) return 1
+    else if(isNum(a)&&isNum(b)) return b-a
+    else if(!b) return -1
+    else if(!a) return 1
+    else if(a.length != b.length) return b.length-a.length
+    else if(b>a) return 1
     return -1
 }
 function card(value){
