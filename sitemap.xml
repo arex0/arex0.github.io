@@ -56,13 +56,19 @@
   </url>
   <url>
       <loc>https://arex0.com/archive</loc>
-      <lastmod>2020-04-15</lastmod>
+      <lastmod>2020-04-16</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/concise-blog-interface</loc>
       <lastmod>2020-04-06</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
+      <loc>https://arex0.com/blog/drag-sortable</loc>
+      <lastmod>2020-04-16</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>

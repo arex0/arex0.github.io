@@ -523,8 +523,8 @@ function draggable(ele){
 }
 document.querySelectorAll('[draggable="true"]').forEach(draggable)
 let sortID = 0
-document.querySelectorAll('[draggable="true"]').forEach(ele=>{
-    ele.setAttribute('sort-id',sortID++)
+document.querySelectorAll('#sorter [draggable="true"]').forEach(ele=>{
+    ele.setAttribute('sort-id', sortID++)
     on(ele,'dragstart',e=>{
         e.dataTransfer.setData('text/plain', ele.getAttribute('sort-id'))
     })
@@ -538,16 +538,10 @@ document.querySelectorAll('[draggable="true"]').forEach(ele=>{
         }
     })
 })
-/*
-document.querySelectorAll('[draggable="true"]').forEach(ele=>{
-    on(ele,'dragenter',e=>{
-        console.log(e)
-        let t = e.target
-        if(e.relatedTarget&&t.getAttribute('draggable')=='true'){
-            debugger
-            t.parentNode.insertBefore(e.relatedTarget,t.nextElementSibling)
-        }
-    })
-})*/
+let sorter = document.getElementById('sorter')
+const sortObserver = new MutationObserver(e=>{
+    console.log(sorter.children)
+})
+sortObserver.observe(sorter,{childList: true})
 </script>
 </html>
