@@ -5,6 +5,7 @@ description: "everything about drag api."
 created: "2020-04-14"
 modified: "2020-04-16"
 markdown: true
+share: true
 ---
 
 # Drag API (Part 1: Sortable)

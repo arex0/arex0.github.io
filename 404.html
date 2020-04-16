@@ -123,6 +123,7 @@ description: "Arex0 404 page not found"
     function zero(command){
         let match=false
         Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+        return match
     }
     let type=document.getElementById('type'),value=document.getElementById('value')
     var AudioContext=window.AudioContext||window.webkitAudioContext

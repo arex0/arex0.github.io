@@ -166,8 +166,8 @@ description: "Arex0 Archive List"
     .wrapper {
         display: flex;
         width: calc(50vmax - 50vmin);
-        justify-content: center;
         min-width: 6em;
+        justify-content: center;
     }
 
     #sorter {
@@ -269,83 +269,84 @@ description: "Arex0 Archive List"
 </div>
 </body>
 <script>
-    theme(0)
-    let logo=document.querySelector('.logo')
-    logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
-    logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
-    pageshow()
-    let actions={
-        '主题':event=>theme(1),
-        '主页':()=>jump('/'),
-        '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
-        '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
-    }
-    function zero(command){
-        let match=false
-        Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
-    }
-    function SortByCount(array){
-        let counter = {}, mapper = []
-        array.forEach(i=>counter[i] = (counter[i]||0)+1)
-        Object.entries(counter).forEach(([k,v])=>{
-            if(mapper[v]) mapper[v].push(k)
-            else mapper[v] = [k]
-        })
-        return mapper.filter(i=>i).reverse().flat()
-    }
-    let template = document.getElementById('template'), ctl = document.getElementById('controller'), filter = document.getElementById('filter')
-    let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = [], sortby, vlc = {}//visit_like_count
-    function card(value){
-        let c = template.content.cloneNode(true)
-        let a = c.querySelector('a')
-        a.href = value.path
-        a.onclick = e => {e.preventDefault(),jump(value.path)}
-        a.children[0].innerHTML = value.name
-        a.children[1].innerHTML = value.description
-        a.children[2].children[0].innerHTML = value.created
-        let v = vlc['/visit_count'+value.path]
-        if(v!=undefined){
-            a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
-        }else{
-            onread['/visit_count'+value.path] = v =>{
-                delete onread['/visit_count'+value.path]
-                a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(v))
-            }
+theme(0)
+let logo=document.querySelector('.logo')
+logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
+logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
+pageshow()
+let actions={
+    '主题':event=>theme(1),
+    '主页':()=>jump('/'),
+    '顶部':()=>scrollTo({top:0,behavior:'smooth'}),
+    '底部':()=>scrollTo({top:document.documentElement.clientHeight,behavior:'smooth'}),
+}
+function zero(command){
+    let match=false
+    Object.entries(actions).forEach(([flag,action])=>command.includes(flag)&&(match=true)&&action(command))
+}
+function SortByCount(array){
+    let counter = {}, mapper = []
+    array.forEach(i=>counter[i] = (counter[i]||0)+1)
+    Object.entries(counter).forEach(([k,v])=>{
+        if(mapper[v]) mapper[v].push(k)
+        else mapper[v] = [k]
+    })
+    return mapper.filter(i=>i).reverse().flat()
+}
+let template = document.getElementById('template'), ctl = document.getElementById('controller'), filter = document.getElementById('filter'), sorter = document.getElementById('sorter')
+let blogs = {}, pathList = [], onread = {}, filters = {}, filterList = [], vlc = {}//visit_like_count
+sorter.order = ['created','modified','like','visit']
+function compare(a,b){
+    if(b==a) return 0
+    if(b>a) return 1
+    return -1
+}
+function card(value){
+    let c = template.content.cloneNode(true)
+    let a = c.querySelector('a')
+    a.href = value.path
+    a.onclick = e => {e.preventDefault(),jump(value.path)}
+    a.children[0].innerHTML = value.name
+    a.children[1].innerHTML = value.description
+    a.children[2].children[0].innerHTML = value.created
+    let v = vlc['/visit_count'+value.path]
+    a.children[2].children[1].childNodes[0].replaceWith(document.createTextNode(vlc['/visit_count'+value.path]||'0'))
+    a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(vlc['/like_count'+value.path]||'0'))
+    return c.children[0]
+}
+function updateView(){
+    let p = document.createElement('ul'), ul = document.querySelector('main>ul')
+    let KeywordsCollector = {}
+    ctl.querySelectorAll('[exist]').forEach(p=>p.removeAttribute('exist'))
+    let list = pathList.filter(path=>{
+        let ws = blogs[path].keywords
+        return filterList.every(w=>ws.includes(w))
+    })
+    filter.setAttribute('data-number',list.length+' Result')
+    sorter.order.reduceRight((list,sortType)=>list.sort((a,b)=>compare(blogs[a][sortType],blogs[b][sortType])),list)
+    list.forEach(path=>{
+        let blog = blogs[path]
+        blog.keywords.forEach(w=>KeywordsCollector[w]=true)
+        p.appendChild(blog.dom)
+    })
+    Object.keys(KeywordsCollector).forEach(w=>filters[w].setAttribute('exist','true'))
+    scrollTo({top:0})
+    ul.replaceWith(p)
+}
+let vlcLoaded = fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).then(res=>res.text())
+.then(text=>{
+    text.slice(0,-1).split('\n').map(JSON.parse).forEach(json=>{
+        let key = Object.keys(json)[0]
+        if(!blogs[key]){blogs[key] = {}}
+        if(key.startsWith('/like_count')){
+            blogs[key.slice(11)]['like'] = json[key]
+        }else if(key.startsWith('/visit_count')){
+            blogs[key.slice(12)]['visit'] = json[key]
         }
-        let l = vlc['/like_count'+value.path]
-        if(l!=undefined){
-            a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
-        }else{
-            onread['/like_count'+value.path] = l =>{
-                delete onread['/like_count'+value.path]
-                a.children[2].children[2].childNodes[0].replaceWith(document.createTextNode(l))
-            }
-        }
-        return c.children[0]
-    }
-    function updateView(){
-        let p = document.createElement('ul'), ul = document.querySelector('main>ul')
-        let KeywordsCollector = {}
-        ctl.querySelectorAll('[exist]').forEach(p=>p.removeAttribute('exist'))
-        let list = pathList.filter(path=>{
-            let ws = blogs[path].keywords
-            return filterList.every(w=>ws.includes(w))
-        })
-        filter.setAttribute('data-number',list.length+' Result')
-        list.forEach(path=>{
-            let blog = blogs[path]
-            blog.keywords.forEach(w=>KeywordsCollector[w]=true)
-            p.appendChild(blog.dom)
-        })
-        Object.keys(KeywordsCollector).forEach(w=>filters[w].setAttribute('exist','true'))
-        scrollTo({top:0})
-        ul.replaceWith(p)
-        /*.sort((p1,p2)=>{
-            let b1 = blogs[p1], b2 = blogs[p2]
-            return 
-        })*/
-    }
-    fetch('/archive/list.json').then(res=>res.json()).then(list=>{
+    })
+})
+fetch('/archive/list.json').then(res=>res.json()).then(list=>{
+    vlcLoaded.catch(console.log).then(()=>{
         loaded = true
         ctl.style.opacity=1
         list.forEach(json=>{
@@ -371,24 +372,9 @@ description: "Arex0 Archive List"
             filter.appendChild(filters[w] = t)
         })
         updateView()
-        //ArchiveExplorer.Show()
-        //ArchiveExplorer.Archives(location.search.slice(1).split('&').map(q => q.split('=')).reduce((q, p)=>({...q,[p[0]]:q.hasOwnProperty(p[0])?[...q[p[0]], p[1]]:[p[1]]}),{}))
     })
-    fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).then(res=>res.text())
-    .then(text=>{
-        text.slice(0,-1).split('\n').map(JSON.parse).forEach(json=>{
-            let key = Object.keys(json)[0]
-            if(!blogs[key]){blogs[key] = {}}
-            if(key.startsWith('/like_count')){
-                blogs[key.slice(11)]['like'] = json[key]
-            }else if(key.startsWith('/visit_count')){
-                blogs[key.slice(12)]['visit'] = json[key]
-            }
-        })
-        //ArchiveExplorer.allow vlc sort
-    })
-</script>
-<script>
+})
+
 const ArrayMethods = Array.prototype
 const hypot = (p1, p2) => Math.hypot(p1.pageX - p2.pageX, p1.pageY - p2.pageY)
 const copyTouch = touch => ({ id: touch.identifier, pageX: touch.pageX, pageY: touch.pageY })
@@ -538,9 +524,9 @@ document.querySelectorAll('#sorter [draggable="true"]').forEach(ele=>{
         }
     })
 })
-let sorter = document.getElementById('sorter')
 const sortObserver = new MutationObserver(e=>{
-    console.log(sorter.children)
+    sorter.order = ArrayMethods.map.call(sorter.children,ele=>ele.innerHTML)
+    updateView()
 })
 sortObserver.observe(sorter,{childList: true})
 </script>
