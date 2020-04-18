@@ -3,7 +3,7 @@ title: "Drag API (Part 1: Sortable)"
 keywords: [Javascript,API,Drag]
 description: "everything about drag api."
 created: "2020-04-14"
-modified: "2020-04-16"
+modified: "2020-04-18"
 markdown: true
 share: true
 ---
@@ -123,53 +123,51 @@ function draggable(ele){
             un(document,'touchmove',cancelDrag,{passive:false})
             un(document,'touchstart',cancelDrag,{once:true})
             if(!cancel){
-                let shadow = ele.cloneNode(true),
+                let shadow = ele.cloneNode(true), style = shadow.style
                     src = ele.getBoundingClientRect(), srcX = src.x, srcY = src.y,
-                    baseX = tc.pageX, baseY = tc.pageY
-                Object.entries(getComputedStyle(ele)).forEach(([attr,val])=>{shadow.style[attr] = val})
-                shadow.style.position = 'fixed'
-                shadow.style.left = srcX+'px'
-                shadow.style.top = srcY+'px'
-                shadow.style.opacity = parseFloat(document.body.style.opacity||1) * 0.5
-                shadow.style.pointerEvents = 'none'
-                shadow.style.zIndex = 999
+                    baseX = tc.pageX, baseY = tc.pageY,
+                    data = new DataTransfer()
+                Object.entries(getComputedStyle(ele)).forEach(([attr,val])=>{style[attr] = val})
+                style.position = 'fixed'
+                style.left = srcX+'px'
+                style.top = srcY+'px'
+                style.opacity = parseFloat(document.body.style.opacity||1) * 0.5
+                style.pointerEvents = 'none'
+                style.zIndex = 999
                 document.body.appendChild(shadow)
-                function getTarget(e){
-                    let el = document.elementFromPoint(e.clientX, e.clientY);
+
+                let target = null, overTimer = null, fireover = true
+                function getElementByPoint(e){
+                    let el = document.elementFromPoint(e.clientX, e.clientY)
                     while (el && getComputedStyle(el).pointerEvents == 'none') {
                         el = el.parentElement;
                     }
                     return el;
                 }
-                let target = ele, overTimer = null, fireover = true
-                function SetDragEvent(e,type,target){
-                    Object.defineProperty(e, 'type', {configurable: true, value: type})
-                    Object.defineProperty(e, 'target', {configurable: true, value: target})
-                }
-                function DispatchDragEvent(e){
+                function dispatchEvent(e){
                     shadow.remove()
-                    let t = getTarget(e)
+                    let t = getElementByPoint(e)
                     document.body.appendChild(shadow)
-                    let evt = new DragEvent('dragleave',{
+                    let init = {
                         screenX: e.screenX,
                         screenY: e.screenY,
                         clientX: e.clientX,
                         clientY: e.clientY,
                         pageX: e.pageX,
                         pageY: e.pageY,
-                    })
+                        dataTransfer: data
+                    }
                     if(t!=target){
-                        let pre = target, nxt = t
-                        SetDragEvent(evt,'dragleave',pre)
-                        ele.dispatchEvent(evt)
+                        init.relatedTarget = target
+                        t.dispatchEvent(new DragEvent('dragenter',init))
+                        init.relatedTarget = t
+                        target.dispatchEvent(new DragEvent('dragleave',init))
                         target = t
-                        SetDragEvent(evt,'dragenter',nxt)
-                        ele.dispatchEvent(evt)
+                        init.relatedTarget = null
                     }
                     clearInterval(overTimer)
-                    SetDragEvent(evt,'dragover',t)
-                    ele.dispatchEvent(evt)
-                    overTimer = setInterval(()=>ele.dispatchEvent(evt),350)
+                    target.dispatchEvent(new DragEvent('dragover',init))
+                    overTimer = setInterval(()=>target.dispatchEvent(new DragEvent('dragover',init)),350)
                 }
                 function RenderDragMove(e){
                     ele.dispatchEvent(new DragEvent('drag',e))
@@ -181,8 +179,10 @@ function draggable(ele){
                     if (t){
                         e.preventDefault()
                         e.stopPropagation()
-                        requestAnimationFrame(()=>DispatchDragEvent(t))
-                        requestAnimationFrame(()=>RenderDragMove(t))
+                        requestAnimationFrame(()=>{
+                            dispatchEvent(t)
+                            RenderDragMove(t)
+                        })
                     }
                 }
                 function DragEnd(e){
@@ -191,23 +191,33 @@ function draggable(ele){
                         touch = null
                         shadow.remove()
                         shadow = null
-                        let evt = new DragEvent('drop',{
+                        clearInterval(overTimer)
+                        target.dispatchEvent(new DragEvent('drop',{
                             screenX: t.screenX,
                             screenY: t.screenY,
                             clientX: t.clientX,
                             clientY: t.clientY,
                             pageX: t.pageX,
                             pageY: t.pageY,
-                        })
-                        SetDragEvent(evt,'drop', target)
-                        ele.dispatchEvent(evt)
+                            dataTransfer: data
+                        }))
                         ele.dispatchEvent(new DragEvent('dragend',t))
                         un(document,'touchcancel',DragEnd)
                         un(document,'touchend',DragEnd)
                         un(document,'touchmove',DragMove,{passive:false})
                     }
                 }
-                ele.dispatchEvent(new DragEvent('dragstart', tc))
+                ele.dispatchEvent(new DragEvent('dragstart', {
+                    screenX: tc.screenX,
+                    screenY: tc.screenY,
+                    clientX: tc.clientX,
+                    clientY: tc.clientY,
+                    pageX: tc.pageX,
+                    pageY: tc.pageY,
+                    dataTransfer: data
+                }))
+                ele.dispatchEvent(new DragEvent('dragenter',tc))
+                target = ele
                 let evt = new DragEvent('dragover',{
                     screenX: e.screenX,
                     screenY: e.screenY,
@@ -215,7 +225,9 @@ function draggable(ele){
                     clientY: e.clientY,
                     pageX: e.pageX,
                     pageY: e.pageY,
+                    dataTransfer: data
                 })
+                ele.dispatchEvent(evt)
                 overTimer = setInterval(()=>ele.dispatchEvent(evt),350)
                 on(document,'touchmove',DragMove,{passive:false})
                 on(document,'touchend',DragEnd)

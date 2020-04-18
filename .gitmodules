@@ -19,3 +19,6 @@
 [submodule "link/github/mail"]
 	path = link/github/mail
 	url = https://github.com/arex0/mail.git
+[submodule "link/github/web-mobile-drag"]
+	path = link/github/web-mobile-drag
+	url = https://github.com/arex0/web-mobile-drag.git
