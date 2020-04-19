@@ -35,7 +35,7 @@ description: "Arex0 Archive List"
         document.querySelector('footer').style.opacity=0
         setTimeout(()=>{
             document.querySelector('main').style.opacity=0
-            document.getElementById('controller').style.opacity=0
+            document.getElementById('controller').setAttribute('loaded','false')
         },200)
         setTimeout(()=>location.href=url,400)
     }
@@ -47,7 +47,7 @@ description: "Arex0 Archive List"
     function pageshow(){
         setTimeout(()=>{
             document.querySelector('main').style.opacity=1
-            if(loaded) document.getElementById('controller').style.opacity=1
+            if(loaded) document.getElementById('controller').setAttribute('loaded','true')
             setTimeout(()=>{
                 document.querySelector('footer').style.opacity=1
                 snap(document.querySelector('footer'))
@@ -62,21 +62,19 @@ description: "Arex0 Archive List"
         let ctl=document.getElementById('controller'),
             h=nav.offsetHeight,
             pre=document.documentElement.scrollTop,
-            chidden = CSS.number(0),
-            cshow = CSS.number(1),
             showing = true
         function autoShowControls() {
             let cur=document.documentElement.scrollTop
             if(cur>pre+h){
                 pre=cur
                 if(showing){
-                    ctl.attributeStyleMap.set('opacity',chidden)
+                    ctl.setAttribute('loaded','false')
                     showing = false
                 }
             }else if(cur+32<pre){
                 pre=cur
                 if(showing) return
-                ctl.attributeStyleMap.set('opacity',cshow)
+                ctl.setAttribute('loaded','true')
                 showing = true
             }
         }
@@ -159,15 +157,28 @@ description: "Arex0 Archive List"
         transition: opacity .2s ease-in-out;
     }
 
+    #controller[loaded='true'],
+    #controller[loaded='true']>.wrapper {
+        opacity: 1 !important;
+    }
+
     #spread {
+        visibility: hidden;
         width: 100vmin;
+        pointer-events: none;
     }
 
     .wrapper {
         display: flex;
         width: calc(50vmax - 50vmin);
         min-width: 6em;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
         justify-content: center;
+    }
+
+    #controller[loaded='true'] .wrapper {
+        pointer-events: all;
     }
 
     #sorter {
@@ -175,7 +186,6 @@ description: "Arex0 Archive List"
         height: max-content;
         justify-content: center;
         flex-direction: column;
-        pointer-events: all;
     }
 
     #sorter::before {
@@ -185,13 +195,17 @@ description: "Arex0 Archive List"
     #filter {
         display: flex;
         height: max-content;
+        max-height: calc(100vh - 13.85em - 8vmin);
+        overflow: auto;
         flex-flow: row wrap;
-        pointer-events: all;
+        margin-top: 1.7em;
     }
 
     #filter::before {
+        position: fixed;
         width: 100%;
         content: 'Filter By:';
+        margin-top: -1.7em;
     }
 
     #filter::after {
@@ -213,7 +227,7 @@ description: "Arex0 Archive List"
         box-sizing: border-box;
         height: 1em;
         text-align: center;
-        line-height: 1em;
+        line-height: 1.25em;
         cursor: pointer;
         border-radius: .25em;
         user-select: none;
@@ -232,21 +246,43 @@ description: "Arex0 Archive List"
     }
 
     @media only screen and (max-width:500px) {
+        .fabs {
+            margin-bottom: 2em !important;
+        }
+
         #controller {
             top: calc(1em + 8vmin);
             bottom: 0;
-            background: hsl(var(--background));
             width: 100vw;
             flex-direction: column;
+            touch-action: none;
+        }
+
+        #controller[show='true'] {
+            background: hsl(var(--background));
+            pointer-events: all;
+        }
+
+        #controller[show='true']>.wrapper {
+            display: flex !important;
         }
 
         .wrapper {
+            display: none;
             width: 100vw;
         }
 
         #spread {
-            height: 0;
-            min-height: unset;
+            position: fixed;
+            bottom: 0;
+            visibility: visible;
+            padding: .35em 0 .5em;
+            background: hsl(var(--color));
+            color: hsl(var(--background));
+            width: 100%;
+            text-align: center;
+            border-radius: unset;
+            pointer-events: all;
         }
 
         #sorter {
@@ -270,6 +306,7 @@ description: "Arex0 Archive List"
             width: 100%;
             text-align: center;
             content: attr(data-number);
+            pointer-events: all;
         }
     }
 
@@ -303,8 +340,8 @@ description: "Arex0 Archive List"
             <span draggable='true'>visit</span>
         </div>
     </div>
-    <div id='spread'></div>
-    <div class='wrapper'>
+    <div id='spread' onclick='this.parentNode.setAttribute("show","true")'>Sort/Filter</div>
+    <div class='wrapper' onclick='document.elementsFromPoint(event.clientX,event.clientY)[1]==this.previousElementSibling&&this.parentNode.setAttribute("show","false")'>
         <div id='filter'>
         </div>
     </div>
@@ -399,7 +436,6 @@ let vlcLoaded = fetch('https://phlashing.me/visit_like_count',{mode:'cors'}).the
 fetch('/archive/list.json').then(res=>res.json()).then(list=>{
     vlcLoaded.catch(console.log).then(()=>{
         loaded = true
-        ctl.style.opacity=1
         list.forEach(json=>{
             if(!blogs[json.path]) blogs[json.path] = {}
             Object.assign(blogs[json.path],json)
