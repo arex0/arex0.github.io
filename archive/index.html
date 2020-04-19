@@ -246,16 +246,17 @@ description: "Arex0 Archive List"
     }
 
     @media only screen and (max-width:500px) {
-        .fabs {
-            margin-bottom: 2em !important;
-        }
-
         #controller {
             top: calc(1em + 8vmin);
             bottom: 0;
             width: 100vw;
+            transform: translateY(0);
             flex-direction: column;
             touch-action: none;
+        }
+
+        #controller[loaded='true']~.fabs {
+            transform: translateY(-2em) !important;
         }
 
         #controller[show='true'] {
@@ -315,7 +316,6 @@ description: "Arex0 Archive List"
 <body id='focus' style='display:flex;position:relative;margin:0;z-index:0;background-color:hsl(var(--background));color:hsl(var(--color));font:calc(16px + 1vh) monaco,consolas,monospace;overflow-y:scroll;flex-direction:column'>
 {%- include nav.html -%}
 {%- include footer.html -%}
-{%- include fabs.html -%}
 <main style='position:relative;z-index:1;background:hsl(var(--background));min-height:calc(100vh - 1.7em);margin-top:1.7em;opacity:0;contain:layout style;transition:opacity .2s ease-in-out;display:flex;justify-content:center' onclick='document.body.firstElementChild.removeAttribute("open")'>
     <ul>
         <template id='template'>
@@ -346,6 +346,7 @@ description: "Arex0 Archive List"
         </div>
     </div>
 </div>
+{%- include fabs.html -%}
 </body>
 <script src='/link/github/web-mobile-drag/web-mobile-drag.js'></script>
 <script>
