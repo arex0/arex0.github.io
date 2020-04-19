@@ -287,6 +287,7 @@ description: "Arex0 Archive List"
         }
 
         #sorter {
+            padding: 0 .8em;
             width: 100%;
         }
 
@@ -295,6 +296,7 @@ description: "Arex0 Archive List"
         }
 
         #filter {
+            padding: 0 .8em;
             flex: 1;
         }
 
@@ -354,7 +356,7 @@ theme(0)
 let logo=document.querySelector('.logo')
 logo.addEventListener('pointerdown',()=>logo.setAttribute("open",true),{passive:true})
 logo.addEventListener('touchstart',()=>logo.setAttribute("open",true),{passive:true})//for firefox
-pageshow()
+
 let actions={
     '主题':event=>theme(1),
     '主页':()=>jump('/'),
@@ -461,6 +463,7 @@ fetch('/archive/list.json').then(res=>res.json()).then(list=>{
             filter.appendChild(filters[w] = t)
         })
         updateView()
+        pageshow()
     })
 })
 
