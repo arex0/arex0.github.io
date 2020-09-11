@@ -240,13 +240,13 @@ li>div li {
                 <section>
                     <h3>经历</h3>
                     <ul id='experience' class='timeline'>
-                        <li><label>大学生创新创业项目</label>
+                        <li><label>暂无</label>
                             <div>
-                                <ul>
-                                    <li>负责人</li>
-                                    <li>前端</li>
-                                    <li>未完成</li>
-                                </ul>
+                                <!--ul>
+                                    <li>暂无</li>
+                                    <li>暂无</li>
+                                    <li>暂无</li>
+                                </ul-->
                             </div>
                         </li>
                     </ul>
@@ -280,7 +280,7 @@ li>div li {
                     <label>zero-3d.js</label><div>一个操控3D DOM的小JS库，支持用鼠标，触控来旋转缩放HTML DOM，因为用Proxy进行了绑定，所以也支持定制控件来操控。
                     </div>
                     </li>
-                    <li><label>diff</label><br><div>Golang写的基于myestr diff算法的库，主要用于同步数据。</div></li>
+                    <li><label>diff</label><br><div>Golang写的基于myestr diff算法的库。</div></li>
                     <li><label>简历</label><br><div>这个简历是用自己写的简历生成工具生成的，特色是干净简洁，刚好能打印在一页A4纸上。</div>
                     </li>
                     <li><label>其它</label><br><div>还有很多项目在努力中。</div></li>
@@ -288,7 +288,9 @@ li>div li {
                     </section>
                 <section>
                     <h3>评价</h3>
-                    <div>我学的东西很广，有兴趣的都会去了解，喜欢前端，会去逛设计网站，关注MDN和Chrome，会跟进最新的API。虽然不敢说擅长，但是用了两年Debian了，写过一些小脚本，对Linux还算熟悉。最常用的编辑器是VS Code，我喜欢那种快速开始创造的感觉。
+                    <div>我想学的东西很广，有兴趣的都会去了解，喜欢前端，会去逛设计网站，关注MDN和Chrome，会跟进最新的API，比如前端Native FileSystem，Payment API，PWA等。
+                        <br><br>
+                        日常使用了两年Debian了，写过一些小脚本，对Linux不算陌生。最常用的编辑器是VS Code，我喜欢那种快速开始创造的感觉。
                         <br><br>
                         我热爱分享，拥抱开源。我用的几乎全是开源软件，这些开源软件给我提供了很多便利，我也希望能够以相同的方式回馈这个世界，所以我的github仓库基本都是公开状态，协议大都是MIT。
                         <br><br>
@@ -333,6 +335,6 @@ li>div li {
             }
             return `<svg viewBox='-128 -128 256 256' style='color:hsl(var(--color))'>` + pgs.join('') + `</svg>`
         }
-        document.getElementById('radar').innerHTML = radar(JSON.parse(`[\n["前端",0.8],\n["架构",0.6],\n["审美",0.8],\n["后端",0.7],\n["安全",0.6]\n]`), 24)
+        document.getElementById('radar').innerHTML = radar(JSON.parse(`[\n["前端",0.7],\n["架构",0.4],\n["审美",0.6],\n["后端",0.5],\n["安全",0.4]\n]`), 24)
 </script>
 </html>
