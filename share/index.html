@@ -69,10 +69,10 @@ description: "arex0 share things here"
         a.setAttribute('name',share.name)
         a.innerHTML = share.name
         a.setAttribute('icon',icons[share.type])
-        a.href = '/'+share.path
+        a.href = share.path
         a.onclick = e =>{
             e.preventDefault()
-            jump('/'+share.path)
+            jump(share.path)
         }
         main.appendChild(a)
     }

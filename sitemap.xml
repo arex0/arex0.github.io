@@ -2,211 +2,217 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
       <loc>https://arex0.com/</loc>
-      <lastmod>2020-04-16</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1</priority>
   </url>
   <url>
       <loc>https://arex0.com/about</loc>
-      <lastmod>2020-04-10</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/asciiflow</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/design</loc>
-      <lastmod>2020-04-10</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/guestbook</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/icons</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/mail</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/apps/matrix3d</loc>
-      <lastmod>2020-04-10</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/archive</loc>
-      <lastmod>2020-04-19</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/concise-blog-interface</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/drag-sortable</loc>
-      <lastmod>2020-04-18</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/example</loc>
-      <lastmod>2020-04-03</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog</loc>
-      <lastmod>2020-04-11</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/matrix3d-2</loc>
-      <lastmod>2020-04-08</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/matrix3d</loc>
-      <lastmod>2020-04-08</lastmod>
+      <lastmod>2020-11-03</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
+      <loc>https://arex0.com/blog/optimize-js</loc>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/paymentrequest</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/shot</loc>
-      <lastmod>2020-04-09</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/stream-json-array</loc>
-      <lastmod>2020-04-05</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/work-with-phone</loc>
-      <lastmod>2020-04-16</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/add</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github</loc>
-      <lastmod>2020-04-08</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.8</priority>
   </url>
   <url>
       <loc>https://arex0.com/link</loc>
-      <lastmod>2020-04-06</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/share</loc>
-      <lastmod>2020-04-08</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/baidu_not_in_home</loc>
-      <lastmod>2020-03-29</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/clash-script</loc>
-      <lastmod>2020-04-04</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/css</loc>
-      <lastmod>2020-04-04</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/diff</loc>
-      <lastmod>2020-03-31</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/go-ext</loc>
-      <lastmod>2020-03-29</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/js</loc>
-      <lastmod>2020-04-04</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/mail</loc>
-      <lastmod>2020-03-29</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/pic</loc>
-      <lastmod>2020-04-02</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/resume</loc>
-      <lastmod>2020-04-04</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/web-mobile-drag</loc>
-      <lastmod>2020-04-17</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/link/github/zero-3d.js</loc>
-      <lastmod>2020-04-10</lastmod>
+      <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
