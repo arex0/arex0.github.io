@@ -1,9 +1,3 @@
-{"name": "怎么优化Javascript代码","description": "从Javascript的运行原理角度，考虑如何优化Javascript代码。","created": "2020-11-03","path":"/blog/optimize-js"}
-{"name": "Drag API (Part 1: Sortable)","description": "everything about drag api.","created": "2020-04-14","path":"/blog/drag-sortable"}
-{"name": "让手机成为工作的助力","description": "Make phone help your work","created": "2020-04-16","path":"/blog/work-with-phone"}
-{"name": "Payment Request API","description": "use Payment Request API","created": "2020-04-08","path":"/blog/paymentrequest"}
-{"name": "CSS matrix3d 旋转3D物体（实践篇）","description": "use css matrix3d rotate object in 3d","created": "2020-04-06","path":"/blog/matrix3d-2"}
-{"name": "CSS matrix3d 旋转3D物体（原理篇）","description": "use css matrix3d rotate object in 3d","created": "2020-04-06","path":"/blog/matrix3d"}
-{"name": "设计简洁的博客界面","description": "Design a concise blog interface","created": "2020-04-05","path":"/blog/concise-blog-interface"}
-{"name": "Javascript 流式解析JSON数组","description": "use stream api to read JSON Array","created": "2020-04-04","path":"/blog/stream-json-array"}
+{"name": "Javascript 中的继承","description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。","created": "2020-11-06","path":"/blog/js-inherit"}
+{"name": "怎么优化 Javascript 代码","description": "从 Javascript 的运行原理角度，考虑如何优化 Javascript 代码。","created": "2020-11-03","path":"/blog/optimize-js"}
 {"name": "Arex0 Markdown Example","description": "a Example to show markdown style.","created": "2020-04-03","path":"/blog/example"}

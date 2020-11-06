@@ -3,7 +3,7 @@ title: "Stylish"
 keywords: [Share,Stylish]
 description: "share a extension stylish"
 created: "2020-04-02"
-modified: "2020-04-09"
+modified: "2020-11-03"
 markdown: true
 ---
 

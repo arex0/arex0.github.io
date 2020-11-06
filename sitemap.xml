@@ -61,18 +61,6 @@
       <priority>.5</priority>
   </url>
   <url>
-      <loc>https://arex0.com/blog/concise-blog-interface</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/drag-sortable</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
       <loc>https://arex0.com/blog/example</loc>
       <lastmod>2020-11-03</lastmod>
       <changefreq>weekly</changefreq>
@@ -85,44 +73,14 @@
       <priority>.5</priority>
   </url>
   <url>
-      <loc>https://arex0.com/blog/matrix3d-2</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/matrix3d</loc>
-      <lastmod>2020-11-03</lastmod>
+      <loc>https://arex0.com/blog/js-inherit</loc>
+      <lastmod>2020-11-06</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/optimize-js</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/paymentrequest</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/shot</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/stream-json-array</loc>
-      <lastmod>2020-11-03</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>.5</priority>
-  </url>
-  <url>
-      <loc>https://arex0.com/blog/work-with-phone</loc>
-      <lastmod>2020-11-03</lastmod>
+      <lastmod>2020-11-06</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
