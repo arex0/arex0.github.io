@@ -96,7 +96,6 @@ table {
     border-spacing: 0;
     min-width: max-content;
     max-width: 100%;
-    margin-bottom: 30px;
     font-size: .9em;
 }
 table::after {
