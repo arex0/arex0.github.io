@@ -31,24 +31,18 @@ share: true
 | | Person.prototype +--------------->| Person |    |
 | +-------+----------+ |            | +-+------+    |
 +---------|------------+            +---|-----------+
-          | __proto__                   | __proto__
-          v                             v
-  +------------------+      Fake      +--------+
-+>|Function.prototype+--------------->|Function+----+
-| +-------+----------+   construtor   +--------+    |
-|         |                                         |
-|         | __proto__                     __proto__ |
-|         v                                         |
-| +------------------+      Fake      +--------+    |
-| | Object.prototype +--------------->| Object +----+
-| +-------+----------+   construtor   +--------+    |
-|         |                                         |
-|         | __proto__                     __proto__ |
-|         v                                         |
-| +------------------+                              |
-| |       null       |                              |
-| +------------------+                              |
-+---------------------------------------------------+
+          | __proto__                   +-----------+
+          v                               __proto__ |
+  +------------------+                +--------+    |
+  | Object.prototype +--------------->| Object +----+
+  +-------+----------+        Fake    +--------+    | __proto__
+          |    ^-------+   construtor +--------+    |
+          | __proto__  +---+--------->|Function+----+
+          v                |          +--------+    |
+  +------------------+     |                        v
+  |       null       |     |               +------------------+
+  +------------------+     +---------------+Function.prototype|
+                                           +------------------+
 ```
 
 ## 继承原理
@@ -162,7 +156,7 @@ _x.set(this, {
 ### __proto__和 prototype 做了什么？
 我们在上面已经看到 prototype 在继承中扮演很重要的作用，在实际使用中，我们通过__proto__（即 `[[Prototype]]`）访问原型，从而访问原型中的方法，而原型的__proto__又可以访问父类的原型，以此实现原型链。相信大家都听过这样的言论，Function 是所有 class 的祖父，Function 的父类是 Object，Object 的父类是 null，这在原型链上是可验证的。
 ```
-Men instance -> Men.prototype -> Person.prototype -> Function.prototype -> Object.prototype -> null
+Men instance -> Men.prototype -> Person.prototype -> Object.prototype -> null
 ```
 每个函数一旦创建则同时创建一个原型，并将函数作为此原型的构造函数。
 ```js
@@ -219,15 +213,11 @@ function Create(prototype){
 ```
 
 ## 谁是本源？
-上文提到过
-```
-Men instance -> Men.prototype -> Person.prototype -> Function.prototype -> Object.prototype -> null
-```
 ```js
 Function instanceof Object
 Object instanceof Object
 ```
-只从原型链的角度看，似乎先有 Object 再有 Function，但 Object 本身也是 Function 的实例，甚至 Function 本身就是自己的实例。
+似乎先有 Object 再有 Function，但 Object 本身也是 Function 的实例，甚至 Function 本身就是自己的实例。
 ```js
 Object instanceof Function
 Object.__proto__ === Function.prototype
