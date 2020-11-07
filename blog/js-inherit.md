@@ -243,14 +243,14 @@ let Function = function() { [native code] };
 Function.prototype = Object.create(Object.prototype);
 Function.prototype.constructor = Function;
 /* inherit function... */
-Function.__proto__ = Function;
+Function.__proto__ = Function.prototype;
 
 let Object = function Object() { [native code] };
 /* static function... */
 Object.prototype = Object.create(null);
 Object.prototype.constructor = Object;
 /* inherit function... */
-Object.__proto__ = Function;
+Object.__proto__ = Function.prototype;
 ```
 可见，上述代码有一处关键的矛盾：Function 的定义依赖于 Object.create，但 Object.create 作为函数依赖于 Function，这是不可能实现的。
 
