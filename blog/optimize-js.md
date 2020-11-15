@@ -3,7 +3,7 @@ title: "怎么优化 Javascript 代码"
 keywords: [Javascript,Optimize]
 description: "从 Javascript 的运行原理角度，考虑如何优化 Javascript 代码。"
 created: "2020-11-03"
-modified: "2020-11-06"
+modified: "2020-11-07"
 markdown: true
 share: true
 ---

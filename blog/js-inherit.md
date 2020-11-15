@@ -3,7 +3,7 @@ title: "Javascript 中的继承"
 keywords: [Javascript]
 description: "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。"
 created: "2020-11-06"
-modified: "2020-11-06"
+modified: "2020-11-07"
 markdown: true
 share: true
 ---

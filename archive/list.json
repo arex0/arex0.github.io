@@ -1,5 +1,6 @@
 [
-{"name": "Javascript 中的继承","keywords": ["Javascript"],"description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。","created": "2020-11-06","modified": "2020-11-06","path":"/blog/js-inherit"},
-{"name": "怎么优化 Javascript 代码","keywords": ["Javascript","Optimize"],"description": "从 Javascript 的运行原理角度，考虑如何优化 Javascript 代码。","created": "2020-11-03","modified": "2020-11-06","path":"/blog/optimize-js"},
-{"name": "Arex0 Markdown Example","keywords": ["Markdown"],"description": "a Example to show markdown style.","created": "2020-04-03","modified": "2020-11-03","path":"/blog/example"}
+{"name": "Javascript 中的克隆","keywords": ["Javascript","Clone"],"description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。而克隆是对我们理解的实践。","created": "2020-11-15","modified": "2020-11-15","path":"/blog/js-clone"},
+{"name": "Arex0 Markdown Example","keywords": ["Markdown"],"description": "a Example to show markdown style.","created": "2020-04-03","modified": "2020-11-07","path":"/blog/example"},
+{"name": "Javascript 中的继承","keywords": ["Javascript"],"description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。","created": "2020-11-06","modified": "2020-11-07","path":"/blog/js-inherit"},
+{"name": "怎么优化 Javascript 代码","keywords": ["Javascript","Optimize"],"description": "从 Javascript 的运行原理角度，考虑如何优化 Javascript 代码。","created": "2020-11-03","modified": "2020-11-07","path":"/blog/optimize-js"}
 ]

@@ -62,7 +62,7 @@
   </url>
   <url>
       <loc>https://arex0.com/blog/example</loc>
-      <lastmod>2020-11-03</lastmod>
+      <lastmod>2020-11-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
@@ -73,14 +73,20 @@
       <priority>.5</priority>
   </url>
   <url>
+      <loc>https://arex0.com/blog/js-clone</loc>
+      <lastmod>2020-11-15</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>.5</priority>
+  </url>
+  <url>
       <loc>https://arex0.com/blog/js-inherit</loc>
-      <lastmod>2020-11-06</lastmod>
+      <lastmod>2020-11-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
   <url>
       <loc>https://arex0.com/blog/optimize-js</loc>
-      <lastmod>2020-11-06</lastmod>
+      <lastmod>2020-11-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>.5</priority>
   </url>
