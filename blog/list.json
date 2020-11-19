@@ -1,4 +1,5 @@
+{"name": "Javascript 中的函数","description": "理解 Javascript 中的函数，才能写出正确的代码","created": "2020-11-19","path":"/blog/js-function"}
 {"name": "Javascript 中的克隆","description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。而克隆是对我们理解的实践。","created": "2020-11-15","path":"/blog/js-clone"}
-{"name": "Arex0 Markdown Example","description": "a Example to show markdown style.","created": "2020-04-03","path":"/blog/example"}
 {"name": "Javascript 中的继承","description": "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。","created": "2020-11-06","path":"/blog/js-inherit"}
+{"name": "Arex0 Markdown Example","description": "a Example to show markdown style.","created": "2020-04-03","path":"/blog/example"}
 {"name": "怎么优化 Javascript 代码","description": "从 Javascript 的运行原理角度，考虑如何优化 Javascript 代码。","created": "2020-11-03","path":"/blog/optimize-js"}

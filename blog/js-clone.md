@@ -3,7 +3,7 @@ title: "Javascript 中的克隆"
 keywords: [Javascript,Clone]
 description: "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。而克隆是对我们理解的实践。"
 created: "2020-11-15"
-modified: "2020-11-15"
+modified: "2020-11-19"
 markdown: true
 share: true
 ---
@@ -307,15 +307,15 @@ const AsyncGeneratorFunction = proto(async function* () { }).constructor
 ```js
 // eval CSP
 function genFunc(type, src) {
-    switch(type){
+    switch (type) {
         case Function:
-            return function(){return src.apply(this,arguments)}
+            return function() {return src.apply(this,arguments)}
         case GeneratorFunction:
-            return function*(){return src.apply(this,arguments)}
+            return function* () {return src.apply(this,arguments)}
         case AsyncFunction:
-            return async function(){return src.apply(this,arguments)}
+            return async function () {return src.apply(this,arguments)}
         case AsyncGeneratorFunction:
-            return async function*(){return src.apply(this,arguments)}
+            return async function* () {return src.apply(this,arguments)}
     }
 }
 ```
@@ -354,6 +354,8 @@ case AsyncGenerator:
 ```
 
 为什么我们可以用 Function 判断对象是否函数，即便函数的原型指向的并不一定是 Function？因为事实上所有的 Function 都没有 constructor 属性，Function 的原型链最后指向的都是 Function.prototype，而其 constructor 属性指向 Function。
+
+（更新）我们只能拷贝没有检测 this 指向的构造函数，因为一旦检测 this，很容易就会发现当前 this 不是真正的当前类。
 
 这种方法有仍有缺陷，我们只浅拷贝了 Generator，不是不想拷贝其底层状态，而是不能，因此他们表现为指向相同的 GeneratorFunction，并且拥有相同的状态。ES Discuss 中有相关提案，采用类似 fork 的机制但可惜并没有实现。
 
@@ -414,17 +416,6 @@ const tests = [
             frozen: Object.freeze({}),
         },
         failed: d => !(Object.isExtensible(d.extensible) && Object.isSealed(d.sealed) && Object.isFrozen(d.frozen))
-    },
-    {// custom class
-        value: (() => {
-            class test { }
-            class outer extends test { }
-            return {
-                test,
-                outer
-            }
-        })(),
-        failed: (d, s) => !(new d.outer instanceof s.test)
     },
     {// Array
         value: [1, 2, 3],

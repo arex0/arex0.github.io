@@ -3,7 +3,7 @@ title: "Javascript 中的继承"
 keywords: [Javascript]
 description: "理解 Javascript 中 class 的本质更有利于我们理解 Javascript，以更好的使用它。"
 created: "2020-11-06"
-modified: "2020-11-07"
+modified: "2020-11-19"
 markdown: true
 share: true
 ---
@@ -199,10 +199,10 @@ Object.create(Men.prototype):
 ```
 因此我们也可以模拟实现
 ```js
-function New(Class){
+function New(Class, ...Args){
     let obj = {};
     obj.__proto__ = Class.prototype;
-    return Class.apply(obj,Array.prototype.slice.call(arguments, 1)) || obj;
+    return Class.apply(obj, Args) || obj;
 }
 
 function Create(prototype){
